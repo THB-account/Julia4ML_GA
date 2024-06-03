@@ -1,0 +1,7 @@
+name = "Julia4ML_GA"
+uuid = "bf3591ee-69f7-4669-bac3-51a98216d305"
+authors = ["Jonas Engler <jonas.engler@campus.tu-berlin.de>"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.6.7"
