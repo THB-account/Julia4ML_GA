@@ -4,3 +4,4 @@ for selection a function should receive the following parameters
     - random number generator
     - perhaps parametrization
 """
+

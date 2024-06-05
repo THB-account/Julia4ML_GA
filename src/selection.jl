@@ -4,3 +4,8 @@ for selection a function should receive the following parameters
     - population size
     - random number generator
 """
+
+"""
+
+returnds indexes for selected
+"""
