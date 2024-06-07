@@ -1,5 +1,12 @@
 module Julia4ML_GA
 
-# Write your package code here.
+"""
+    timestwo(x)
+
+some text.WEFBQBOUGB4
+"""
+timestwo(x) = 2 * x
+
+export timestwo  
 
 end
