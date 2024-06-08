@@ -1,6 +1,3 @@
-
-
-
 function test_roulette_wheel()
     fit = [rand(Float64) for i in 1:5]
     rng = MersenneTwister(1234);
@@ -8,7 +5,7 @@ function test_roulette_wheel()
 end
 
 """
-    roulette_wheel(rng, fitness, selection_number)
+    roulette_wheel(fitness, selection_number,rng)
 
 Implements a simple roulette_wheel.
 `rng` is an instance of a random number generator to produce reproducible results.
@@ -39,4 +36,3 @@ function roulette_wheel(fitness, selection_number, rng)
     # print(result)
     return result
 end
-

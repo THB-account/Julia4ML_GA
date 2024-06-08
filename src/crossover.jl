@@ -1,5 +1,3 @@
-
-
 #function single_point_crossover(p1::ContinuousPopulant,p2::ContinuousPopulant)
 #    i = rand(1:length(p1.genes))
 #    return ContinuousPopulant(vcat(p1.genes[begin:i],p2.genes[i:end])),ContinuousPopulant(vcat(p2.genes[begin:i],p1.genes[i:end]))
@@ -13,7 +11,7 @@ function test_single_point()
 end
 
 """
-    single_point(rng, genes1, genes2)
+    single_point(genes1, genes2,rng)
 
 Implements the single point crossover method.
 `rng` is an instance of a random number generator to produce reproducible results.
@@ -39,3 +37,4 @@ function single_point(genes1, genes2, rng)
     return child1, child2
 
 end
+

@@ -1,4 +1,3 @@
-
 function test_displacement()
     rng = MersenneTwister();
     genes1 = [i for i in 1:5]
@@ -6,7 +5,7 @@ function test_displacement()
 end
 
 """
-    displacement(rng, gene)
+    displacement(gene,rng)
 
 Implements the single point crossover method.
 `rng` is an instance of a random number generator to produce reproducible results.
@@ -33,3 +32,4 @@ function displacement(gene,rng)
     result = vcat(vcat(rest[begin:random_insertion], random_subsequence), rest[random_insertion+1:end])
     return result
 end
+
