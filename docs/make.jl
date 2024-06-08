@@ -9,7 +9,7 @@ makedocs(;
     sitename="Julia4ML_GA.jl",
     format=Documenter.HTML(;
         canonical="https://THB-account.github.io/Julia4ML_GA.jl",
-        edit_link="doumentation",
+        edit_link="documentation",
         assets=String[],
     ),
     pages=[
