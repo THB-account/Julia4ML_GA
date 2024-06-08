@@ -3,7 +3,7 @@ module Julia4ML_GA
 """
     timestwo(x)
 
-some text.WEFBQBOUGB4
+some text.
 """
 timestwo(x) = 2 * x
 
