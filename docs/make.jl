@@ -19,5 +19,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/THB-account/Julia4ML_GA.jl"
+    repo="github.com/THB-account/Julia4ML_GA.jl",
+    branch="gh-pages"
 )
