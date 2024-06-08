@@ -1,9 +1,8 @@
-using Random
 
 function test_displacement()
     rng = MersenneTwister();
     genes1 = [i for i in 1:5]
-    return displacement(rng, genes1)
+    return displacement(genes1,rng)
 end
 
 """
@@ -15,7 +14,7 @@ Implements the single point crossover method.
 The genes are displaced inside itself.
 The returned element has the same values as before, but with scrambled genes.
 """
-function displacement(rng, gene)
+function displacement(gene,rng)
     # println(gene)
     random_subsequence_index = rand(rng, 1:length(gene)) # random index where subsequence starts
     random_subsequence_length = rand(rng, 0:length(gene)-random_subsequence_index+1) # random length of subsequence

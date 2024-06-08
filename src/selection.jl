@@ -1,11 +1,10 @@
-using Random
 
 
 
 function test_roulette_wheel()
     fit = [rand(Float64) for i in 1:5]
     rng = MersenneTwister(1234);
-    return roulette_wheel(rng, fit, 10)
+    return roulette_wheel(fit, 10,rng)
 end
 
 """
@@ -18,7 +17,7 @@ The higher, the more likely the corresponding chromosome is selected.
 `selection_number` indicates how many indices are returned.
 `result` stores the indices of the chromosomes.
 """
-function roulette_wheel(rng, fitness, selection_number)
+function roulette_wheel(fitness, selection_number, rng)
     total_fitness = 0
     fitness_border = similar(fitness)
     for (index, value) in enumerate(fitness)
@@ -41,5 +40,3 @@ function roulette_wheel(rng, fitness, selection_number)
     return result
 end
 
-export roulette_wheel
-export test_roulette_wheel

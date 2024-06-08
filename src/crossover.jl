@@ -1,4 +1,4 @@
-using Random
+
 
 #function single_point_crossover(p1::ContinuousPopulant,p2::ContinuousPopulant)
 #    i = rand(1:length(p1.genes))
@@ -9,7 +9,7 @@ function test_single_point()
     rng = MersenneTwister(1234);
     genes1 = [1 for i in 1:4]
     genes2 = [0 for i in 1:4]
-    return single_point(rng, genes1, genes2)[1]
+    return single_point(genes1, genes2,rng)[1]
 end
 
 """
@@ -22,7 +22,7 @@ Implements the single point crossover method.
 `child1` is a copy of `genes1` up to randomly generated crossover point. 
 After that it is a copy of `genes2`. The same for `child2` in reverse.
 """
-function single_point(rng, genes1, genes2)
+function single_point(genes1, genes2, rng)
     # println(genes1, genes2)
     crossover_point = rand(rng, 1:length(genes1)) # it is possible to swap 0 up to (including) all-1 genes
     # println(crossover_point)
