@@ -21,11 +21,11 @@ function roulette_wheel(fitness, selection_number, rng)
         total_fitness += value
         fitness_border[index] = total_fitness
     end
-    # print(fitness_border)
+
     result = zeros(Integer, selection_number)
     for i in 1:selection_number
         random_number = rand(rng, Float64) * total_fitness
-        # print(random_number)
+
         for (index, value) in enumerate(fitness_border)
             if random_number < value
                 result[i] = index
@@ -33,6 +33,6 @@ function roulette_wheel(fitness, selection_number, rng)
             end
         end
     end
-    # print(result)
+
     return result
 end

@@ -21,9 +21,8 @@ Implements the single point crossover method.
 After that it is a copy of `genes2`. The same for `child2` in reverse.
 """
 function single_point(genes1, genes2, rng)
-    # println(genes1, genes2)
     crossover_point = rand(rng, 1:length(genes1)) # it is possible to swap 0 up to (including) all-1 genes
-    # println(crossover_point)
+
     child1 = similar(genes1)
     child2 = similar(genes2)
     for i in 1:crossover_point
@@ -35,6 +34,5 @@ function single_point(genes1, genes2, rng)
         child2[i] = genes1[i]
     end
     return child1, child2
-
 end
 
