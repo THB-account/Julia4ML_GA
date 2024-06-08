@@ -33,6 +33,3 @@ function displacement(gene,rng)
     result = vcat(vcat(rest[begin:random_insertion], random_subsequence), rest[random_insertion+1:end])
     return result
 end
-
-export displacement
-export test_displacement
