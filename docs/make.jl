@@ -14,11 +14,10 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
-        "another" => "example.md",
+        "Example Usage" => "example.md",
     ],
 )
 
 deploydocs(;
-    repo="github.com/THB-account/Julia4ML_GA.jl",
-    devbranch="master",
+    repo="github.com/THB-account/Julia4ML_GA.jl"
 )
