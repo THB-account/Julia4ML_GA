@@ -39,6 +39,3 @@ function single_point(genes1, genes2, rng)
     return child1, child2
 
 end
-
-export single_point
-export test_single_point
