@@ -48,3 +48,15 @@ Returns resulting gene.
 function gaussian_displacement(gene,rng)
     return gene + randn(rng,size(gene)...)
 end
+"""
+    univariate_displacement(gene,rng)
+
+Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
+"""
+function univariate_displacement(gene,rng)
+    return gene + (rand(rng,size(gene)...) .* 2 .- 1)
+end

@@ -1,6 +1,6 @@
 name = "Julia4ML_GA"
 uuid = "bf3591ee-69f7-4669-bac3-51a98216d305"
-authors = ["Jonas Engler <jonas.engler@campus.tu-berlin.de>"]
+authors = ["Ben Nikolas Baute <baute@campus.tu-berlin.de>", "Jonas Engler <jonas.engler@campus.tu-berlin.de>", "Anja Katharina Ilg <ilg@campus.tu-berlin.de>", "Nicolas Oliver Julian Look <n.look@campus.tu-berlin.de>"]
 version = "1.0.0-DEV"
 
 [deps]
