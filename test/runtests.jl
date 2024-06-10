@@ -5,6 +5,4 @@ using Test
 @testset "Julia4ML_GA.jl" begin
     # Write your tests here.
     include("SystemTests.jl")
-
-
 end

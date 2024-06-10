@@ -1,5 +1,4 @@
 
-
 function optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,rng=default_rng())
     """
         1. initialize population
@@ -11,8 +10,8 @@ function optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,r
     seed!(1234)
     # TODO needs to be changed to OS time
     #rng = MersenneTwister(1234)
-    state = initialise_genetic_state(starting_point,objective,ga,rng)
-
+    #state = initialise_genetic_state(starting_point,objective,ga,rng)
+    state = GeneticAlgorithmState(starting_point, objective)
 
     for _ in 1:iterations
         update_state!(ga, state, objective, rng)
