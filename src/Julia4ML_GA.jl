@@ -1,12 +1,17 @@
 module Julia4ML_GA
+using Random:default_rng
 
-"""
-    timestwo(x)
+# Write your package code here.
 
-some text.
-"""
-timestwo(x) = 2 * x
+include("api/types.jl")
+include("api/objective.jl")
 
-export timestwo  
+include("crossover.jl")
+include("mutation.jl")
+include("selection.jl")
+include("initialization.jl")
+include("ga.jl")
+include("api/optimize.jl")
+include("api/utils.jl")
 
 end

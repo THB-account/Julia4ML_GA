@@ -1,8 +1,9 @@
-function init_gaussian(pop_type::ContinuousPopulant,shape::Tuple{Vararg{Integer}},loc=0.0,scale=1.0)
-    init_vals = randn(shape...)
-    pops = Array{pop_type}(undef,shape...)
-    for i in 1:length(a)
-        pops[i] = ContinuousPopulant.(selectdim(a,1,i))
+function init_gaussian(starting_point::AbstractVector,population_size::Integer,rng)
+    population = Vector{Vector{eltype(starting_point)}}(undef, populationsize)
+    d=length(starting_point)
+    for i in 1:populationsize
+        population[i] = rand(rng,d) .+ starting_point #Vector{eltype(starting_point)}
     end
-    return pops
+
+    return population
 end
