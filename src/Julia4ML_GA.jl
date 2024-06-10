@@ -20,6 +20,6 @@ include("crossover.jl")
 
 export roulette_wheel, 
 displacement, 
-single_point, gaussian_displacement
+single_point, gaussian_displacement, univariate_displacement
 
 end
