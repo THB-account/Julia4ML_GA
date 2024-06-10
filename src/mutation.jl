@@ -8,8 +8,11 @@ end
     displacement(gene,rng)
 
 Implements the single point crossover method.
-`rng` is an instance of a random number generator to produce reproducible results.
-`gene` and `result` are Vectors which store all genes of a chromosome.
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
+
 The genes are displaced inside itself.
 The returned element has the same values as before, but with scrambled genes.
 """
@@ -34,8 +37,26 @@ function displacement(gene,rng)
 end
 
 """
+    gaussian_displacement(gene,rng)
+
 Adds gaussian noise to the gene with ``\\mathcal{N}(0,1)``.
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
 """
 function gaussian_displacement(gene,rng)
     return gene + randn(rng,size(gene)...)
+end
+"""
+    univariate_displacement(gene,rng)
+
+Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
+"""
+function univariate_displacement(gene,rng)
+    return gene + (rand(rng,size(gene)...) .* 2 .- 1)
 end

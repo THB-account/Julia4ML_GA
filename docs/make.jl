@@ -9,15 +9,16 @@ makedocs(;
     sitename="Julia4ML_GA.jl",
     format=Documenter.HTML(;
         canonical="https://THB-account.github.io/Julia4ML_GA.jl",
-        edit_link="master",
+        edit_link="documentation",
         assets=String[],
     ),
     pages=[
         "Home" => "index.md",
+        "API Reference" => "reference.md",
     ],
 )
 
 deploydocs(;
     repo="github.com/THB-account/Julia4ML_GA.jl",
-    devbranch="master",
+    branch="gh-pages"
 )

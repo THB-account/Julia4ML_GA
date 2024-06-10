@@ -2,6 +2,7 @@ module Julia4ML_GA
 
 using Random: MersenneTwister, default_rng,seed!
 # Write your package code here.
+
 include("api/types.jl")
 include("api/objective.jl")
 
@@ -19,6 +20,6 @@ include("crossover.jl")
 
 export roulette_wheel, 
 displacement, 
-single_point, gaussian_displacement
+single_point, gaussian_displacement, univariate_displacement
 
 end

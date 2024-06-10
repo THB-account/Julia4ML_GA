@@ -1,3 +1,5 @@
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Julia4ML_GA = "bf3591ee-69f7-4669-bac3-51a98216d305"
+LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
