@@ -149,6 +149,7 @@ function crossover!(parents,children,selected_individuals,ga,rng)
     for i in 1:2:length(selected_individuals)
         parent1, parent2 = i!=N ? (i,i+1) : (i,i-1)
         parent1, parent2 = parents[selected_individuals[parent1]],parents[selected_individuals[parent2]]
+        # TODO (Fix): selected_individuals[parent1] and selected_individuals[parent2] can be 0 
 
         if rand(rng)<ga.crossoverRate
             children[i],children[i+1] = ga.crossover(parent1,parent2,rng)
