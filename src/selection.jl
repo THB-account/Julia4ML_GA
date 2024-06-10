@@ -8,11 +8,12 @@ end
     roulette_wheel(fitness, selection_number,rng)
 
 Implements a simple roulette_wheel.
-`rng` is an instance of a random number generator to produce reproducible results.
-`fitness` is a vector pf fitness values. 
-The higher, the more likely the corresponding chromosome is selected.
-`selection_number` indicates how many indices are returned.
-`result` stores the indices of the chromosomes.
+
+- `fitness`: (Vector{Float64}) Vector of fitness values. The higher, the more likely the corresponding chromosome is selected.
+- `selection_number`: (Integer) Indicates how many indices are returned.
+- `rng`: Instance of a random number generator to produce reproducible results.
+
+Returns indices of selected populants.
 """
 function roulette_wheel(fitness, selection_number, rng)
     total_fitness = 0

@@ -14,11 +14,14 @@ end
     single_point(genes1, genes2,rng)
 
 Implements the single point crossover method.
-`rng` is an instance of a random number generator to produce reproducible results.
-`genes1`, `genes2`, `child1` and `child2` are Vectors which store all genes of a chromosome.
-`genes1` and `genes2` are used to create `child1` and `child2`, which are returned.
+- `rng`: An instance of a random number generator to produce reproducible results.
+- `genes1`, `genes2`, `child1` and `child2`: Vectors containing all genes of a chromosome. 
+
+Returns `child1` and `child2`.
+
+`genes1` and `genes2` are used to create `child1` and `child2`, which are returned. 
 `child1` is a copy of `genes1` up to randomly generated crossover point. 
-After that it is a copy of `genes2`. The same for `child2` in reverse.
+After that it is a copy of `genes2`. The same for `child2` respectively with parent roles swapped.
 """
 function single_point(genes1, genes2, rng)
     crossover_point = rand(rng, 1:length(genes1)) # it is possible to swap 0 up to (including) all-1 genes

@@ -1,3 +1,27 @@
+
+"""
+Contains information and functions to execute an optimization process for a genetic algorithm.
+
+- `population_size`: (Integer) Number of populants to be maintained.
+- `eliteSize`: (Integer) Number of populants selected as elite.
+- `crossoverRate`: (Float) Probability of crossover for two populants.
+- `mutationRate`: (Float) Probability of mutation.
+- `selection`: (Function) Function to select populants for next iteration.
+- `muation`: (Function) Mutation function.
+- `crossover`: (Function) Crossover function.
+
+Constructor:
+
+    GeneticAlgorithm(;
+        populationSize=50,
+        eliteSize=5,
+        crossoverRate=0.8,
+        mutationRate=0.1,
+        selection=roulette_wheel,
+        mutation=displacement,
+        crossover=single_point
+    ) 
+"""
 struct GeneticAlgorithm <: AbstractOptimizer
     populationSize
     eliteSize
@@ -24,6 +48,16 @@ struct GeneticAlgorithm <: AbstractOptimizer
     crossover)
 end
 
+"""
+State of a genetic algorithm.
+
+- `population`: (Vector) Current population. Vector conatining elements of same type as starting point for optimization process.
+- `populationFitness`: (Function) Fitness function by which the population's fitness is to be evaluated.
+
+Constructor:
+
+    GeneticAlgorithmState(population,objective)
+"""
 mutable struct GeneticAlgorithmState <: AbstractState
     population
     populationFitness
@@ -33,13 +67,33 @@ mutable struct GeneticAlgorithmState <: AbstractState
     end
 end
 
+"""
+    initialise_genetic_state(starting_point,objective,ga,rng)
+
+Initialises populant's genes.
+
+- `starting_point`: (Vector{Float64})
+- `objective`: (Function) Fitness function to be used.
+- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
+- `rng`: Instance of a random number generator to produce reproducible results.
+
+Returns GeneticAlgorithmState.
+"""
 function initialise_genetic_state(starting_point,objective,ga,rng)
     return GeneticAlgorithmState(init_gaussian(starting_point,ga.populationSize,rng),objective)
 end
 
-
 """
+    update_state!(ga, state, objective, rng)
 
+Updates GeneticAlgorithmState according to provided GeneticAlgorithm instance.
+Selection, crossover, mutation and evaluation is executed.
+Equivalent to one iteration of the optimizatrion process.
+
+- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
+- `state`: (GeneticAlgorithmState) GeneticAlgorithmState to proceed from.
+- `objective`: (Function) Fitness function to be used.
+- `rng`: Instance of a random number generator to produce reproducible results.
 """
 function update_state!(ga, state, objective, rng)
     # initialisation won't be handled here
@@ -67,14 +121,27 @@ function update_state!(ga, state, objective, rng)
 end
 
 """
-control function for evaluation
+    evaluation!(ga,state,objective)
+
+Control function for fitness evaluation.
+- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
+- `state`:  (GeneticAlgorithmState) GeneticAlgorithmState instance to proceed from.
+- `objective`: (Function) Fitness function by which the population is evaluated.
 """
 function evaluation!(ga,state,objective)
     state.populationFitness .= objective.(state.population)
 end
 
 """
-control function for crossover
+    crossover!(parents,children,selected_individuals,ga,rng)
+
+Control function for crossover.
+
+- `parents`: (Vector) (Sub-)Population to be used to create offspring.
+- `children` (Vector) Object to hold the newly created offspring.
+- `selected_individuals`: (Vector{Integer}) The for crossover selected populant's indices.
+- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
+- `rng`:  Instance of a random number generator to produce reproducible results.
 """
 function crossover!(parents,children,selected_individuals,ga,rng)
     s = selected_individuals
@@ -90,13 +157,20 @@ function crossover!(parents,children,selected_individuals,ga,rng)
         end
     end
 end
+
 """
-control function for mutation
+    mutation!(offspring,ga,rng)
+
+control function for mutation.
+
+- `population`: (Vector) (Sub-)Population to be mutated.
+- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
+- `rng`: Instance of a random number generator to produce reproducible results.
 """
-function mutation!(offspring,ga,rng)
-    for i in eachindex(offspring)
+function mutation!(population,ga,rng)
+    for i in eachindex(population)
         if rand(rng)<ga.mutationRate
-            offspring[i] = ga.mutation(offspring[i],rng)
+            population[i] = ga.mutation(population[i],rng)
         end
     end
 end

@@ -1,5 +1,19 @@
 
+"""
+    optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,rng=default_rng())
 
+    Executes optimization process
+
+- `starting_point`: (Vector) Initial candidate.
+- `objective`: (Function) Fitness function to evaluate population. 
+- `iterations`: (Integer) Maximum number of iterations.
+- `rng`: Instance of a random number generator to produce reproducible results. Default is `Random.default_rng()`.
+
+Returns final population's fittest populant.
+
+Population is initialized and build. 
+Then the optimization is executed using the provided fitness function.
+"""
 function optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,rng=default_rng())
     """
         1. initialize population
@@ -8,8 +22,8 @@ function optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,r
         2. evaluate population on objective and set state
         3. start optimization loop
     """
-    seed!(1234)
-    # TODO needs to be changed to OS time
+    seed!(1234) # TODO needs to be changed to OS time
+   
     #rng = MersenneTwister(1234)
     state = initialise_genetic_state(starting_point,objective,ga,rng)
 
