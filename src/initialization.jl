@@ -8,7 +8,7 @@ function init_gaussian(starting_point::AbstractVector,population_size::Integer,r
     return population
 end
 
-function init_uniform_binary_population(population_size::UInt, genome_length::UInt)
+function init_uniform_binary_population(population_size::Integer, genome_length::Integer)
     population = Vector{Vector{Bool}}(undef, population_size)
 
     for i in 1:population_size
