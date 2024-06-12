@@ -7,16 +7,15 @@ using Test
     # rosenbrock funktion for a = 1 and b = 100
     # global minimum (x,y) at (a,a**2)
     # solution is (1,1)
-    populationSize = 50
+    populationSize = 100
     rng = Random.default_rng()
     initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
 
     result = Julia4ML_GA.optimize(
         initPop,
-        x -> -((1-x[1])^2 +100*(x[2]-x[1]^2)^2),
+        x -> (1-x[1])^2 +100*(x[2]-x[1]^2)^2,
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=populationSize,
-            eliteSize=20
         );
         iterations=100,
         rng=rng
@@ -34,7 +33,7 @@ end
     initpop = init_uniform_binary_population(50, 9)
     result = Julia4ML_GA.optimize(
         initpop,
-        x -> fitnessFun(x),
+        x -> -fitnessFun(x),
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=50
         );

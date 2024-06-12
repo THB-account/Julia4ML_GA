@@ -35,6 +35,6 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
         update_state!(ga, state, objective, rng)
     end
 
-    _,idx_fittest = findmax(state.populationFitness,dims=1)
+    _,idx_fittest = findmin(state.populationFitness,dims=1)
     return state.population[idx_fittest] 
 end

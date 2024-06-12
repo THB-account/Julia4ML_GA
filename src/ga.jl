@@ -36,7 +36,7 @@ struct GeneticAlgorithm <: AbstractOptimizer
         eliteSize=5,
         crossoverRate=0.8,
         mutationRate=0.1,
-        selection=take_top_candidates,
+        selection=roulette_wheel,
         mutation=displacement,
         crossover=single_point
     ) = new(populationSize,
@@ -102,7 +102,7 @@ function update_state!(ga, state, objective, rng)
     parents = state.population
     new_gen = similar(parents)
     nonEliteSize = populationSize - ga.eliteSize
-    selected_individuals = ga.selection(state.populationFitness,nonEliteSize,rng)
+    selected_individuals = ga.selection(state.populationFitness,nonEliteSize, rng)
 
     # fill with crossover children
     crossover!(parents,new_gen,selected_individuals,ga,rng)

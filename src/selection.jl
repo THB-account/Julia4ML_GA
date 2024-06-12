@@ -4,21 +4,6 @@ function test_roulette_wheel()
     return roulette_wheel(fit, 10,rng)
 end
 
-function take_top_candidates(fitness, selection_number, rng)
-    sorted_candidate_indices = sortperm(.-fitness)
-    result = zeros(Integer, selection_number)
-    total_num_of_candidates = length(fitness)
-    skipped = 0
-
-    for i in 1:selection_number
-        result[i] = sorted_candidate_indices[i + skipped]
-        if rand(rng) < 0.1
-            skipped += 1
-        end
-    end
-    return result
-end
-
 """
     roulette_wheel(fitness, selection_number,rng)
 
@@ -30,26 +15,40 @@ Implements a simple roulette_wheel.
 
 Returns indices of selected populants.
 """
-function roulette_wheel(fitness, selection_number, rng)
-    total_fitness = 0
-    fitness_border = similar(fitness)
-    for (index, value) in enumerate(fitness)
-        total_fitness += value
-        fitness_border[index] = total_fitness
+
+function roulette_wheel(fitness::AbstractArray, num_to_select::Int, rng)
+    total_fitness = sum(fitness)
+    probabilities = fitness / total_fitness
+    cumulative_probabilities = cumsum(probabilities)
+    
+    selected_indices = Vector{Int}(undef, num_to_select)
+    
+    for i in 1:num_to_select
+        r = rand(rng)
+        selected_index = findfirst(cumulative_probabilities .>= r)
+        selected_indices[i] = selected_index
     end
+    
+    return selected_indices
+end
 
-    # TODO (fix): result[i] can stay zero which is not a valid index
-    result = zeros(Integer, selection_number)
-    for i in 1:selection_number
-        random_number = rand(rng, Float64) * total_fitness
-
-        for (index, value) in enumerate(fitness_border)
-            if random_number <= value
-                result[i] = index
-                break
+# TODO: there might be a better way of handling this
+function tournament_selection(fitness::AbstractArray, num_to_select::Int, tournament_size::Int, rng)
+    population_size = length(fitness)
+    selected_indices = Vector{Int}(undef, num_to_select)
+    
+    for i in 1:num_to_select
+        tournament_indices = rand(rng, 1:population_size, tournament_size)
+        
+        best_index = tournament_indices[1]
+        for j in 2:tournament_size
+            if fitness[tournament_indices[j]] < fitness[best_index]
+                best_index = tournament_indices[j]
             end
         end
+        
+        selected_indices[i] = best_index
     end
 
-    return result
+    return selected_indices
 end
