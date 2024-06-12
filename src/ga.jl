@@ -36,7 +36,7 @@ struct GeneticAlgorithm <: AbstractOptimizer
         eliteSize=5,
         crossoverRate=0.8,
         mutationRate=0.1,
-        selection=roulette_wheel,
+        selection=take_top_candidates,
         mutation=displacement,
         crossover=single_point
     ) = new(populationSize,
@@ -148,10 +148,12 @@ function crossover!(parents,children,selected_individuals,ga,rng)
     N = length(selected_individuals)
     for i in 1:2:length(selected_individuals)
         parent1, parent2 = i!=N ? (i,i+1) : (i,i-1)
-        parent1, parent2 = parents[selected_individuals[parent1]],parents[selected_individuals[parent2]]
+        selected_idx1 = selected_individuals[parent1]
+        selected_idx2 = selected_individuals[parent2]
+        parent1, parent2 = parents[selected_idx1],parents[selected_idx2]
         # TODO (Fix): selected_individuals[parent1] and selected_individuals[parent2] can be 0 
 
-        if rand(rng)<ga.crossoverRate
+        if rand(rng) < ga.crossoverRate
             children[i],children[i+1] = ga.crossover(parent1,parent2,rng)
         else
             children[i],children[i+1] = parent1,parent2

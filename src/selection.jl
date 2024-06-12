@@ -4,6 +4,21 @@ function test_roulette_wheel()
     return roulette_wheel(fit, 10,rng)
 end
 
+function take_top_candidates(fitness, selection_number, rng)
+    sorted_candidate_indices = sortperm(.-fitness)
+    result = zeros(Integer, selection_number)
+    total_num_of_candidates = length(fitness)
+    skipped = 0
+
+    for i in 1:selection_number
+        result[i] = sorted_candidate_indices[i + skipped]
+        if rand(rng) < 0.1
+            skipped += 1
+        end
+    end
+    return result
+end
+
 """
     roulette_wheel(fitness, selection_number,rng)
 
@@ -23,12 +38,13 @@ function roulette_wheel(fitness, selection_number, rng)
         fitness_border[index] = total_fitness
     end
 
+    # TODO (fix): result[i] can stay zero which is not a valid index
     result = zeros(Integer, selection_number)
     for i in 1:selection_number
         random_number = rand(rng, Float64) * total_fitness
 
         for (index, value) in enumerate(fitness_border)
-            if random_number < value
+            if random_number <= value
                 result[i] = index
                 break
             end
