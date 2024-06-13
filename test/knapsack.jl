@@ -3,7 +3,7 @@ using Julia4ML_GA
 using Test
 
 @testset "knapsack" begin
-    rng = Random.default_rng(42)
+    rng = Random.default_rng(5)
     Random.seed!(rng, 2)
 
     mass    = [1, 5, 3, 7, 2, 10, 5, 9, 2]
