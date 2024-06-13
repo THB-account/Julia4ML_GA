@@ -9,7 +9,7 @@ using Test
     # solution is (1,1)
     rng = Random.default_rng()
 
-    populationSize = 1000
+    populationSize = 2000
     initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
 
     result = Julia4ML_GA.optimize(
