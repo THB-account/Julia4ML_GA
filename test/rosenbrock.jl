@@ -23,23 +23,3 @@ using Test
 
     @test isapprox(result, [[1.,1.]], atol=0.1)
 end
-
-@testset "knapsack" begin
-    mass    = [1, 5, 3, 7, 2, 10, 5, 9, 2]
-    utility = [1, 3, 5, 2, 5,  8, 3, 9, 5]
-
-    fitnessFun = n -> (sum(mass .* n) <= 30) ? sum(utility .* n) : 0
-    
-    initpop = init_uniform_binary_population(50, 9)
-    result = Julia4ML_GA.optimize(
-        initpop,
-        x -> -fitnessFun(x),
-        Julia4ML_GA.GeneticAlgorithm(
-            populationSize=50
-        );
-        iterations=100
-    );
-
-    @test sum(result[1] .* utility) >= 30.
-    @test sum(result[1] .* mass) <= 30.
-end
