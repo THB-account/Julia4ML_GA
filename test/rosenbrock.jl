@@ -24,7 +24,5 @@ using Test
         rng=rng
     )
 
-    print(result)
-
     @test isapprox(result, [[1.,1.]], atol=0.1)
 end
