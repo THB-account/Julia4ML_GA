@@ -8,7 +8,6 @@ using Test
     # global minimum (x,y) at (a,a**2)
     # solution is (1,1)
     rng = Random.default_rng()
-    Random.seed!(rng, 2)
 
     populationSize = 1000
     initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
