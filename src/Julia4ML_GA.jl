@@ -20,6 +20,8 @@ include("crossover.jl")
 
 export 
 roulette_wheel, 
+roulette_wheel_inv,
+tournament_selection,
 displacement, 
 single_point, 
 gaussian_displacement, 

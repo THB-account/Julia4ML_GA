@@ -102,7 +102,7 @@ function update_state!(ga, state, objective, rng)
     parents = state.population
     new_gen = similar(parents)
     nonEliteSize = populationSize - ga.eliteSize
-    selected_individuals = ga.selection(state.populationFitness,nonEliteSize, rng)
+    selected_individuals = ga.selection(state.populationFitness, nonEliteSize, rng)
 
     # fill with crossover children
     crossover!(parents,new_gen,selected_individuals,ga,rng)
@@ -172,7 +172,7 @@ control function for mutation.
 """
 function mutation!(population,ga,rng)
     for i in eachindex(population)
-        if rand(rng)<ga.mutationRate
+        if rand(rng) < ga.mutationRate
             population[i] = ga.mutation(population[i],rng)
         end
     end
