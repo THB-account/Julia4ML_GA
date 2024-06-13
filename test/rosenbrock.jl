@@ -7,7 +7,7 @@ using Test
     # rosenbrock funktion for a = 1 and b = 100
     # global minimum (x,y) at (a,a**2)
     # solution is (1,1)
-    rng = Random.default_rng(4)
+    rng = Random.default_rng()
     Random.seed!(rng, 2)
 
     populationSize = 1000
