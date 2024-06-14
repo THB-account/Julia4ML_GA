@@ -22,6 +22,6 @@ using Test
         rng=rng
     );
 
-    @test sum(result[1] .* utility) >= 30.
-    @test sum(result[1] .* mass) <= 30.
+    @test sum(Julia4ML_GA.argmin(result)[1] .* utility) >= 30.
+    @test sum(Julia4ML_GA.argmin(result)[1] .* mass) <= 30.
 end

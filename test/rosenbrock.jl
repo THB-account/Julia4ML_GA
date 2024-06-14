@@ -1,4 +1,4 @@
-using Random
+using Random:default_rng
 using Julia4ML_GA
 using Test
 
@@ -23,5 +23,5 @@ using Test
         rng=rng
     )
 
-    @test isapprox(result, [[1.,1.]], atol=0.1)
+    @test isapprox(Julia4ML_GA.argmin(result), [[1.,1.]], atol=0.1)
 end

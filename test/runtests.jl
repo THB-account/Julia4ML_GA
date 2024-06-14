@@ -4,6 +4,8 @@ using Test
 
 @testset "Julia4ML_GA.jl" begin
     # Write your tests here.
+    include("logging.jl")
     include("rosenbrock.jl")
     include("knapsack.jl")
+    
 end
