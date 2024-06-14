@@ -1,9 +1,3 @@
-function test_displacement()
-    rng = MersenneTwister();
-    genes1 = [i for i in 1:5]
-    return displacement(genes1,rng)
-end
-
 """
     displacement(gene,rng)
 
