@@ -25,6 +25,7 @@ After that it is a copy of `genes2`. The same for `child2` respectively with par
 """
 function single_point(genes1, genes2, rng)
     crossover_point = rand(rng, 1:length(genes1)) # it is possible to swap 0 up to (including) all-1 genes
+    # TODO (Fix): genes1 and genes2 can be something other than arrays currently
 
     child1 = similar(genes1)
     child2 = similar(genes2)

@@ -18,8 +18,15 @@ include("mutation.jl")
 include("selection.jl")
 include("crossover.jl")
 
-export roulette_wheel, 
+export 
+roulette_wheel, 
+roulette_wheel_inv,
+tournament_selection,
 displacement, 
-single_point, gaussian_displacement, univariate_displacement
+single_point, 
+gaussian_displacement, 
+univariate_displacement, 
+init_gaussian,
+init_uniform_binary_population
 
 end
