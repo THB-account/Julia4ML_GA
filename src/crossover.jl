@@ -1,15 +1,3 @@
-#function single_point_crossover(p1::ContinuousPopulant,p2::ContinuousPopulant)
-#    i = rand(1:length(p1.genes))
-#    return ContinuousPopulant(vcat(p1.genes[begin:i],p2.genes[i:end])),ContinuousPopulant(vcat(p2.genes[begin:i],p1.genes[i:end]))
-#end
-
-function test_single_point()
-    rng = MersenneTwister(1234);
-    genes1 = [1 for i in 1:4]
-    genes2 = [0 for i in 1:4]
-    return single_point(genes1, genes2,rng)[1]
-end
-
 """
     single_point(genes1, genes2,rng)
 
