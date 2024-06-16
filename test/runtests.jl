@@ -6,4 +6,6 @@ using Test
     # Write your tests here.
     include("rosenbrock.jl")
     include("knapsack.jl")
+    include("crossoverTest.jl")
+    include("mutationTest.jl")
 end

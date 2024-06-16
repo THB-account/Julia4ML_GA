@@ -1,16 +1,16 @@
 """
     displacement(gene,rng)
 
-Implements the single point crossover method.
+Implements the displacement method.
+- `gene`: ::Vector{<:Real} containing all genes of a chromosome.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `gene`: (Vector) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
 
 The genes are displaced inside itself.
 The returned element has the same values as before, but with scrambled genes.
 """
-function displacement(gene,rng)
+function displacement(gene::Vector{<:Real}, rng)
 
     random_subsequence_index = rand(rng, 1:length(gene)) # random index where subsequence starts
     random_subsequence_length = rand(rng, 0:length(gene)-random_subsequence_index+1) # random length of subsequence
