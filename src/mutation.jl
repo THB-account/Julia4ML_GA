@@ -37,6 +37,8 @@ Returns resulting gene.
 
 The genes are displaced inside itself.
 The returned element has the same values as before, but with scrambled genes.
+
+!!! Only applicable for combinatorial problems (knapsack) !!!
 """
 function displacement(gene::Vector{<:Real}, rng)
 
@@ -73,6 +75,8 @@ Adds gaussian noise to the gene with ``\\mathcal{N}(0,1)``.
 - `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
+
+!!! Only applicable for numerical problems (rosenbrock) !!!
 """
 function gaussian_displacement(gene,rng)
     return gene + randn(rng,size(gene)...)
@@ -85,6 +89,8 @@ Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
 - `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
+
+!!! Only applicable for numerical problems (rosenbrock) !!!
 """
 function univariate_displacement(gene,rng)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
