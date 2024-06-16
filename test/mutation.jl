@@ -6,8 +6,10 @@ using Test
     rng = Random.default_rng()
 
     @testset "Displacement" begin
-		Random.seed!(rng, 2)
-		#@test displacement([24, 2, 6, -3, 5], rng) == [5, 24, 2, 6, -3]
+		Random.seed!(rng, 7)
+        @test displacement([1, 2, 3, 4, 5], rng) == [1, 5, 2, 3, 4]
+        Random.seed!(rng, 2)
+		@test displacement([1, 2, 3, 4, 5], rng) == [5, 1, 2, 3, 4]
 	end	
 
     @testset "Displacement: Test length" begin
@@ -17,12 +19,12 @@ using Test
             genes = [i for i in 1:length_genes]
 
             mutated = displacement(genes, rng)
+
+            # println("genes ", genes)
+            # println("mutated ", mutated)
             
             # Test length
-            @test length(mutated) == length(genes)
-
-            #println(genes)
-            #println(mutated)
+            @test length(mutated) == length(genes) && sum(genes) == sum(mutated)
         end
     end
 end

@@ -26,6 +26,9 @@ using Test
             @test length(child1) == length_genes
             @test length(child2) == length_genes
 
+            # Test value
+            @test sum(child1) + sum(child2) == sum(genes1) + sum(genes2)
+
             #println(child1)
             #println(child2)
 
