@@ -3,10 +3,16 @@ using Julia4ML_GA
 using Test
 
 @testset "crossover" begin
-    @testset "single_point" begin
-        rng = Random.default_rng()
+    rng = Random.default_rng()
 
-        #rng = MersenneTwister(1234);
+    @testset "Single Point" begin
+		Random.seed!(rng, 3)
+        child1, child2 = single_point([-24, -2, -6, -3, -5], [4, 2, 1, 3, 5], rng)
+		@test child1 == [-24, -2, 1, 3, 5]
+        @test child2 == [4, 2, -6, -3, -5]
+	end	
+
+    @testset "Single Point: Test length" begin
         number_of_runs = 10
         all_crossover_points = zeros(number_of_runs)
         for i in 1:number_of_runs
@@ -14,7 +20,7 @@ using Test
             genes1 = zeros(length_genes)
             genes2 = ones(length_genes)
 
-            child1, child2 = single_point(genes1, genes2,rng)
+            child1, child2 = single_point(genes1, genes2, rng)
             
             # Test length
             @test length(child1) == length_genes

@@ -22,6 +22,7 @@ function roulette_wheel(fitness::Vector{<:Real}, selection_number::Int, rng)
     abs_fitness = abs.(fitness)
     probabilities = abs_fitness ./ sum(abs_fitness)
     cumulative_probabilities = cumsum(probabilities)
+    cumulative_probabilities[end] = 1
     
     selected_indices = Vector{Int}(undef, selection_number)
     

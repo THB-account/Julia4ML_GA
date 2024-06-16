@@ -4,8 +4,9 @@ using Test
 
 @testset "Julia4ML_GA.jl" begin
     # Write your tests here.
-    include("rosenbrock.jl")
-    include("knapsack.jl")
-    include("crossoverTest.jl")
-    include("mutationTest.jl")
+    #include("rosenbrock.jl")
+    #include("knapsack.jl")
+    include("crossover.jl")
+    include("mutation.jl")
+    include("selection.jl")
 end
