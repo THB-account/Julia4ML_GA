@@ -1,7 +1,7 @@
 using Julia4ML_GA
 using Random:default_rng
 
-@testset "logging" begin
+@testset "logging api" begin
     """
     1. check for errors when creating
     """
@@ -42,6 +42,30 @@ using Random:default_rng
         @test Julia4ML_GA.trace(res).fitnessValues[2] !== state.populationFitness
         @test Julia4ML_GA.trace(res).fittestPopulants[2] !== state.fittest
     end
+end
 
-    
+@testset "logging system test" begin
+    rng = default_rng()
+
+    populationSize = 100
+    initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
+    num_iter = 100
+    result = Julia4ML_GA.optimize(
+        initPop,
+        x -> (1-x[1])^2 +100*(x[2]-x[1]^2)^2,
+        Julia4ML_GA.GeneticAlgorithm(
+            populationSize=populationSize,
+	    selection=roulette_wheel_inv
+        );
+        iterations=num_iter,
+        rng=rng,
+        trace_optimization=true
+    )
+
+    @testset "functionality" begin
+        @test length(Julia4ML_GA.trace(result).populations) == num_iter
+        @test length(Julia4ML_GA.trace(result).populations[1]) == populationSize
+        @test length(Julia4ML_GA.trace(result).fitnessValues[1]) == populationSize
+    end
+
 end
