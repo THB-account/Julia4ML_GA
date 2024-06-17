@@ -35,6 +35,12 @@ using Random:default_rng
         @test Julia4ML_GA.trace(res).populations[1] !== state.population
         @test Julia4ML_GA.trace(res).fitnessValues[1] !== state.populationFitness
         @test Julia4ML_GA.trace(res).fittestPopulants[1] !== state.fittest
+        @test length(Julia4ML_GA.trace(res).populations) == 2
+        @test length(Julia4ML_GA.trace(res).fitnessValues) == 2
+        @test length(Julia4ML_GA.trace(res).fittestPopulants) == 2
+        @test Julia4ML_GA.trace(res).populations[2] !== state.population
+        @test Julia4ML_GA.trace(res).fitnessValues[2] !== state.populationFitness
+        @test Julia4ML_GA.trace(res).fittestPopulants[2] !== state.fittest
     end
 
     
