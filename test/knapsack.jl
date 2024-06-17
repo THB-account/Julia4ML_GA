@@ -1,9 +1,9 @@
-using Random
+using Random:default_rng
 using Julia4ML_GA
 using Test
 
 @testset "knapsack" begin
-    rng = Random.default_rng()
+    rng = default_rng()
 
     mass    = [1, 5, 3, 7, 2, 10, 5, 9, 2]
     utility = [1, 3, 5, 2, 5,  8, 3, 9, 5]
