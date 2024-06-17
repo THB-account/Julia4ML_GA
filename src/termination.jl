@@ -2,7 +2,7 @@ using Dates
 """
     Holds information about termination criteria
 """
-struct Terminator
+mutable struct Terminator
     # terminate by iterations
     max_iterations
     iterations
@@ -29,8 +29,9 @@ Evaluates configured termination criteria.
 
 Returns false if algorithm should terminate.
 """
-function terminate!(t::Terminator, ga::GeneticAlgorithm, state::GeneticAlgorithmState, iterations)
+function terminate!(t::Terminator, ga::GeneticAlgorithm, state::GeneticAlgorithmState, objective)
     t.iterations += 1
+    #println(t.iterations)
     again = true  
     
     # check iterations
@@ -46,12 +47,14 @@ function terminate!(t::Terminator, ga::GeneticAlgorithm, state::GeneticAlgorithm
     
     #check objective value
     if !isnan(t.obj_bound)
-        min = findmin(state.populationFitness,dims=1)
-        v = ga.objective(state.population[min])
-        if v < t.obj_bound
+        val, min = findmin(state.populationFitness,dims=1)
+        #print(min, " ", typeof(val))
+        #v = objective(state.population[min])
+        #println("obj_val: ", val[1])
+        if val[1] < t.obj_bound
             again = false
         end
     end
-    println("objective not yet reached:", again)
+    
     return again
 end

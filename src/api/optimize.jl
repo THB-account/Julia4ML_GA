@@ -33,9 +33,8 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
     #rng = MersenneTwister(1234)
     state = GeneticAlgorithmState(starting_population, objective)
     
-    while terminate!(terminator, ga, state, iterations)
+    while terminate!(terminator, ga, state, objective)
         update_state!(ga, state, objective, rng)
-        terminator.iterations += 1
     end
 
     _ ,idx_fittest = findmin(state.populationFitness,dims=1)
