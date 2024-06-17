@@ -2,7 +2,8 @@ using Random:default_rng
 using Julia4ML_GA
 using Test
 
-@testset "rosenbrock (1,1)" begin
+@testset "rosenbrock" begin
+    @testset "rosenbrock (1,1)" begin
         # https://en.wikipedia.org/wiki/Rosenbrock_function
         # rosenbrock funktion for a = 1 and b = 100
         # global minimum (x,y) at (a,a**2)
