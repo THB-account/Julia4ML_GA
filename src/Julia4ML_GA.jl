@@ -13,6 +13,7 @@ include("initialization.jl")
 include("ga.jl")
 include("api/optimize.jl")
 include("api/utils.jl")
+include("termination.jl")
 
 include("mutation.jl")
 include("selection.jl")
@@ -27,6 +28,7 @@ single_point,
 gaussian_displacement, 
 univariate_displacement, 
 init_gaussian,
-init_uniform_binary_population
+init_uniform_binary_population,
+terminate
 
 end
