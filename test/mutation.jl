@@ -1,14 +1,13 @@
-using Random
-using Julia4ML_GA
-using Test
+import Random
+import Julia4ML_GA
 
 @testset "mutation" begin
     @testset "Displacement" begin
         rng = Random.Xoshiro()
 		Random.seed!(rng, 7)
-        @test displacement([1, 2, 3, 4, 5], rng) == [1, 5, 2, 3, 4]
+        @test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [1, 5, 2, 3, 4]
         Random.seed!(rng, 2)
-		@test displacement([1, 2, 3, 4, 5], rng) == [5, 1, 2, 3, 4]
+		@test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [5, 1, 2, 3, 4]
 	end	
 
     @testset "Displacement: Test length" begin
@@ -18,7 +17,7 @@ using Test
             length_genes = i
             genes = [i for i in 1:length_genes]
 
-            mutated = displacement(genes, rng)
+            mutated = Julia4ML_GA.displacement(genes, rng)
 
             # println("genes ", genes)
             # println("mutated ", mutated)

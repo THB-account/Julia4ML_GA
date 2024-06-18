@@ -1,12 +1,11 @@
-using Random
-using Julia4ML_GA
-using Test
+import Random
+import Julia4ML_GA
 
 @testset "crossover" begin
     @testset "Single Point" begin
         rng = Random.Xoshiro()
 		Random.seed!(rng, 3)
-        child1, child2 = single_point([-24, -2, -6, -3, -5], [4, 2, 1, 3, 5], rng)
+        child1, child2 = Julia4ML_GA.single_point([-24, -2, -6, -3, -5], [4, 2, 1, 3, 5], rng)
 		@test child1 == [-24, -2, 1, 3, 5]
         @test child2 == [4, 2, -6, -3, -5]
 	end	
@@ -20,7 +19,7 @@ using Test
             genes1 = zeros(length_genes)
             genes2 = ones(length_genes)
 
-            child1, child2 = single_point(genes1, genes2, rng)
+            child1, child2 = Julia4ML_GA.single_point(genes1, genes2, rng)
             
             # Test length
             @test length(child1) == length_genes

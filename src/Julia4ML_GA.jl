@@ -18,6 +18,7 @@ export
 roulette_wheel, 
 roulette_wheel_inv,
 tournament_selection,
+rank_selection,
 displacement, 
 single_point, 
 gaussian_displacement, 
