@@ -81,7 +81,8 @@ Returns indices of selected populants.
 """
 function rank_selection(fitness::Vector{<:Real}, selection_number::Int, rng)
     selected_ranks = roulette_wheel(collect(1:length(fitness)), selection_number, rng)
-    sorted_fitness = sort(fitness, rev=true) # lowest fitness is selected with highest probability
-    selected_indices = sorted_fitness[selected_ranks]
+    fitness_with_indices = collect(zip(collect(1:length(fitness)),fitness))
+    sorted_fitness = sort(fitness_with_indices, by=x->x[2], rev=true) # lowest fitness is selected with highest probability
+    selected_indices = first.(sorted_fitness)[selected_ranks]
     return selected_indices
 end

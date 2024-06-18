@@ -5,7 +5,9 @@ import Julia4ML_GA
     @testset "Rank" begin
         rng = Random.Xoshiro()
 		Random.seed!(rng, 13)
-		@test Julia4ML_GA.rank_selection([24, 2, 6, -3, 5], 20, rng) == [6, -3, -3, 6, 2, -3, 2, -3, 6, 2, -3, 2, -3, 5, 6, -3, 2, -3, 6, 2]
+		@test Julia4ML_GA.rank_selection([24, 2, 6, -3, 5], 20, rng) == [3, 4, 4, 3, 2, 4, 2, 4, 3, 2, 4, 2, 4, 5, 3, 4, 2, 4, 3, 2]
+        Random.seed!(rng, 7)
+		@test Julia4ML_GA.rank_selection([24, 2, 6, -3, 5, 7, 10, 10], 20, rng) == [6, 2, 4, 5, 4, 7, 4, 4, 3, 6, 4, 2, 4, 2, 2, 4, 4, 4, 4, 3]
     end
 
 	@testset "Roulette" begin
