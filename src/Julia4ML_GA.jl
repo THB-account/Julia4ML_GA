@@ -14,10 +14,6 @@ include("ga.jl")
 include("api/optimize.jl")
 include("api/utils.jl")
 
-include("mutation.jl")
-include("selection.jl")
-include("crossover.jl")
-
 export 
 roulette_wheel, 
 roulette_wheel_inv,

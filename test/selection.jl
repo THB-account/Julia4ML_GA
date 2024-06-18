@@ -3,9 +3,8 @@ using Julia4ML_GA
 using Test
 
 @testset "Selection" begin
-	rng = Random.default_rng()
-
 	@testset "Roulette" begin
+        rng = Random.Xoshiro()
 		Random.seed!(rng, 2)
 		@test roulette_wheel([24, 2, 6, -3, 5], 2, rng) == [1, 3]
 		Random.seed!(rng, 2)
@@ -13,6 +12,7 @@ using Test
 	end	
 
 	@testset "Tounament" begin
+        rng = Random.Xoshiro()
 		Random.seed!(rng, 2)
 		@test tournament_selection([3, 1, -4, 7, 4, 2, 9], 3, 4, rng) == [6, 2, 6]
 	end

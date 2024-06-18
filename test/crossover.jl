@@ -3,9 +3,8 @@ using Julia4ML_GA
 using Test
 
 @testset "crossover" begin
-    rng = Random.default_rng()
-
     @testset "Single Point" begin
+        rng = Random.Xoshiro()
 		Random.seed!(rng, 3)
         child1, child2 = single_point([-24, -2, -6, -3, -5], [4, 2, 1, 3, 5], rng)
 		@test child1 == [-24, -2, 1, 3, 5]
@@ -13,6 +12,7 @@ using Test
 	end	
 
     @testset "Single Point: Test length" begin
+        rng = Random.default_rng()
         number_of_runs = 10
         all_crossover_points = zeros(number_of_runs)
         for i in 1:number_of_runs
