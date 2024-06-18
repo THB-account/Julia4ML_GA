@@ -61,9 +61,11 @@ Constructor:
 mutable struct GeneticAlgorithmState <: AbstractState
     population
     populationFitness
-
+    fittest
     function GeneticAlgorithmState(population,objective)
-        new(population, objective.(population))        
+        fitness = objective.(population)
+        _,fittest_idx = findmin(fitness)
+        new(population, fitness, population[fittest_idx])        
     end
 end
 
@@ -116,8 +118,11 @@ function update_state!(ga, state, objective, rng)
 
     mutation!(new_gen,ga,rng)
 
+    _, fitidx = findmin(state.populationFitness)
+    # update state
     state.population .= new_gen
     state.populationFitness .= evaluation!(ga,state,objective)
+    state.fittest = state.population[fitidx]
 end
 
 """

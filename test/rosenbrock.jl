@@ -1,4 +1,4 @@
-using Random
+using Random:default_rng
 using Julia4ML_GA
 using Test
 
@@ -8,7 +8,7 @@ using Test
         # rosenbrock funktion for a = 1 and b = 100
         # global minimum (x,y) at (a,a**2)
         # solution is (1,1)
-        rng = Random.default_rng()
+        rng = default_rng()
 
         populationSize = 1000
         initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
@@ -25,13 +25,13 @@ using Test
             rng=rng
         )
 
-        @test isapprox(result, [[1.,1.]], atol=0.1)
+        @test isapprox(Julia4ML_GA.argmin(result), [[1.,1.]], atol=0.1)
     end
 
     @testset "rosenbrock (4,16) gaussian_displacement" begin
         # global minimum (x,y) at (a,a**2)
         # solution is (4,16)
-        rng = Random.default_rng()
+        rng = default_rng()
 
         populationSize = 1000
         initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
@@ -50,13 +50,13 @@ using Test
 
         #println(result)
 
-        @test isapprox(result, [[4.,16.]], atol=0.5)
+        @test isapprox(Julia4ML_GA.argmin(result), [[4.,16.]], atol=0.5)
     end
 
     @testset "rosenbrock (4,16) univariate_displacement" begin
         # global minimum (x,y) at (a,a**2)
         # solution is (4,16)
-        rng = Random.default_rng()
+        rng = default_rng()
 
         populationSize = 1000
         initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
@@ -75,6 +75,6 @@ using Test
 
         #println(result)
 
-        @test isapprox(result, [[4.,16.]], atol=0.5)
+        @test isapprox(Julia4ML_GA.argmin(result), [[4.,16.]], atol=0.5)
     end
 end
