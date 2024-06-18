@@ -22,7 +22,8 @@ rank_selection,
 displacement, 
 single_point, 
 gaussian_displacement, 
-univariate_displacement, 
+univariate_displacement,
+bit_inversion,
 init_gaussian,
 init_uniform_binary_population
 

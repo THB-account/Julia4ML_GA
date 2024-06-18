@@ -78,9 +78,10 @@ Returns resulting gene.
 
 !!! Only applicable for numerical problems (rosenbrock) !!!
 """
-function gaussian_displacement(gene,rng)
+function gaussian_displacement(gene::Vector{<:Real}, rng)
     return gene + randn(rng,size(gene)...)
 end
+
 """
     univariate_displacement(gene,rng)
 
@@ -92,6 +93,27 @@ Returns resulting gene.
 
 !!! Only applicable for numerical problems (rosenbrock) !!!
 """
-function univariate_displacement(gene,rng)
+function univariate_displacement(gene::Vector{<:Real}, rng)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
+end
+
+"""
+    univariate_displacement(gene,rng)
+
+Inverses each bit with probability 1/length(gene).
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector{Bool}) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
+
+!!! Only applicable for problems with true/false genes (knapsack) !!!
+"""
+function bit_inversion(gene::Vector{Bool}, rng)
+    p = 1/length(gene)
+    for (index, element) in enumerate(gene)
+        if rand(rng) <= p
+            gene[index] = !gene[index]
+        end
+    end
+    return gene
 end

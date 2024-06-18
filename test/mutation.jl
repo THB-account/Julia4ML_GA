@@ -2,6 +2,15 @@ import Random
 import Julia4ML_GA
 
 @testset "mutation" begin
+    @testset "Bit Inversion" begin
+        rng = Random.Xoshiro()
+		Random.seed!(rng, 2)
+        @test Julia4ML_GA.bit_inversion([true, true, true, true, true], rng) == [false, true, true, true, true]
+        Random.seed!(rng, 13)
+		@test (Julia4ML_GA.bit_inversion([true, true, true, true, true, false, false, false, false, false], rng) == 
+            [true, true, true, false, true, false, false, false, true, false])
+	end
+
     @testset "Displacement" begin
         rng = Random.Xoshiro()
 		Random.seed!(rng, 7)

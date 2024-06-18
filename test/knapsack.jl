@@ -16,9 +16,10 @@ using Test
         x -> -fitnessFun(x),
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=50,
-            selection=roulette_wheel
+            selection=roulette_wheel,
+            mutation=bit_inversion
         );
-        iterations=100,
+        iterations=30,
         rng=rng
     );
 
