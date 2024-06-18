@@ -27,7 +27,7 @@ end
 
 
 """
-    displacement(gene,rng)
+    displacement(gene, rng)
 
 Implements the displacement method.
 - `gene`: ::Vector{<:Real} containing all genes of a chromosome.
@@ -68,7 +68,7 @@ function displacement(gene::Vector{<:Real}, rng)
 end
 
 """
-    gaussian_displacement(gene,rng)
+    gaussian_displacement(gene, rng)
 
 Adds gaussian noise to the gene with ``\\mathcal{N}(0,1)``.
 - `rng`: Instance of a random number generator to produce reproducible results.
@@ -83,7 +83,7 @@ function gaussian_displacement(gene::Vector{<:Real}, rng)
 end
 
 """
-    univariate_displacement(gene,rng)
+    univariate_displacement(gene, rng)
 
 Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
 - `rng`: Instance of a random number generator to produce reproducible results.
@@ -98,7 +98,7 @@ function univariate_displacement(gene::Vector{<:Real}, rng)
 end
 
 """
-    univariate_displacement(gene,rng)
+    bit_inversion(gene, rng)
 
 Inverses each bit with probability 1/length(gene).
 - `rng`: Instance of a random number generator to produce reproducible results.
