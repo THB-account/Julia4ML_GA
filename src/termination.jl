@@ -1,4 +1,5 @@
 using Dates
+using Logging
 """
     Holds information about termination criteria
 """
@@ -14,24 +15,31 @@ mutable struct Terminator
     # terminate by bound of objective value
     obj_bound
 
-    function Terminator(;max_iter=1000, time_limit=600, obj_bound=NaN)
+    function Terminator(;max_iter=NaN, time_limit=NaN, obj_bound=NaN)
+        if isnan(max_iter) && isnan(time_limit)
+        #    if isnan(obj_bound)
+                #throw(ArgumentError("No termination criteria set. Created Infinite Loop :)"))
+        #        pass
+        #    else
+            @warn "No hard termination criterion set (time_limit or iterations). May run indefinetly"
+        #    end
+        end
         new(max_iter, 0, time_limit, now(), obj_bound)
     end
 end
 
 
 """
-    terminate(ga::GeneticAlgorithm, state::GeneticAlgorithmState)
+    terminate(t::Terminator, state::GeneticAlgorithmState)
 
 Evaluates configured termination criteria.
-- 'ga': (GeneticAlgorithm) contains termination criteria
+- 't': (Terminator) contains termination criteria
 - 'state': (GeneticAlgorithmState)
 
 Returns false if algorithm should terminate.
 """
-function terminate!(t::Terminator, ga::GeneticAlgorithm, state::GeneticAlgorithmState, objective)
+function terminate!(t::Terminator, state::GeneticAlgorithmState)
     t.iterations += 1
-    #println(t.iterations)
     again = true  
     
     # check iterations
@@ -48,9 +56,6 @@ function terminate!(t::Terminator, ga::GeneticAlgorithm, state::GeneticAlgorithm
     #check objective value
     if !isnan(t.obj_bound)
         val, min = findmin(state.populationFitness,dims=1)
-        #print(min, " ", typeof(val))
-        #v = objective(state.population[min])
-        #println("obj_val: ", val[1])
         if val[1] < t.obj_bound
             again = false
         end

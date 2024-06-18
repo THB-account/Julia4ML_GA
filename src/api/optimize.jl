@@ -33,7 +33,7 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
     #rng = MersenneTwister(1234)
     state = GeneticAlgorithmState(starting_population, objective)
     
-    while terminate!(terminator, ga, state, objective)
+    while terminate!(terminator, state)
         update_state!(ga, state, objective, rng)
     end
 
