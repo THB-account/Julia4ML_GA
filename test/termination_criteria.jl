@@ -10,16 +10,20 @@ using Dates
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
-    time_limit=2
+    
+    time_limit=10 # to be tested here
+    bound = 0.00000005
+    max_iter = 20000000
+
     start = now()
 
     res = Julia4ML_GA.optimize(pop,
         obj, 
         ga ;
-        iterations=20000000, # -> rediculusly high
+        iterations=max_iter, 
         rng=rng,
-        time_limit=time_limit, # -> to use this as termination criterion
-        obj_bound = 0.00000005 # -> rediculously low
+        time_limit=time_limit, 
+        obj_bound = bound 
     )
 
     fin = now()
@@ -28,31 +32,12 @@ using Dates
 end
 
 @testset "max_iterations" begin
-    Random.seed!(1234)
-    rng = Random.default_rng()
-    obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
-    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    #The following example runs for 3 iterations with outcomes:
+    #    # fittness fittest, id fittest
+    #    ([0.03259902851092163], [80]) 
+    #    ([0.03259902851092163], [96])
+    #    ([0.007679540200270641], [62])
     
-    time_limit=2
-    start = now()
-
-    res = Julia4ML_GA.optimize(pop,
-        obj, 
-        ga ;
-        iterations=3, # -> this will be fast
-        rng=rng,
-        time_limit=time_limit, # -> low, but longer than 3 iterations
-        obj_bound = 0.00000005 # -> rediculously low
-    )
-
-    fin = now()
-
-    # running time should be almost zero, even on my sucky laptop
-    @test isapprox(time_limit-(fin - start)/ Millisecond(1000), 2, atol=0.1)
-end
-
-@testset "objective_lower_bound" begin
     Random.seed!(1)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
@@ -60,22 +45,48 @@ end
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
     time_limit=10
-    bound = 0.008 
-    start = now()
+    bound = 0.00000005
+    max_iter = 2 # to be tested here
 
-    # setup with which it ends after 4 iterations due to fixed randomness and bound
     res = Julia4ML_GA.optimize(pop,
         obj, 
         ga ;
-        iterations=10, 
+        iterations=max_iter, 
         rng=rng,
         time_limit=time_limit, 
         obj_bound = bound 
     )
 
-    fin = now()
+    @test isapprox(obj(res[1]), 0.0325990, atol=0.00001)
+end
 
-    # running time should be almost zero, even on my sucky laptop
+@testset "objective_lower_bound" begin
+    #The following example runs for 3 iterations with outcomes:
+    #    # fittness fittest, id fittest
+    #    ([0.03259902851092163], [80]) 
+    #    ([0.03259902851092163], [96])
+    #    ([0.007679540200270641], [62])
+    
+
+    Random.seed!(1)
+    rng = Random.default_rng()
+    obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
+    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    
+    time_limit=10
+    bound = 0.008 # to be tested here
+    max_iter = 20
+
+    res = Julia4ML_GA.optimize(pop,
+        obj, 
+        ga ;
+        iterations=max_iter, 
+        rng=rng,
+        time_limit=time_limit, 
+        obj_bound = bound 
+    )
+
     @test isapprox(obj(res[1]), bound, atol=0.001)
 end
 
