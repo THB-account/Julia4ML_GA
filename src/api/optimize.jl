@@ -22,7 +22,6 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
         2. evaluate population on objective and set state
         3. start optimization loop
     """
-    seed!(1234) # TODO needs to be changed to OS time
     trace = OptimizationTrace()
 
     if length(starting_population) != ga.populationSize
