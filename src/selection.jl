@@ -79,8 +79,8 @@ Selects based on order of fitness values. The amount of the difference between t
 
 Returns indices of selected populants.
 """
-function rank_selection(fitness::Vector{<:Real}, selection_number::Int, rng)
-    selected_ranks = roulette_wheel(collect(1:length(fitness)), selection_number, rng)
+function rank_selection(fitness::Vector{<:Real}, selection_number::Int, rng, f = x -> x)
+    selected_ranks = roulette_wheel(f.(collect(1:length(fitness))), selection_number, rng)
     fitness_with_indices = collect(zip(collect(1:length(fitness)),fitness))
     sorted_fitness = sort(fitness_with_indices, by=x->x[2], rev=true) # lowest fitness is selected with highest probability
     selected_indices = first.(sorted_fitness)[selected_ranks]

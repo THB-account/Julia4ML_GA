@@ -19,7 +19,7 @@ Constructor:
         mutationRate=0.1,
         selection=roulette_wheel,
         mutation=displacement,
-        crossover=single_point
+        crossover=k_point
     ) 
 """
 struct GeneticAlgorithm <: AbstractOptimizer
@@ -38,7 +38,7 @@ struct GeneticAlgorithm <: AbstractOptimizer
         mutationRate=0.1,
         selection=roulette_wheel,
         mutation=displacement,
-        crossover=single_point
+        crossover=k_point
     ) = new(populationSize,
     eliteSize,
     crossoverRate,

@@ -89,3 +89,30 @@ Returns trace of evolutionary algorithm
 function trace(res::OptimizationResult)
     return res.trace
 end
+
+"""
+    get_sub_vector(vec, s, e, allow_wrap)
+
+Returns a part of the vector. 
+- `vec`: Vector{<:Real}
+- `s`: Start Index (including) [1, length]
+- `e`: End index (not including) [2, length + 1]
+- `allow_wrap`: If true, start can be behind end
+"""
+function get_sub_vector(vec::Vector{<:Real}, s::Int, e::Int, allow_wrap::Bool = false)
+    if s == e
+        return Vector{eltype(vec)}(undef, 0) # return empty vector
+    end
+    if e < 2 || s < 1 || s > length(vec) || e > length(vec) + 1
+        error("Indexing not correct. Vector: ", vec, ", s: ", s, ", e: ", e)
+    end
+    if s < e
+        return vec[s:e-1]
+    end
+    if allow_wrap
+        sub_arr_1 = get_sub_vector(vec, s, length(vec)+1)
+        sub_arr_2 = get_sub_vector(vec, 1, e)
+        return vcat(sub_arr_1, sub_arr_2)
+    end
+    error("s is before s. This is only allowed if allow_wrap. Vector: ", vec, ", s: ", s, ", e: ", e)
+end
