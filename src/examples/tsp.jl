@@ -1,4 +1,4 @@
-function get_traveling_cost(cost_matrix, traveling_order)
+function get_traveling_cost(cost_matrix::Matrix{<:Real}, traveling_order::Vector{<:Integer})
     if length(traveling_order) > length(Set(traveling_order))
         return sum(cost_matrix)
     end
@@ -31,16 +31,16 @@ function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Rea
     return population
 end
 
-function solve_tsp(cost_matrix,
-                        iterations=100,
-                        populationSize=50,
-                        eliteSize=5,
-                        crossoverRate=0.8,
-                        mutationRate=0.1,
-                        selection=rank_selection, 
-                        mutation=displacement, 
-                        crossover=partially_mapped,
-                        rng=default_rng())
+function solve_tsp(cost_matrix::Matrix{<:Real};
+    iterations=100,
+    populationSize=50,
+    eliteSize=5,
+    crossoverRate=0.8,
+    mutationRate=0.1,
+    selection=rank_selection, 
+    mutation=displacement, 
+    crossover=partially_mapped,
+    rng=default_rng())
 
     initpop = init_tsp_population(populationSize, cost_matrix, rng)
 

@@ -15,6 +15,9 @@ include("api/optimize.jl")
 include("api/utils.jl")
 
 include("examples/tsp.jl")
+include("examples/sudoku.jl")
+include("examples/knapsack.jl")
+include("examples/rosenbrock.jl")
 
 export 
 roulette_wheel, 

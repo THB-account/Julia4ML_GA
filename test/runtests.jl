@@ -7,10 +7,10 @@ using Test
     include("logging.jl")
     include("other.jl")    
 
-    include("rosenbrock.jl")
-    include("knapsack.jl")
-    include("sudoku.jl")
-    include("tsp.jl")
+    include("examples/rosenbrock.jl")
+    include("examples/knapsack.jl")
+    include("examples/sudoku.jl")
+    include("examples/tsp.jl")
 
     include("crossover.jl")
     include("mutation.jl")
