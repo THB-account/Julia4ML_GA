@@ -31,6 +31,9 @@ gaussian_displacement,
 univariate_displacement,
 bit_inversion,
 init_gaussian,
-init_uniform_binary_population
-
+init_uniform_binary_population,
+solve_knapsack,
+solve_rosenbrock,
+solve_sudoku,
+solve_tsp
 end

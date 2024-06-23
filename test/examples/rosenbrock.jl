@@ -24,7 +24,8 @@ using Test
             Julia4ML_GA.GeneticAlgorithm(
                 populationSize=populationSize,
             selection=roulette_wheel_inv,
-            mutation=gaussian_displacement
+            mutation=gaussian_displacement,
+            crossover=k_point
             );
             iterations=100,
             rng=rng
