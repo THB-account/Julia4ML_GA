@@ -3,7 +3,7 @@ import Julia4ML_GA
 
 @testset "crossover" begin
     @testset "Partially mapped" begin
-        rng = Random.Xoshiro()
+        rng = Random.MersenneTwister()
 		Random.seed!(rng, 3)
         child1, child2 = Julia4ML_GA.partially_mapped([1, 2, 3, 4, 5, 6, 7, 8], [3, 7, 5, 1, 6, 8, 2, 4], rng)
 	end
@@ -22,11 +22,11 @@ import Julia4ML_GA
     end
 
     @testset "Single Point" begin
-        rng = Random.Xoshiro()
+        rng = Random.MersenneTwister()
 		Random.seed!(rng, 3)
         child1, child2 = Julia4ML_GA.k_point([-24, -2, -6, -3, -5], [4, 2, 1, 3, 5], rng, 1)
-		@test child1 == [-24, -2, 1, 3, 5]
-        @test child2 == [4, 2, -6, -3, -5]
+		@test child1 == [-24, -2, -6, 3, 5]
+        @test child2 == [4, 2, 1, -3, -5]
 	end	
 
     @testset "Single Point: Test length" begin

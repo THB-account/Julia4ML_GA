@@ -3,20 +3,20 @@ import Julia4ML_GA
 
 @testset "mutation" begin
     @testset "Bit Inversion" begin
-        rng = Random.Xoshiro()
-		Random.seed!(rng, 2)
-        @test Julia4ML_GA.bit_inversion([true, true, true, true, true], rng) == [false, true, true, true, true]
+        rng = Random.MersenneTwister()
+		Random.seed!(rng, 7)
+        @test Julia4ML_GA.bit_inversion([true, true, true, true, true], rng) == [true, true, true, false, true]
         Random.seed!(rng, 13)
 		@test (Julia4ML_GA.bit_inversion([true, true, true, true, true, false, false, false, false, false], rng) == 
-            [true, true, true, false, true, false, false, false, true, false])
+            [true, true, false, true, true, false, false, false, false, false])
 	end
 
     @testset "Displacement" begin
-        rng = Random.Xoshiro()
+        rng = Random.MersenneTwister()
 		Random.seed!(rng, 7)
-        @test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [1, 5, 2, 3, 4]
+        @test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [1, 2, 4, 3, 5]
         Random.seed!(rng, 2)
-		@test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [5, 1, 2, 3, 4]
+		@test Julia4ML_GA.displacement([1, 2, 3, 4, 5], rng) == [4, 5, 1, 2, 3]
 	end	
 
     @testset "Displacement: Test length" begin
