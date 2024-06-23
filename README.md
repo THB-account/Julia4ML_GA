@@ -7,7 +7,7 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 
 |Documentation| Build Status|
 |-------------|-------------|
-|[![Stable][docs-stable-img]][docs-stable-url] [![Dev][docs-dev-img]][docs-dev-url]||
+|[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![Coverage][cov-img]][cov-url]|
 
 [![Stable]()]()
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://THB-account.github.io/Julia4ML_GA.jl/dev/)
@@ -25,3 +25,6 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 
 [docs-dev-url]: https://THB-account.github.io/Julia4ML_GA.jl/dev/
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
+
+[cov-url]:
+[cov-img]:
