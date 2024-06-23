@@ -1,6 +1,10 @@
 # Julia4ML_GA
+Julia4ML_GA is a package that provides a framework for initializing genetic algorithms to solve optimization problems.
+
 
 Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://thb-account.github.io/Julia4ML_GA/dev/)!
+
+
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://THB-account.github.io/Julia4ML_GA.jl/stable/)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://THB-account.github.io/Julia4ML_GA.jl/dev/)
