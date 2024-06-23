@@ -26,5 +26,5 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 [docs-dev-url]: https://THB-account.github.io/Julia4ML_GA.jl/dev/
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
 
-[cov-url]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl/branch/master/graph/badge.svg
-[cov-img]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl
+[cov-url]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl
+[cov-img]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl/branch/master/graph/badge.svg
