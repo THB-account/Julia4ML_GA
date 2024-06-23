@@ -1,6 +1,6 @@
 module Julia4ML_GA
 
-using Random: MersenneTwister, default_rng,seed!
+using Random: MersenneTwister, default_rng,seed!, shuffle
 # Write your package code here.
 
 include("api/types.jl")
@@ -14,6 +14,8 @@ include("ga.jl")
 include("api/optimize.jl")
 include("api/utils.jl")
 
+include("examples/tsp.jl")
+
 export 
 roulette_wheel, 
 roulette_wheel_inv,
@@ -21,6 +23,7 @@ tournament_selection,
 rank_selection,
 displacement, 
 k_point, 
+partially_mapped,
 gaussian_displacement, 
 univariate_displacement,
 bit_inversion,

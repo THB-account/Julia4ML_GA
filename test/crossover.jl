@@ -2,6 +2,25 @@ import Random
 import Julia4ML_GA
 
 @testset "crossover" begin
+    @testset "Partially mapped" begin
+        rng = Random.Xoshiro()
+		Random.seed!(rng, 3)
+        child1, child2 = Julia4ML_GA.partially_mapped([1, 2, 3, 4, 5, 6, 7, 8], [3, 7, 5, 1, 6, 8, 2, 4], rng)
+	end
+
+    @testset "Partially mapped: test length" begin
+        rng = Random.default_rng()
+        number_of_runs = 10
+        t_vec_size = 5
+        t_vec = [i for i in 1:t_vec_size]
+        t_vec_2 = Random.shuffle(t_vec)
+
+        for i in 1:number_of_runs
+            r1, r2 = Julia4ML_GA.partially_mapped(t_vec, t_vec_2, rng)
+            @test length(t_vec) == length(Set(r1)) && length(t_vec) == length(Set(r2))
+        end
+    end
+
     @testset "Single Point" begin
         rng = Random.Xoshiro()
 		Random.seed!(rng, 3)

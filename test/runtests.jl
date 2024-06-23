@@ -10,6 +10,7 @@ using Test
     include("rosenbrock.jl")
     include("knapsack.jl")
     include("sudoku.jl")
+    include("tsp.jl")
 
     include("crossover.jl")
     include("mutation.jl")
