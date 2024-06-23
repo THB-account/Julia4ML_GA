@@ -47,7 +47,7 @@ Adds gaussian noise to the gene with ``\\mathcal{N}(0,1)``.
 
 Returns resulting gene.
 
-!!! Only applicable for numerical problems (rosenbrock) !!!
+!!! Only applicable for continous problems (rosenbrock) !!!
 """
 function gaussian_displacement(gene::Vector{<:Real}, rng)
     return gene + randn(rng,size(gene)...)
@@ -62,7 +62,7 @@ Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
 
 Returns resulting gene.
 
-!!! Only applicable for numerical problems (rosenbrock) !!!
+!!! Only applicable for continous problems (rosenbrock) !!!
 """
 function univariate_displacement(gene::Vector{<:Real}, rng)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
