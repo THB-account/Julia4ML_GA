@@ -1,7 +1,19 @@
 using Dates
 using Logging
 """
-    Holds information about termination criteria
+    Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
+
+- 'max_iterations': (Integer/NaN) Maximum number of iterations in optimisation process. Default is NaN.
+- 'time_limit': (Float/NaN) Time after which the optimization should be terminated. Default is NaN.
+- 'obj_bound': (Float/NaN) Threshold after which the optimization should be terminated. Default is NaN.
+
+Throws 
+    - 'ArgumentError' if no termination condition is set.
+    - Warning if no time or iteration limit is provided.
+
+Constructor:
+
+    Terminator(;max_iter=NaN, time_limit=NaN, obj_bound=NaN)
 """
 mutable struct Terminator
     # terminate by iterations
@@ -43,10 +55,10 @@ function terminate!(t::Terminator, state::GeneticAlgorithmState)
     
     # check iterations
     if !isnan(t.max_iterations)
-        t.iterations += 1
         if  (t.iterations >= t.max_iterations)
             again = false
         end
+        t.iterations += 1
     end
 
     # check time
@@ -64,7 +76,6 @@ function terminate!(t::Terminator, state::GeneticAlgorithmState)
             again = false
         end
     end
-    
     
     return again
 end
