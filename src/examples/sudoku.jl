@@ -84,18 +84,39 @@ function init_sudoku_population(population_size::Integer, sudoku::Matrix{Int8}, 
     return population
 end
 
+function sudoku_mutation(genes::Vector{Int8}, rng, range::Integer = 9)
+    p = 1/length(genes)
+    for (index, element) in enumerate(genes)
+        if rand(rng) <= p
+            r_number = rand(rng, 1:range-1)
+            if r_number == genes[index]
+                r_number = range
+            end
+            genes[index] = r_number
+        end
+    end
+    return genes
+end
+
 function solve_sudoku(sudoku::Matrix{<:Integer};
-    iterations=100,
+    iterations=1000,
     populationSize=50,
     eliteSize=5,
-    crossoverRate=0.4,
-    mutationRate=0.4,
+    crossoverRate=0.5,
+    mutationRate=0.9,
     selection=rank_selection, 
-    mutation=displacement, 
+    mutation=sudoku_mutation, 
     crossover=k_point,
     rng=default_rng())
 
     sudoku = Int8.(sudoku)
+
+    if mutation == sudoku_mutation
+        function sudoku_mutation_correct_range(genes::Vector{Int8}, rng)
+            return sudoku_mutation(genes, rng, size(sudoku)[1])
+        end
+        mutation = sudoku_mutation_correct_range
+    end
 
     initpop = init_sudoku_population(populationSize, sudoku, rng)
 

@@ -48,6 +48,14 @@ import Julia4ML_GA
         @test length(p) == p_size
     end
 
+    @testset "Sudoku mutation" begin
+        rng = Random.MersenneTwister()
+		Random.seed!(rng, 7)
+        genes = Int8.([1 for i in 1:10])
+        genes_mutated = Julia4ML_GA.sudoku_mutation(genes, rng, 4)
+        @test genes_mutated == [1, 1, 1, 2, 1, 1, 1, 1, 1, 1]
+    end
+
     @testset "Sudoku 4 x 4" begin
         rng = Random.default_rng()
 
@@ -59,9 +67,9 @@ import Julia4ML_GA
             ]
 
         best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku)
+        # println(errors)
         @test errors < 5
-        # display(solution)
-        # println("Errors: ", error_per_sudoku(solution))
+        # display(best_solution)
     end
 
     @testset "Sudoku 9 x 9" begin
@@ -91,8 +99,8 @@ import Julia4ML_GA
             ]
 
         best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku, iterations=10000)
-        
-        @test errors < 25
-        # display(solution)
+        # println(errors)
+        @test errors < 5
+        # display(best_solution)
     end
 end
