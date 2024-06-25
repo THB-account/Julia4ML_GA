@@ -1,5 +1,7 @@
 function solve_rosenbrock(a::Real, b::Real;
-    iterations=1000,
+    iterations=1000, 
+    time_limit=NaN, 
+    obj_bound=NaN,
     populationSize=100,
     eliteSize=5,
     crossoverRate=0.4,
@@ -26,6 +28,8 @@ function solve_rosenbrock(a::Real, b::Real;
             mutationRate=mutationRate
         );
         iterations=iterations,
+        time_limit=time_limit,
+        obj_bound=obj_bound,
         rng=rng
     )
 

@@ -32,7 +32,9 @@ function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Rea
 end
 
 function solve_tsp(cost_matrix::Matrix{<:Real};
-    iterations=100,
+    iterations=100, 
+    time_limit=NaN, 
+    obj_bound=NaN,
     populationSize=50,
     eliteSize=5,
     crossoverRate=0.8,
@@ -59,6 +61,8 @@ function solve_tsp(cost_matrix::Matrix{<:Real};
             mutationRate=mutationRate
         );
         iterations=iterations,
+        time_limit=time_limit, 
+        obj_bound=obj_bound,
         rng=rng
     )
 

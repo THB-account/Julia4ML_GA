@@ -17,12 +17,12 @@ mutable struct Terminator
 
     function Terminator(;max_iter=NaN, time_limit=NaN, obj_bound=NaN)
         if isnan(max_iter) && isnan(time_limit)
-        #    if isnan(obj_bound)
-                #throw(ArgumentError("No termination criteria set. Created Infinite Loop :)"))
+            if isnan(obj_bound)
+                throw(ArgumentError("No termination criteria set. Created Infinite Loop :)"))
         #        pass
-        #    else
-            @warn "No hard termination criterion set (time_limit or iterations). May run indefinetly"
-        #    end
+            else
+                @warn "No hard termination criterion set (time_limit or iterations). May run indefinetly"
+            end
         end
         new(max_iter, 0, time_limit, now(), obj_bound)
     end
@@ -39,27 +39,32 @@ Evaluates configured termination criteria.
 Returns false if algorithm should terminate.
 """
 function terminate!(t::Terminator, state::GeneticAlgorithmState)
-    t.iterations += 1
     again = true  
     
     # check iterations
-    if t.iterations >= t.max_iterations
-        again = false
+    if !isnan(t.max_iterations)
+        t.iterations += 1
+        if  (t.iterations >= t.max_iterations)
+            again = false
+        end
     end
 
     # check time
-    curr = now()
-    if (curr - t.starting_time)/ Millisecond(1000) >= t.time_limit
-        again = false
+    if !isnan(t.max_iterations)
+        curr = now()
+        if (curr - t.starting_time)/ Millisecond(1000) >= t.time_limit
+            again = false
+        end
     end
     
     #check objective value
     if !isnan(t.obj_bound)
-        val, min = findmin(state.populationFitness,dims=1)
+        val, __ = findmin(state.populationFitness,dims=1)
         if val[1] < t.obj_bound
             again = false
         end
     end
+    
     
     return again
 end

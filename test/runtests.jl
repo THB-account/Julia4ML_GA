@@ -15,4 +15,5 @@ using Test
     include("crossover.jl")
     include("mutation.jl")
     include("selection.jl")
+    include("termination_criteria.jl")
 end

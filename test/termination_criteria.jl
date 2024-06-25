@@ -3,7 +3,7 @@ using Julia4ML_GA
 using Test
 using Dates
 
-@testset "time_limit" begin
+@testset "terminate_time_limit" begin
     Random.seed!(1234)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
@@ -31,7 +31,7 @@ using Dates
     @test isapprox(time_limit, (fin - start)/ Millisecond(1000), atol=0.5)
 end
 
-@testset "max_iterations" begin
+@testset "terminate_max_iterations" begin
     #The following example runs for 3 iterations with outcomes:
     #    # fittness fittest, id fittest
     #    ([0.03259902851092163], [80]) 
@@ -54,13 +54,14 @@ end
         iterations=max_iter, 
         rng=rng,
         time_limit=time_limit, 
-        obj_bound = bound 
+        obj_bound = bound,
+        trace_optimization=true
     )
 
-    @test isapprox(obj(res[1]), 0.0325990, atol=0.00001)
+    @test isequal(length(Julia4ML_GA.trace(res).populations), max_iter)
 end
 
-@testset "objective_lower_bound" begin
+@testset "terminate_objective_lower_bound" begin
     #The following example runs for 3 iterations with outcomes:
     #    # fittness fittest, id fittest
     #    ([0.03259902851092163], [80]) 
@@ -87,7 +88,7 @@ end
         obj_bound = bound 
     )
 
-    @test isapprox(obj(res[1]), bound, atol=0.001)
+    @test isless(res.minmalFitness[1], bound)
         
 end
 
@@ -105,8 +106,8 @@ end
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
-    time_limit=NaN
-    bound = 1
+    time_limit = NaN
+    bound = 0.008 # to be tested here
     max_iter = NaN
 
     msg = "No hard termination criterion set (time_limit or iterations). May run indefinetly"
@@ -114,8 +115,8 @@ end
     @test_warn msg res = Julia4ML_GA.optimize(pop,obj,ga;iterations=max_iter,rng=rng,time_limit=time_limit,obj_bound = bound)
 
 
-    time_limit=NaN
-    bound = 
+    time_limit = NaN
+    bound = NaN
     max_iter = NaN
 
     msg = "No termination criteria set. Created Infinite Loop :)"

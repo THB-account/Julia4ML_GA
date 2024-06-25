@@ -1,5 +1,7 @@
 function solve_knapsack(mass::Vector{<:Real}, utility::Vector{<:Real}, maxMass::Real;
-    iterations=100,
+    iterations=100, 
+    time_limit=NaN, 
+    obj_bound=NaN,
     populationSize=50,
     eliteSize=5,
     crossoverRate=0.8,
@@ -27,6 +29,8 @@ function solve_knapsack(mass::Vector{<:Real}, utility::Vector{<:Real}, maxMass::
             mutationRate=mutationRate
         );
         iterations=iterations,
+        time_limit=time_limit, 
+        obj_bound=obj_bound,
         rng=rng
     )
 

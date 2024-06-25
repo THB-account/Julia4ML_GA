@@ -99,7 +99,9 @@ function sudoku_mutation(genes::Vector{Int8}, rng, range::Integer = 9)
 end
 
 function solve_sudoku(sudoku::Matrix{<:Integer};
-    iterations=1000,
+    iterations=1000, 
+    time_limit=NaN, 
+    obj_bound=NaN,
     populationSize=50,
     eliteSize=5,
     crossoverRate=0.5,
@@ -136,6 +138,8 @@ function solve_sudoku(sudoku::Matrix{<:Integer};
             mutationRate=mutationRate
         );
         iterations=iterations,
+        time_limit=time_limit, 
+        obj_bound=obj_bound,
         rng=rng
     )
 
