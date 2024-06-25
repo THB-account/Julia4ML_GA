@@ -14,7 +14,7 @@ Returns final population's fittest populant.
 Population is initialized and build. 
 Then the optimization is executed using the provided fitness function.
 """
-function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=NaN,rng=default_rng(), time_limit=600, obj_bound=NaN)
+function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=NaN,trace_optimization=false,rng=default_rng(), time_limit=NaN, obj_bound=NaN)
     """
         1. initialize population
             1.1 build population
@@ -22,7 +22,7 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
         2. evaluate population on objective and set state
         3. start optimization loop
     """
-    seed!(1234) # TODO needs to be changed to OS time
+    trace = OptimizationTrace()
 
     terminator = Terminator(max_iter=iterations, time_limit=time_limit, obj_bound=obj_bound)
 
@@ -35,8 +35,13 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
     
     while terminate!(terminator, state)
         update_state!(ga, state, objective, rng)
+        if trace_optimization
+            append!(trace,state)
+        end
     end
 
-    _ ,idx_fittest = findmin(state.populationFitness,dims=1)
-    return state.population[idx_fittest] 
+    min_fitness ,idx_fittest = findmin(state.populationFitness,dims=1)
+
+    
+    return OptimizationResult(state.population[idx_fittest] ,min_fitness,trace)
 end

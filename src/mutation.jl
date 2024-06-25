@@ -1,56 +1,90 @@
 """
-    displacement(gene,rng)
+    displacement(gene, rng)
 
-Implements the single point crossover method.
+Implements the displacement method.
+- `gene`: ::Vector{<:Real} containing all genes of a chromosome.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `gene`: (Vector) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
 
 The genes are displaced inside itself.
 The returned element has the same values as before, but with scrambled genes.
+
+!!! Only applicable for combinatorial problems (knapsack) !!!
 """
-function displacement(gene,rng)
+function displacement(gene::Vector{<:Real}, rng)
 
-    random_subsequence_index = rand(rng, 1:length(gene)) # random index where subsequence starts
-    random_subsequence_length = rand(rng, 0:length(gene)-random_subsequence_index+1) # random length of subsequence
-    random_insertion = rand(rng, 0:length(gene)-random_subsequence_length) # random insertion place of subsequence (including before and behind)
+    r_start = rand(rng, 1:length(gene)) # random index where subsequence starts
+    r_end = rand(rng, 2:length(gene)+1) # random index where subsequence ends
 
-    if random_subsequence_length == 0
-        return gene[begin:end]
+    random_subsequence = get_sub_vector(gene, r_start, r_end, true)
+    rest = []
+
+    # println("s ",random_subsequence)
+
+    if r_end >= r_start
+        rest = vcat(get_sub_vector(gene, 1, r_start), get_sub_vector(gene, r_end, length(gene)+1))
+    else
+        rest = get_sub_vector(gene, r_end, r_start)
     end
-    random_subsequence = gene[random_subsequence_index:random_subsequence_index+random_subsequence_length-1]
+    
+    # println("r ", rest)
 
-    rest = vcat(gene[begin:random_subsequence_index-1], gene[random_subsequence_index+random_subsequence_length:end])
+    r_insertion = rand(rng, 1:length(rest)+1) # random insertion place of subsequence (including before and behind)
 
-    if random_insertion == 0
-        return vcat(random_subsequence, rest)
-    end
-    result = vcat(vcat(rest[begin:random_insertion], random_subsequence), rest[random_insertion+1:end])
-    return result
+    # println(r_start, " ", r_end, " ", r_insertion)
+    rest_2 = get_sub_vector(rest, r_insertion, length(rest)+1)
+    rest_1 = get_sub_vector(rest, 1, r_insertion)
+    return vcat(rest_1, vcat(random_subsequence, rest_2))
 end
 
 """
-    gaussian_displacement(gene,rng)
+    gaussian_displacement(gene, rng)
 
 Adds gaussian noise to the gene with ``\\mathcal{N}(0,1)``.
 - `rng`: Instance of a random number generator to produce reproducible results.
 - `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
+
+!!! Only applicable for numerical problems (rosenbrock) !!!
 """
-function gaussian_displacement(gene,rng)
+function gaussian_displacement(gene::Vector{<:Real}, rng)
     return gene + randn(rng,size(gene)...)
 end
+
 """
-    univariate_displacement(gene,rng)
+    univariate_displacement(gene, rng)
 
 Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
 - `rng`: Instance of a random number generator to produce reproducible results.
 - `gene`: (Vector{Float64}) Vector containing all genes of a chromosome.
 
 Returns resulting gene.
+
+!!! Only applicable for numerical problems (rosenbrock) !!!
 """
-function univariate_displacement(gene,rng)
+function univariate_displacement(gene::Vector{<:Real}, rng)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
+end
+
+"""
+    bit_inversion(gene, rng)
+
+Inverses each bit with probability 1/length(gene).
+- `rng`: Instance of a random number generator to produce reproducible results.
+- `gene`: (Vector{Bool}) Vector containing all genes of a chromosome.
+
+Returns resulting gene.
+
+!!! Only applicable for problems with true/false genes (knapsack) !!!
+"""
+function bit_inversion(gene::Vector{Bool}, rng)
+    p = 1/length(gene)
+    for (index, element) in enumerate(gene)
+        if rand(rng) <= p
+            gene[index] = !gene[index]
+        end
+    end
+    return gene
 end
