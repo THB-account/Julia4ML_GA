@@ -17,11 +17,9 @@ Then the optimization is executed using the provided fitness function.
 function optimize(
     starting_population::A,
     objective,ga::GeneticAlgorithm;
-    
     iterations::Int = 100, 
     time_limit=NaN, 
     obj_bound=NaN,
-    
     trace_optimization::Bool = false,
     
     rng::AbstractRNG = default_rng()
