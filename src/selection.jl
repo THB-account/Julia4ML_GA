@@ -42,7 +42,6 @@ the fittest of `tournament_size` randomly chosen candidates.
 
 - `fitness`: (Vector{<:Real}) Vector of fitness values.
 """
-# TODO: complete and fix
 function tournament_selection(
     fitness::Vector{<:Real}, 
     selection_number::Int, 
