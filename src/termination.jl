@@ -1,5 +1,3 @@
-using Dates
-using Logging
 """
     Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
 
