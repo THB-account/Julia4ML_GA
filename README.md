@@ -22,7 +22,7 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 [docs-stable-url]: https://THB-account.github.io/Julia4ML_GA.jl/stable/
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
 
-[docs-dev-url]: https://THB-account.github.io/Julia4ML_GA.jl/dev/
+[docs-dev-url]: https://THB-account.github.io/Julia4ML_GA/dev/
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
 
 [cov-url]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl
