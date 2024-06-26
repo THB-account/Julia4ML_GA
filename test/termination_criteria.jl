@@ -132,10 +132,5 @@ end
         obj_bound = bound 
     )
     end
-        #@test false  # This should not be reached
-    #catch e
-    #    @test isa(e, ArgumentError)
-    #    @test occursin("No termination criteria set. Created Infinite Loop :)", e.message)
-    #end
-
+        
 end
