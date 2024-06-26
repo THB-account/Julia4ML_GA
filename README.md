@@ -7,7 +7,7 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 
 |Documentation| Build Status|
 |-------------|-------------|
-|[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![codecov](https://codecov.io/gh/THB-account/Julia4ML_GA/branch/docu_update_240623/graph/badge.svg?token=M1YMJMO46Y)](https://codecov.io/gh/THB-account/Julia4ML_GA)|
+|[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![codecov](cov-img)](cov-url)|
 
 
 ## Installation
@@ -25,6 +25,6 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 [docs-dev-url]: https://THB-account.github.io/Julia4ML_GA/dev/
 [docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
 
-[cov-url]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl
-[cov-img]: https://codecov.io/gh/THB-account/Julia4ML_GA.jl/branch/master/graph/badge.svg
+[cov-url]: https://codecov.io/gh/THB-account/Julia4ML_GA
+[cov-img]: https://codecov.io/gh/THB-account/Julia4ML_GA/branch/docu_update_240623/graph/badge.svg?token=M1YMJMO46Y
 
