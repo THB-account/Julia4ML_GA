@@ -1,5 +1,6 @@
 using Julia4ML_GA
 using Random:default_rng
+using Test
 
 @testset "logging api" begin
     """

@@ -1,25 +1,4 @@
 """
-Contains the results of a evolutionary optimization process
-
-- `minimalPopulant`: (Vector{Vector{Real}}) Populant that minimizes the objective.
-- `minimalFitness`: (Vector{Real}) Value of the objective for the minimal populant.
-- `trace`: (OptimizationTrace) Trace object containing individual values of generations.
-
-Constructor:
-
-    OptimizationResult(minimalPopulant,minmalFitness,trace) 
-"""
-struct OptimizationResult <: AbstractOptimizationResult
-    minimalPopulant
-    minmalFitness
-    trace
-
-    function OptimizationResult(minimalPopulant, minimalFitness,trace)
-        new(minimalPopulant,minimalFitness,trace)
-    end
-end
-
-"""
 Contains information and functions to execute an optimization process for a genetic algorithm.
 
 - `populations`: (Vector{Vector{Vector{Real}}}) Population of each iteration.
@@ -55,6 +34,27 @@ function append!(trace::AbstractTrace,state::AbstractState)
     push!(trace.populations,state.population)
     push!(trace.fitnessValues,state.populationFitness)
     push!(trace.fittestPopulants,state.fittest)
+end
+
+"""
+Contains the results of a evolutionary optimization process
+
+- `minimalPopulant`: (T1) Populant that minimizes the objective.
+- `minimalFitness`: (T2) Value of the objective for the minimal populant.
+- `trace`: (OptimizationTrace) Trace object containing individual values of generations.
+
+Constructor:
+
+    OptimizationResult(minimalPopulant,minmalFitness,trace) 
+"""
+struct OptimizationResult{T1, T2} <: AbstractOptimizationResult
+    minimalPopulant::T1
+    minmalFitness::T2
+    trace::OptimizationTrace
+
+    function OptimizationResult(minimalPopulant::T1, minimalFitness::T2, trace) where {T1, T2}
+        new{T1, T2}(minimalPopulant,minimalFitness,trace)
+    end
 end
 
 """

@@ -1,4 +1,4 @@
-function roulette_wheel_inv(fitness::Vector{<:Real}, selection_number::Int, rng)
+function roulette_wheel_inv(fitness::Vector{<:Real}, selection_number::Int, rng::R) where {R<:AbstractRNG}
     roulette_wheel(1.0 ./ fitness, selection_number, rng)
 end
 
@@ -17,7 +17,7 @@ positive
 
 Returns indices of selected populants.
 """
-function roulette_wheel(fitness::Vector{<:Real}, selection_number::Int, rng)
+function roulette_wheel(fitness::Vector{<:Real}, selection_number::Int, rng::R) where {R<:AbstractRNG} 
     abs_fitness = abs.(fitness)
     probabilities = abs_fitness ./ sum(abs_fitness)
     cumulative_probabilities = cumsum(probabilities)
@@ -42,8 +42,12 @@ the fittest of `tournament_size` randomly chosen candidates.
 
 - `fitness`: (Vector{<:Real}) Vector of fitness values.
 """
-function tournament_selection(fitness::Vector{<:Real}, selection_number::Int, tournament_size::Int, rng)
-    # TODO: complete and fix
+function tournament_selection(
+    fitness::Vector{<:Real}, 
+    selection_number::Int, 
+    tournament_size::Int, 
+    rng::R
+) where {R<:AbstractRNG} 
     population_size = length(fitness)
     selected_indices = Vector{Int}(undef, selection_number)
     total_fitness_sign = fitness |> sum |> sign
@@ -79,7 +83,12 @@ Selects based on order of fitness values. The amount of the difference between t
 
 Returns indices of selected populants.
 """
-function rank_selection(fitness::Vector{<:Real}, selection_number::Int, rng, f = x -> x)
+function rank_selection(
+    fitness::Vector{<:Real}, 
+    selection_number::Int, 
+    rng::R, 
+    f::F = x -> x
+) where {R<:AbstractRNG, F<:Function}
     selected_ranks = roulette_wheel(f.(collect(1:length(fitness))), selection_number, rng)
     fitness_with_indices = collect(zip(collect(1:length(fitness)),fitness))
     sorted_fitness = sort(fitness_with_indices, by=x->x[2], rev=true) # lowest fitness is selected with highest probability

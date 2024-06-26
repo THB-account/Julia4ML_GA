@@ -11,7 +11,7 @@ using Dates
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
     
-    time_limit=10 # to be tested here
+    time_limit=10.0 # to be tested here
     bound = 0.00000005
     max_iter = 20000000
 
@@ -44,7 +44,7 @@ end
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
-    time_limit=10
+    time_limit=10.0
     bound = 0.00000005
     max_iter = 2 # to be tested here
 
@@ -75,7 +75,7 @@ end
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
-    time_limit=10
+    time_limit=10.0
     bound = 0.008 # to be tested here
     max_iter = 20
 
@@ -106,14 +106,13 @@ end
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
     pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
     
-    time_limit = NaN
+    time_limit = NaN 
     bound = 0.008 # to be tested here
     max_iter = NaN
 
     msg = "No hard termination criterion set (time_limit or iterations). May run indefinetly"
 
     @test_warn msg res = Julia4ML_GA.optimize(pop,obj,ga;iterations=max_iter,rng=rng,time_limit=time_limit,obj_bound = bound)
-
 
     time_limit = NaN
     bound = NaN

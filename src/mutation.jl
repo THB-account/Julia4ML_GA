@@ -12,7 +12,7 @@ The returned element has the same values as before, but with scrambled genes.
 
 !!! Only applicable for combinatorial problems (knapsack) !!!
 """
-function displacement(gene::Vector{<:Real}, rng)
+function displacement(gene::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
 
     r_start = rand(rng, 1:length(gene)) # random index where subsequence starts
     r_end = rand(rng, 2:length(gene)+1) # random index where subsequence ends
@@ -49,7 +49,7 @@ Returns resulting gene.
 
 !!! Only applicable for continous problems (rosenbrock) !!!
 """
-function gaussian_displacement(gene::Vector{<:Real}, rng)
+function gaussian_displacement(gene::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
     return gene + randn(rng,size(gene)...)
 end
 
@@ -64,7 +64,7 @@ Returns resulting gene.
 
 !!! Only applicable for continous problems (rosenbrock) !!!
 """
-function univariate_displacement(gene::Vector{<:Real}, rng)
+function univariate_displacement(gene::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
 end
 
@@ -79,7 +79,7 @@ Returns resulting gene.
 
 !!! Only applicable for problems with true/false genes (knapsack) !!!
 """
-function bit_inversion(gene::Vector{Bool}, rng)
+function bit_inversion(gene::Vector{Bool}, rng::R) where {R<:AbstractRNG}
     p = 1/length(gene)
     for (index, element) in enumerate(gene)
         if rand(rng) <= p
