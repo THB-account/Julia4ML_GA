@@ -7,7 +7,7 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 
 |Documentation| Build Status|
 |-------------|-------------|
-|[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![codecov](cov-img)](cov-url)|
+|[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![](cov-img)](cov-url)|
 
 
 ## Installation
