@@ -8,11 +8,11 @@ function init_gaussian(starting_point::AbstractVector,population_size::Integer,r
     return population
 end
 
-function init_uniform_binary_population(population_size::Integer, genome_length::Integer)
+function init_uniform_binary_population(population_size::Integer, genome_length::Integer, rng)
     population = Vector{Vector{Bool}}(undef, population_size)
 
     for i in 1:population_size
-        population[i] = [rand() > 0.5 for _ in 1:genome_length]
+        population[i] = [rand(rng) > 0.5 for _ in 1:genome_length]
     end
 
     population

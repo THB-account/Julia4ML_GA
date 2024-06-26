@@ -33,6 +33,13 @@ function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng, k::Int = 2
     return child1, child2
 end
 
+function get_uncopied_gene(d::Dict, gene::Real)
+    if !(gene in keys(d))
+        return gene
+    end
+    return get_uncopied_gene(d, d[gene])
+end
+
 """
     partially_mapped(genes1, genes2,rng)
 
@@ -45,7 +52,55 @@ Returns `child1` and `child2`
 `genes1` and `genes2` are used to create `child1` and `child2`, which are returned. 
 """
 function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
-    child1 = copy(genes1)
-    child2 = copy(genes2)
+    child1 = similar(genes1)
+    child2 = similar(genes2)
+
+    r_start = rand(rng, 1:length(genes1)) # random index where subsequence starts
+    r_end = rand(rng, 2:length(genes1)+1) # random index where subsequence ends
+
+    if r_start == r_end
+        return genes1, genes2
+    end
+
+    random_subsequence_genes1 = get_sub_vector(genes1, r_start, r_end, true)
+    random_subsequence_genes2 = get_sub_vector(genes2, r_start, r_end, true)
+
+    #println(genes1, genes2)
+    if r_start < r_end
+        child1[r_start:r_end-1] = random_subsequence_genes2
+        child2[r_start:r_end-1] = random_subsequence_genes1
+    else
+        child1[r_start:length(genes1)] = get_sub_vector(random_subsequence_genes2, 1, length(genes1)-r_start+2)
+        child1[1:r_end-1] = get_sub_vector(random_subsequence_genes2, length(genes1)-r_start+2, length(genes1)-r_start+1 + r_end)
+
+        child2[r_start:length(genes1)] = get_sub_vector(random_subsequence_genes1, 1, length(genes1)-r_start+2)
+        child2[1:r_end-1] = get_sub_vector(random_subsequence_genes1, length(genes1)-r_start+2, length(genes1)-r_start+1 + r_end)
+    end
+
+
+    #println(child1, child2)
+
+    indices = []
+    if r_end >= r_start
+        if r_start > 1
+            indices = collect(1:r_start-1)
+        end
+        if r_end <= length(genes1)
+            Base.append!(indices, collect(r_end:length(genes1)))
+        end
+    else
+        indices = collect(r_end:r_start-1)
+    end
+
+    d_child2 = Dict(zip(random_subsequence_genes1, random_subsequence_genes2))
+    d_child1 = Dict(zip(random_subsequence_genes2, random_subsequence_genes1))
+    #println(d_child1)
+    for i in indices
+        uncopied_gene = get_uncopied_gene(d_child2, genes2[i])
+        #println("i: ", i, ", ug: ", uncopied_gene)
+        child2[i] = uncopied_gene
+        child1[i] = get_uncopied_gene(d_child1, genes1[i])
+    end
+    #println(child1, child2)
     return child1, child2
 end

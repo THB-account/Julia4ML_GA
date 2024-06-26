@@ -14,7 +14,12 @@ Returns final population's fittest populant.
 Population is initialized and build. 
 Then the optimization is executed using the provided fitness function.
 """
-function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=100,trace_optimization=false,rng=default_rng())
+function optimize(starting_population,objective,ga::GeneticAlgorithm;
+    iterations=100, 
+    time_limit=NaN, 
+    obj_bound=NaN,
+    trace_optimization=false,
+    rng=default_rng())
     """
         1. initialize population
             1.1 build population
@@ -24,14 +29,16 @@ function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=
     """
     trace = OptimizationTrace()
 
+    terminator = Terminator(max_iter=iterations, time_limit=time_limit, obj_bound=obj_bound)
+
     if length(starting_population) != ga.populationSize
         throw(ArgumentError("starting_population must have length of GeneticAlgorithm::populationSize"))
     end
    
     #rng = MersenneTwister(1234)
     state = GeneticAlgorithmState(starting_population, objective)
-
-    for _ in 1:iterations
+    
+    while terminate!(terminator, state)
         update_state!(ga, state, objective, rng)
         if trace_optimization
             append!(trace,state)
