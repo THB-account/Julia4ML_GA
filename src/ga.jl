@@ -22,30 +22,33 @@ Constructor:
         crossover=k_point
     ) 
 """
-struct GeneticAlgorithm <: AbstractOptimizer
-    populationSize
-    eliteSize
-    crossoverRate
-    mutationRate
-    selection
-    mutation
-    crossover
+struct GeneticAlgorithm{S, M, C} <: AbstractOptimizer
+    populationSize::Int
+    eliteSize::Int
+    mutationRate::Float64
+    crossoverRate::Float64
+    selection::S
+    mutation::M
+    crossover::C
     # TODO add methods here
     GeneticAlgorithm(;
-        populationSize=50,
-        eliteSize=5,
-        crossoverRate=0.8,
-        mutationRate=0.1,
-        selection=roulette_wheel,
-        mutation=displacement,
-        crossover=k_point
-    ) = new(populationSize,
-    eliteSize,
-    crossoverRate,
-    mutationRate,
-    selection,
-    mutation,
-    crossover)
+        populationSize::Int=50,
+        eliteSize::Int=5,
+        crossoverRate::Float64=0.8,
+        mutationRate::Float64=0.1,
+        selection::S=roulette_wheel,
+        mutation::M=displacement,
+        crossover::C=k_point
+    ) where {S, M, C} = 
+    new{S, M, C}(
+        populationSize,
+        eliteSize,
+        crossoverRate,
+        mutationRate,
+        selection,
+        mutation,
+        crossover
+    )
 end
 
 """
@@ -58,14 +61,20 @@ Constructor:
 
     GeneticAlgorithmState(population,objective)
 """
-mutable struct GeneticAlgorithmState <: AbstractState
-    population
+mutable struct GeneticAlgorithmState{T, A<:AbstractArray} <: AbstractState
+    population::A
     populationFitness
-    fittest
-    function GeneticAlgorithmState(population,objective)
+    fittest::T
+
+    function GeneticAlgorithmState{T, A}(population::A, objective::Function) where {T, A<:AbstractArray}
         fitness = objective.(population)
-        _,fittest_idx = findmin(fitness)
-        new(population, fitness, population[fittest_idx])        
+        _, fittest_idx = findmin(fitness)
+        new{T, A}(population, fitness, population[fittest_idx])
+    end
+
+    function GeneticAlgorithmState(population::A, objective::Function) where {A<:AbstractArray}
+        T = eltype(population)  
+        GeneticAlgorithmState{T, A}(population, objective)
     end
 end
 

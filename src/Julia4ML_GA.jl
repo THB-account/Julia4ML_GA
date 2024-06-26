@@ -1,6 +1,6 @@
 module Julia4ML_GA
 
-using Random: MersenneTwister, default_rng,seed!, shuffle
+using Random: MersenneTwister, default_rng, seed!, shuffle, AbstractRNG
 # Write your package code here.
 
 include("api/types.jl")

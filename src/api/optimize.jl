@@ -14,7 +14,13 @@ Returns final population's fittest populant.
 Population is initialized and build. 
 Then the optimization is executed using the provided fitness function.
 """
-function optimize(starting_population,objective,ga::GeneticAlgorithm;iterations=100,trace_optimization=false,rng=default_rng())
+function optimize(
+    starting_population::A,
+    objective,ga::GeneticAlgorithm;
+    iterations::Int = 100,
+    trace_optimization::Bool = false,
+    rng::AbstractRNG = default_rng()
+) where {A<:AbstractArray}
     """
         1. initialize population
             1.1 build population
