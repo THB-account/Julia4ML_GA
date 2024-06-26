@@ -1,5 +1,7 @@
 module Julia4ML_GA
 
+using Dates
+using Logging
 using Random: MersenneTwister, default_rng, seed!, shuffle, AbstractRNG
 # Write your package code here.
 
@@ -13,6 +15,7 @@ include("initialization.jl")
 include("ga.jl")
 include("api/optimize.jl")
 include("api/utils.jl")
+include("termination.jl")
 
 include("examples/tsp.jl")
 include("examples/sudoku.jl")
@@ -32,6 +35,7 @@ univariate_displacement,
 bit_inversion,
 init_gaussian,
 init_uniform_binary_population,
+terminate,
 solve_knapsack,
 solve_rosenbrock,
 solve_sudoku,

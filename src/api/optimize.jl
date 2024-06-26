@@ -17,8 +17,13 @@ Then the optimization is executed using the provided fitness function.
 function optimize(
     starting_population::A,
     objective,ga::GeneticAlgorithm;
-    iterations::Int = 100,
+    
+    iterations::Int = 100, 
+    time_limit=NaN, 
+    obj_bound=NaN,
+    
     trace_optimization::Bool = false,
+    
     rng::AbstractRNG = default_rng()
 ) where {A<:AbstractArray}
     """
@@ -30,14 +35,16 @@ function optimize(
     """
     trace = OptimizationTrace()
 
+    terminator = Terminator(max_iter=iterations, time_limit=time_limit, obj_bound=obj_bound)
+
     if length(starting_population) != ga.populationSize
         throw(ArgumentError("starting_population must have length of GeneticAlgorithm::populationSize"))
     end
    
     #rng = MersenneTwister(1234)
     state = GeneticAlgorithmState(starting_population, objective)
-
-    for _ in 1:iterations
+    
+    while terminate!(terminator, state)
         update_state!(ga, state, objective, rng)
         if trace_optimization
             append!(trace,state)
