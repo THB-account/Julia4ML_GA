@@ -63,16 +63,19 @@ Constructor:
 """
 mutable struct GeneticAlgorithmState{T, A<:AbstractArray} <: AbstractState
     population::A
-    populationFitness
+    populationFitness::Vector{<:Real}
     fittest::T
 
-    function GeneticAlgorithmState{T, A}(population::A, objective::Function) where {T, A<:AbstractArray}
+    function GeneticAlgorithmState{T, A}(
+        population::A, 
+        objective::F
+    ) where {T, A<:AbstractArray, F<:Function}
         fitness = objective.(population)
         _, fittest_idx = findmin(fitness)
         new{T, A}(population, fitness, population[fittest_idx])
     end
 
-    function GeneticAlgorithmState(population::A, objective::Function) where {A<:AbstractArray}
+    function GeneticAlgorithmState(population::A, objective::F) where {A<:AbstractArray, F<:Function}
         T = eltype(population)  
         GeneticAlgorithmState{T, A}(population, objective)
     end
@@ -90,8 +93,13 @@ Initialises populant's genes.
 
 Returns GeneticAlgorithmState.
 """
-function initialise_genetic_state(starting_point,objective,ga,rng)
-    return GeneticAlgorithmState(init_gaussian(starting_point,ga.populationSize,rng),objective)
+function initialise_genetic_state(
+    starting_point::Vector{Float64}, 
+    objective::F, 
+    ga::GeneticAlgorithm, 
+    rng::R
+) where {F<:Function, R<:AbstractRNG}
+    return GeneticAlgorithmState(init_gaussian(starting_point, ga.populationSize, rng) ,objective)
 end
 
 """
@@ -106,7 +114,12 @@ Equivalent to one iteration of the optimizatrion process.
 - `objective`: (Function) Fitness function to be used.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
-function update_state!(ga, state, objective, rng)
+function update_state!(
+    ga::GeneticAlgorithm, 
+    state::GeneticAlgorithmState, 
+    objective::F, 
+    rng::R
+) where {R<:AbstractRNG, F<:Function}
     # initialisation won't be handled here
     populationSize = ga.populationSize
     eliteSize = ga.eliteSize
@@ -130,7 +143,7 @@ function update_state!(ga, state, objective, rng)
     _, fitidx = findmin(state.populationFitness)
     # update state
     state.population .= new_gen
-    state.populationFitness .= evaluation!(ga,state,objective)
+    state.populationFitness .= evaluation!(state,objective)
     state.fittest = state.population[fitidx]
 end
 
@@ -142,7 +155,7 @@ Control function for fitness evaluation.
 - `state`:  (GeneticAlgorithmState) GeneticAlgorithmState instance to proceed from.
 - `objective`: (Function) Fitness function by which the population is evaluated.
 """
-function evaluation!(ga,state,objective)
+function evaluation!(state::GeneticAlgorithmState, objective::F) where {F<:Function}
     state.populationFitness .= objective.(state.population)
 end
 
@@ -157,15 +170,19 @@ Control function for crossover.
 - `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
 - `rng`:  Instance of a random number generator to produce reproducible results.
 """
-function crossover!(parents,children,selected_individuals,ga,rng)
-    s = selected_individuals
+function crossover!(
+    parents::A, 
+    children::A, 
+    selected_individuals::Vector{Int}, 
+    ga::GeneticAlgorithm, 
+    rng::R
+) where {A<:AbstractArray, R<:AbstractRNG}
     N = length(selected_individuals)
     for i in 1:2:length(selected_individuals)
         parent1, parent2 = i!=N ? (i,i+1) : (i,i-1)
         selected_idx1 = selected_individuals[parent1]
         selected_idx2 = selected_individuals[parent2]
         parent1, parent2 = parents[selected_idx1],parents[selected_idx2]
-        # TODO (Fix): selected_individuals[parent1] and selected_individuals[parent2] can be 0 
 
         if rand(rng) < ga.crossoverRate
             children[i],children[i+1] = ga.crossover(parent1,parent2,rng)
@@ -184,7 +201,7 @@ control function for mutation.
 - `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
-function mutation!(population,ga,rng)
+function mutation!(population::A, ga::GeneticAlgorithm, rng::R) where {A<:AbstractArray, R<:AbstractRNG}
     for i in eachindex(population)
         if rand(rng) < ga.mutationRate
             population[i] = ga.mutation(population[i],rng)

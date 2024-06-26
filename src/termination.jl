@@ -25,7 +25,11 @@ mutable struct Terminator
     # terminate by bound of objective value
     obj_bound
 
-    function Terminator(;max_iter=NaN, time_limit=NaN, obj_bound=NaN)
+    function Terminator(
+        ;max_iter::Union{Float64, Int} = NaN, 
+        time_limit::Float64 = NaN, 
+        obj_bound::Float64 = NaN
+    )
         if isnan(max_iter) && isnan(time_limit)
             if isnan(obj_bound)
                 throw(ArgumentError("No termination criteria set. Created Infinite Loop :)"))
