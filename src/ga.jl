@@ -34,8 +34,8 @@ struct GeneticAlgorithm{S, M, C} <: AbstractOptimizer
     GeneticAlgorithm(;
         populationSize::Int=50,
         eliteSize::Int=5,
-        crossoverRate::Float64=0.8,
-        mutationRate::Float64=0.1,
+        crossoverRate::Float64=0.5,
+        mutationRate::Float64=0.5,
         selection::S=roulette_wheel,
         mutation::M=displacement,
         crossover::C=k_point

@@ -5,7 +5,7 @@ function solve_knapsack(mass::Vector{<:Real}, utility::Vector{<:Real}, maxMass::
     populationSize=50,
     eliteSize=5,
     crossoverRate=0.8,
-    mutationRate=0.1,
+    mutationRate=0.8,
     selection=roulette_wheel, 
     mutation=bit_inversion, 
     crossover=k_point,

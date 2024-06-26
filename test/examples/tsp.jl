@@ -82,7 +82,7 @@ import Julia4ML_GA
             37  62  54  56  19  55  70  35  26  41  31  47  22  40  19  20  29  37  38   0
         ]
 
-        best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=1000)
+        best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=2000, populationSize=500)
         @test best_solution_cost < 450
     end
 
@@ -131,7 +131,7 @@ import Julia4ML_GA
         ]
 
 
-        best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=1000)
+        best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=2000, populationSize=500)
         @test best_solution_cost < 800
     end
 end
