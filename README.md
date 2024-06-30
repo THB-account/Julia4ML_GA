@@ -13,9 +13,9 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 ## Installation
 For testing in Pluto notebook you can use the following command:
 ```
-  using Pkg;
-	Pkg.add(url="https://github.com/THB-account/Julia4ML_GA")
-	using Julia4ML_GA
+using Pkg;
+Pkg.add(url="https://github.com/THB-account/Julia4ML_GA")
+using Julia4ML_GA
 ```
 
 ## Action Methods for Optimization
