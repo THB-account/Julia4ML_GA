@@ -17,6 +17,11 @@ using Pkg;
 Pkg.add(url="https://github.com/THB-account/Julia4ML_GA")
 using Julia4ML_GA
 ```
+or for temporary testing from Julia's REPL:
+```
+] activate --temp
+] add https://github.com/THB-account/Julia4ML_GA.git
+```
 
 ## Action Methods for Optimization
 
