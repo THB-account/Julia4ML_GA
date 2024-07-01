@@ -2,11 +2,14 @@
 """
     optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,rng=default_rng())
 
-    Executes optimization process
+Executes optimization process
 
 - `starting_point`: (Vector) Initial candidate.
+- `ga`: (GeneticAlgorithm)
 - `objective`: (Function) Fitness function to evaluate population. 
-- `iterations`: (Integer) Maximum number of iterations.
+- `iterations`: (Integer) Maximum number of iterations. Termination condition, defaults to 100.
+- `time_limit`: (Float) Time limit in seconds. Termination condition, defaults to `NaN`.
+- `obj_bound` : (Float) Lower bound to objective value. Termination condition, defaults to `NaN`.
 - `rng`: Instance of a random number generator to produce reproducible results. Default is `Random.default_rng()`.
 
 Returns final population's fittest populant.
