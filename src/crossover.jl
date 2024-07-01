@@ -1,18 +1,18 @@
 """
-    k_point(genes1, genes2,rng)
+    k_point(genes1, genes2, rng)
 
-Implements the k point crossover method.
-- `genes1`, `genes2`: Vector{<:Real} containing all genes of a chromosome.
-- `rng`: An instance of a random number generator to produce reproducible results.
-- `k`: Number of cross over points
-
-Returns `child1` and `child2`
-
+Implements the k point crossover method. 
 `genes1` and `genes2` are used to create `child1` and `child2`, which are returned. 
 `child1` is a copy of `genes1` up to randomly generated crossover point. 
 After that it is a copy of `genes2`. The same for `child2` respectively with parent roles swapped.
 If more than one crossover point exist this procedure is repeated.
-If k == 1, this is single point crossover
+If k == 1, this is single point crossover.
+
+- `genes1`, `genes2`: Vector{<:Real} containing all genes of a each parent.
+- `rng`: An instance of a random number generator to produce reproducible results.
+- `k`: Number of cross over points
+
+Returns `child1` and `child2`
 """
 function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::R, k::Int = 2) where {R<:AbstractRNG}
     crossover_points = sort([rand(rng, 1:length(genes1)+1) for i in 1:k]) # it is possible to swap 0 up to (including) all genes
@@ -43,13 +43,15 @@ end
 """
     partially_mapped(genes1, genes2,rng)
 
-Implements the partially mapped crossover (PMX) method.
-- `genes1`, `genes2`: Vector{<:Real} containing all genes of a chromosome.
+Implements the partially mapped crossover (PMX) method. 
+`genes1` and `genes2` are used to create `child1` and `child2`, which are returned.
+This procedure only changes the order of the genes.
+`child1`, `child2`, `genes1` and `genes2` all have the same genes, but the order can be different.
+
+- `genes1`, `genes2`: Vector{<:Real} containing all genes of each parent.
 - `rng`: An instance of a random number generator to produce reproducible results.
 
 Returns `child1` and `child2`
-
-`genes1` and `genes2` are used to create `child1` and `child2`, which are returned. 
 """
 function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
     child1 = similar(genes1)

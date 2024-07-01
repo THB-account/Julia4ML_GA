@@ -11,7 +11,7 @@ likely to be selected. Should only be used if either all fitness values are nega
 positive
 
 - `fitness`: (Vector{<:Real}) Vector of fitness values. The higher the absolute fitness, 
-  the more likely the corresponding chromosome is selected.
+  the more likely the corresponding gene is selected.
 - `selection_number`: (Integer) Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
@@ -41,6 +41,10 @@ Implements a simple tournament selection. Selects `selection_number` candidates.
 the fittest of `tournament_size` randomly chosen candidates. 
 
 - `fitness`: (Vector{<:Real}) Vector of fitness values.
+- `selection_number`: (Integer) Indicates how many indices are returned.
+- `rng`: Instance of a random number generator to produce reproducible results.
+
+Returns indices of selected populants.
 """
 function tournament_selection(
     fitness::Vector{<:Real}, 
@@ -75,11 +79,11 @@ end
 Implements rank selection based on roulette_wheel. Can deal with mixed positive and negative values.
 Selects based on order of fitness values. The amount of the difference between the fitness values is not taken into account.
 
-
 - `fitness`: (Vector{<:Real}) Vector of fitness values. The lower the fitness, 
-  the more likely the corresponding chromosome is selected.
+  the more likely the corresponding gene is selected.
 - `selection_number`: (Integer) Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
+- `f`: Function which can be used to change importance of rank. If x -> x^2 is used, the gene with higher fitness is returned with higher probability.
 
 Returns indices of selected populants.
 """
