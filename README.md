@@ -26,22 +26,24 @@ or for temporary testing from Julia's REPL:
 ## Action Methods for Optimization
 Genetic Algorithm
 
-Selection:
-  - roulette_wheel
-  - tournament_selection
-  - rank_selection
-  binary:
-  combinatoric:
-  continuous:
-Crossover:
+- Selection:
+    - roulette_wheel
+    - tournament_selection
+    - rank_selection
+  - binary:
+  - combinatoric:
+  - continuous:
+
+- Crossover:
   - k_point
   - partially_mapped
-Mutation:
-  - bit_inversion
-  - displacement
+
+- Mutation:
+    - bit_inversion
+    - displacement
   continuous
-  - gaussian_displacement
-  - univariate_displacement
+    - gaussian_displacement
+    - univariate_displacement
 
 
 
