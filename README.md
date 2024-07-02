@@ -35,7 +35,8 @@ Genetic Algorithm
   - continuous:
 
 - Crossover:
-  - k_point
+  - continuous:
+      - k_point
   - partially_mapped
 
 - Mutation:
