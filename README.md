@@ -30,9 +30,6 @@ Genetic Algorithm
     - roulette_wheel
     - tournament_selection
     - rank_selection
-  - binary:
-  - combinatoric:
-  - continuous:
 
 - Crossover:
   - continuous:
@@ -42,10 +39,10 @@ Genetic Algorithm
 - Mutation:
     - binary:
         - bit_inversion
-    - displacement
     - continuous
         - gaussian_displacement
         - univariate_displacement
+        - displacement
 
 
 
