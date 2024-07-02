@@ -41,9 +41,9 @@ Genetic Algorithm
 - Mutation:
     - bit_inversion
     - displacement
-  continuous
-    - gaussian_displacement
-    - univariate_displacement
+    - continuous
+        - gaussian_displacement
+        - univariate_displacement
 
 
 
