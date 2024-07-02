@@ -1,13 +1,14 @@
 """
     Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
 
-- 'max_iterations': (Integer/NaN) Maximum number of iterations in optimisation process. Default is NaN.
-- 'time_limit': (Float/NaN) Time after which the optimization should be terminated. Default is NaN.
-- 'obj_bound': (Float/NaN) Threshold after which the optimization should be terminated. Default is NaN.
+- `max_iterations`: (Integer/NaN) Maximum number of iterations in optimisation process. Default is `NaN`.
+- `time_limit`: (Float/NaN) Time after which the optimization should be terminated. Default is `NaN`.
+- `obj_bound`: (Float/NaN) Threshold after which the optimization should be terminated. Default is `NaN`.
 
 Throws 
-    - 'ArgumentError' if no termination condition is set.
-    - Warning if no time or iteration limit is provided.
+
+- `ArgumentError` if no termination condition is set.
+- Warning if no time or iteration limit is provided.
 
 Constructor:
 
@@ -47,10 +48,11 @@ end
     terminate(t::Terminator, state::GeneticAlgorithmState)
 
 Evaluates configured termination criteria.
-- 't': (Terminator) contains termination criteria
-- 'state': (GeneticAlgorithmState)
 
-Returns false if algorithm should terminate.
+- `t`: (Terminator) contains termination criteria
+- `state`: (GeneticAlgorithmState)
+
+Returns `false` if algorithm should terminate.
 """
 function terminate!(t::Terminator, state::GeneticAlgorithmState)
     again = true  

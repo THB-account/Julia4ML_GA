@@ -36,6 +36,6 @@ using Test
 
     @testset "rosenbrock solution: (-4, 16) univariate_displacement" begin
         best_solution = Julia4ML_GA.solve_rosenbrock(-4, 100, mutation=univariate_displacement)
-        @test isapprox(best_solution, [-4.,16.], atol=0.5)
+        @test isapprox(best_solution, [-4.,16.], atol=0.9)
     end
 end

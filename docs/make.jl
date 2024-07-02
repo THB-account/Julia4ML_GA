@@ -18,6 +18,7 @@ makedocs(;
         "Selection" => "selection.md",
         "Crossover" => "crossover.md",
         "Mutation" => "mutation.md",
+        "Termination Criteria" => "termination.md"
     ],
 )
 
