@@ -20,8 +20,10 @@ import Julia4ML_GA
 
 	@testset "Tounament" begin
         rng = Random.MersenneTwister()
+        Random.seed!(rng, 13)
+		@test Julia4ML_GA.tournament_selection([24, 2, 6, -3, 5], 20, rng, 4) == [4, 2, 2, 4, 2, 4, 4, 4, 4, 4, 4, 2, 4, 3, 4, 4, 2, 4, 4, 4]
 		Random.seed!(rng, 2)
-		@test Julia4ML_GA.tournament_selection([3, 1, -4, 7, 4, 2, 9], 3, rng, 4) == [3, 2, 3]
+		@test Julia4ML_GA.tournament_selection([24, 2, 6, -3, 5, 7, 10, 10], 20, rng, 4) == [5, 4, 4, 4, 4, 2, 4, 2, 4, 6, 5, 2, 3, 2, 4, 2, 4, 5, 2, 4]
 	end
 
 	@testset "Roulette wheel: Test length" begin

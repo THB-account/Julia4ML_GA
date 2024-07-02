@@ -50,23 +50,19 @@ function tournament_selection(
     fitness::Vector{<:Real}, 
     selection_number::Int, 
     rng::R,
-    tournament_size::Int = 5, 
+    tournament_size::Int = 8, 
 ) where {R<:AbstractRNG} 
     population_size = length(fitness)
     selected_indices = Vector{Int}(undef, selection_number)
-    total_fitness_sign = fitness |> sum |> sign
-    modified_fitness = fitness / total_fitness_sign
     
     for i in 1:selection_number
         tournament_indices = rand(rng, 1:population_size, tournament_size)
-        
         best_index = tournament_indices[1]
         for j in 2:tournament_size
-            if modified_fitness[tournament_indices[j]] < modified_fitness[best_index]
+            if fitness[tournament_indices[j]] < fitness[best_index]
                 best_index = tournament_indices[j]
             end
         end
-        
         selected_indices[i] = best_index
     end
 
