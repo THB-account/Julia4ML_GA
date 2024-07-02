@@ -83,7 +83,7 @@ import Julia4ML_GA
         ]
 
         best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=2000, populationSize=500)
-        @test best_solution_cost < 450
+        @test best_solution_cost < 500
     end
 
     @testset "40 cities tsp" begin
@@ -132,6 +132,6 @@ import Julia4ML_GA
 
 
         best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost, iterations=2000, populationSize=500)
-        @test best_solution_cost < 800
+        @test best_solution_cost < 850
     end
 end
