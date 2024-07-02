@@ -25,6 +25,7 @@ or for temporary testing from Julia's REPL:
 
 ## Action Methods for Optimization
 Genetic Algorithm
+- Parameters
 
 - Selection:
     - roulette_wheel
