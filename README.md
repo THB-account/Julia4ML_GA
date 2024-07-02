@@ -9,6 +9,9 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 |-------------|-------------|
 |[![Stable][docs-stable-img]][docs-stable-url] [![Build Status][docs-dev-img]][docs-dev-url]|[![codecov](https://codecov.io/gh/THB-account/Julia4ML_GA/branch/docu_update_240623/graph/badge.svg?token=M1YMJMO46Y)](https://codecov.io/gh/THB-account/Julia4ML_GA)|
 
+## Demo
+
+To use a demo Pluto notebook you have to open Pluto and copy the following link https://github.com/THB-account/Julia4ML_GA/blob/Pluto/demo.jl
 
 ## Installation
 For testing in Pluto notebook you can use the following command:
