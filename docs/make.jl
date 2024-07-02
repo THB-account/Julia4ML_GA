@@ -15,6 +15,10 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "API Reference" => "reference.md",
+        "Selection" => "selection.md",
+        "Crossover" => "crossover.md",
+        "Mutation" => "mutation.md",
+        "Termination Criteria" => "termination.md"
     ],
 )
 
