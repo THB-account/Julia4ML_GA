@@ -11,10 +11,39 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 
 
 ## Installation
-
+For testing in Pluto notebook you can use the following command:
+```
+using Pkg;
+Pkg.add(url="https://github.com/THB-account/Julia4ML_GA")
+using Julia4ML_GA
+```
+or for temporary testing from Julia's REPL:
+```
+] activate --temp
+] add https://github.com/THB-account/Julia4ML_GA.git
+```
 
 ## Action Methods for Optimization
+Genetic Algorithm
+- Parameters
 
+- Selection:
+    - roulette_wheel
+    - tournament_selection
+    - rank_selection
+
+- Crossover:
+  - continuous:
+      - k_point
+  - partially_mapped
+
+- Mutation:
+    - binary:
+        - bit_inversion
+    - continuous
+        - gaussian_displacement
+        - univariate_displacement
+        - displacement
 
 
 
