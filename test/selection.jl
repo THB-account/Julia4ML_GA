@@ -21,7 +21,7 @@ import Julia4ML_GA
 	@testset "Tounament" begin
         rng = Random.MersenneTwister()
 		Random.seed!(rng, 2)
-		@test Julia4ML_GA.tournament_selection([3, 1, -4, 7, 4, 2, 9], 3, 4, rng) == [3, 2, 3]
+		@test Julia4ML_GA.tournament_selection([3, 1, -4, 7, 4, 2, 9], 3, rng, 4) == [3, 2, 3]
 	end
 
 	@testset "Roulette wheel: Test length" begin
