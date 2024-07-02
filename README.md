@@ -39,7 +39,8 @@ Genetic Algorithm
   - partially_mapped
 
 - Mutation:
-    - bit_inversion
+    - binary:
+        - bit_inversion
     - displacement
     - continuous
         - gaussian_displacement
