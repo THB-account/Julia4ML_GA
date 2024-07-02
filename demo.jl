@@ -66,7 +66,7 @@ More information: https://en.wikipedia.org/wiki/Rosenbrock_function.
 
 
 # ╔═╡ 44ec9e94-f6af-431e-8841-bae44431dfa3
-best_solution = Julia4ML_GA.solve_rosenbrock(4, 100) # a = 4, b = 100, expected solution: [4.,16.]
+best_solution = Julia4ML_GA.solve_rosenbrock(4, 100;obj_bound=0.001, iterations=1000) # a = 4, b = 100, expected solution: [4.,16.]
 
 
 # ╔═╡ 06c0ad65-22d4-4c8e-ae19-4f05ba125e79
@@ -109,7 +109,8 @@ begin
             mutation=gaussian_displacement,
             crossover=k_point
             );
-            iterations=100,
+            obj_bound=0.001, 
+			iterations=100,
             rng=rng,
 			trace_optimization=true
         )
@@ -176,8 +177,8 @@ end
 # ╟─6be73c03-925c-4afa-bd66-aca90e6b49fe
 # ╟─ddd6e83e-5a0d-4ff0-afe4-dedfc860994c
 # ╟─8ece9aea-20f5-41db-95ca-08c8d4d2d4c1
-# ╟─d03e4e95-faab-4ab3-ab27-81189cbd8231
-# ╟─44ec9e94-f6af-431e-8841-bae44431dfa3
+# ╠═d03e4e95-faab-4ab3-ab27-81189cbd8231
+# ╠═44ec9e94-f6af-431e-8841-bae44431dfa3
 # ╟─06c0ad65-22d4-4c8e-ae19-4f05ba125e79
 # ╠═755b8685-0711-48a2-a3eb-f80af39f10e1
 # ╟─5061a130-fc0a-4306-bdf5-6966e8de938a
