@@ -2,12 +2,14 @@
 
 In the mutation step the new population is mutated.
 This should increase the exploration and make it possible to find better solutions.
+
+## Template
 Each mutation function looks like the following template function. 
 This template can also be used to create new functions and replace the default mutation functions.
 
 ```julia
 """
-    mutation_function(genes, rng)
+    template_mutation_function(genes, rng)
 
 Implements a mutation function.
 
@@ -16,9 +18,11 @@ Implements a mutation function.
 
 Returns resulting genes.
 """
-function mutation_function(genes::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
+function template_mutation_function(genes::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
 end
 ```
+
+## Mutation Functions
 
 ```@docs
 displacement

@@ -2,12 +2,15 @@
 
 In the selection step a portion of the population is selected to perform crossover later.
 This should select individuals which after crossover are better than before.
+
+## Template
+
 Each selection function looks like the following template function. 
 This template can also be used to create new functions and replace the default selection functions.
 
 ```julia
 """
-    selection_function(fitness, selection_number, rng)
+    template_selection_function(fitness, selection_number, rng)
 
 Implements a selection function.
 
@@ -18,9 +21,11 @@ Implements a selection function.
 
 Returns indices of selected populants.
 """
-function selection_function(fitness::Vector{<:Real}, selection_number::Int, rng::R) where {R<:AbstractRNG}
+function template_selection_function(fitness::Vector{<:Real}, selection_number::Int, rng::R) where {R<:AbstractRNG}
 end
 ```
+
+## Selection Functions
 
 ```@docs
 roulette_wheel

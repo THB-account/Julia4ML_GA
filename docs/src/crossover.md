@@ -2,12 +2,14 @@
 
 In the crossover step the previous selected individuals perform crossover.
 This should exploit the best of each parent and increase the fitness of children.
+
+## Template
 Each crossover function looks like the following template function. 
 This template can also be used to create new functions and replace the default crossover functions.
 
 ```julia
 """
-    crossover_function(genes1, genes2, rng)
+    template_crossover_function(genes1, genes2, rng)
 
 Implements a crossover function.
 
@@ -16,9 +18,11 @@ Implements a crossover function.
 
 Returns `child1` and `child2`
 """
-function crossover_function(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
+function template_crossover_function(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
 end
 ```
+
+## Crossover Functions
 
 ```@docs
 k_point
