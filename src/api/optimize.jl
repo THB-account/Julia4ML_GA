@@ -7,9 +7,9 @@ Executes optimization process
 - `starting_point`: (Vector) Initial candidate.
 - `ga`: (GeneticAlgorithm)
 - `objective`: (Function) Fitness function to evaluate population. 
-- `iterations`: (Integer) Maximum number of iterations. Termination condition, defaults to 100.
-- `time_limit`: (Float) Time limit in seconds. Termination condition, defaults to `NaN`.
-- `obj_bound` : (Float) Lower bound to objective value. Termination condition, defaults to `NaN`.
+- `iterations`: (Real) Maximum number of iterations. Termination condition, defaults to 100.
+- `time_limit`: (Real) Time limit in seconds. Termination condition, defaults to `NaN`.
+- `obj_bound` : (Real) Lower bound to objective value. Termination condition, defaults to `NaN`.
 - `rng`: Instance of a random number generator to produce reproducible results. Default is `Random.default_rng()`.
 
 Returns final population's fittest populant.
@@ -21,9 +21,9 @@ function optimize(
     starting_population::A,
     objective::F,
     ga::GeneticAlgorithm;
-    iterations::Union{Int, Float64} = 100, 
-    time_limit::Float64=NaN, 
-    obj_bound::Float64=NaN,
+    iterations::Real = 100, 
+    time_limit::Real = NaN, 
+    obj_bound::Real = NaN,
     trace_optimization::Bool = false,
     rng::R = default_rng()
 ) where {A<:AbstractArray, R<:AbstractRNG, F<:Function}

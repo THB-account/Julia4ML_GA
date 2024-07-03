@@ -68,14 +68,14 @@ import Julia4ML_GA
 
         best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku)
         # println(errors)
-        @test errors < 7
+        @test errors == 0
         # display(best_solution)
     end
 
-    @testset "Sudoku 9 x 9" begin
+    @testset "Sudoku 9 x 9 easy" begin
         rng = Random.default_rng()
 
-        #sudoku = Int8.([
+        #sudoku = [
         #    0 3 0 0 0 0 0 0 0;
         #    0 0 0 1 9 5 0 0 0;
         #    0 0 8 0 0 0 0 6 0;
@@ -85,7 +85,7 @@ import Julia4ML_GA
         #    0 6 0 0 0 0 2 8 0;
         #    0 0 0 4 1 9 0 0 5;
         #    0 0 0 0 0 0 0 7 0
-        #    ])
+        #    ]
         sudoku = [
             0 1 0 0 7 5 9 4 0;
             4 0 2 0 0 6 0 0 7;
@@ -98,9 +98,31 @@ import Julia4ML_GA
             2 0 0 0 3 0 6 5 4
             ]
 
-        best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku, iterations=10000)
+        best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku)
         # println(errors)
-        @test errors < 15
+        @test errors < 8
+        # display(best_solution)
+    end
+
+    @testset "Sudoku 9 x 9 difficult" begin
+        rng = Random.default_rng()
+
+        sudoku = [
+            0 5 1 3 9 0 0 6 2;
+            4 0 0 2 0 0 8 0 0;
+            0 0 6 0 0 7 0 5 0;
+            0 0 0 0 0 0 9 0 0;
+            0 0 2 0 0 1 0 7 8;
+            1 0 7 6 3 0 2 0 0;
+            6 0 0 1 0 0 0 0 0;
+            7 3 0 0 0 9 0 0 0;
+            0 1 0 7 4 0 0 0 0
+            ]
+
+        best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku)
+        # best_solution, errors = Julia4ML_GA.solve_sudoku(sudoku, iterations=1000000, time_limit=300, populationSize=2000)
+        # println(errors)
+        @test errors < 20
         # display(best_solution)
     end
 end

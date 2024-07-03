@@ -1,9 +1,9 @@
 """
     Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
 
-- `max_iterations`: (Integer/NaN) Maximum number of iterations in optimisation process. Default is `NaN`.
-- `time_limit`: (Float/NaN) Time after which the optimization should be terminated. Default is `NaN`.
-- `obj_bound`: (Float/NaN) Threshold after which the optimization should be terminated. Default is `NaN`.
+- `max_iterations`: (Real/NaN) Maximum number of iterations in optimisation process. Default is `NaN`.
+- `time_limit`: (Real/NaN) Time in seconds after which the optimization should be terminated. Default is `NaN`.
+- `obj_bound`: (Real/NaN) Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
 
 Throws 
 
@@ -27,9 +27,9 @@ mutable struct Terminator
     obj_bound
 
     function Terminator(
-        ;max_iter::Union{Float64, Int} = NaN, 
-        time_limit::Float64 = NaN, 
-        obj_bound::Float64 = NaN
+        ;max_iter::Real = NaN, 
+        time_limit::Real = NaN, 
+        obj_bound::Real = NaN
     )
         if isnan(max_iter) && isnan(time_limit)
             if isnan(obj_bound)
@@ -73,10 +73,10 @@ function terminate!(t::Terminator, state::GeneticAlgorithmState)
         end
     end
     
-    #check objective value
+    # check objective value
     if !isnan(t.obj_bound)
         val, __ = findmin(state.populationFitness,dims=1)
-        if val[1] < t.obj_bound
+        if val[1] <= t.obj_bound
             again = false
         end
     end
