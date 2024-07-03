@@ -5,6 +5,7 @@
 ```
 
 ```@docs
+Modules = [Julia4ML_GA]
 GeneticAlgorithm
 GeneticAlgorithmState
 OptimizationResult
