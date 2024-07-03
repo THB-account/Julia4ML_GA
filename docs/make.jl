@@ -1,5 +1,7 @@
-using Julia4ML_GA
 using Documenter
+include("../src/Julia4ML_GA.jl")
+using Julia4ML_GA
+
 
 DocMeta.setdocmeta!(Julia4ML_GA, :DocTestSetup, :(using Julia4ML_GA); recursive=true)
 

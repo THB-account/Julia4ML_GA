@@ -3,7 +3,7 @@
 
 ```@index
 ```
-Julia4ML_GA.
+
 ```@docs
 Julia4ML_GA.GeneticAlgorithm
 Julia4ML_GA.GeneticAlgorithmState
