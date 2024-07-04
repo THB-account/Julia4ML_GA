@@ -7,8 +7,9 @@ using Dates
     Random.seed!(1234)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
-    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    populationSize = 100
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
+    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
     
     
     time_limit=10.0 # to be tested here
@@ -41,8 +42,9 @@ end
     Random.seed!(1)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
-    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    populationSize = 100
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
+    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
     
     time_limit=10.0
     bound = 0.00000005
@@ -72,8 +74,9 @@ end
     Random.seed!(1)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
-    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    populationSize = 100
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
+    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
     
     time_limit=10.0
     bound = 0.008 # to be tested here
@@ -103,8 +106,9 @@ end
     Random.seed!(1)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=100)
-    pop = Julia4ML_GA.initialise_genetic_state(Float64[0.,0.],obj,ga,rng).population
+    populationSize = 100
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
+    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
     
     time_limit = NaN 
     bound = 0.008 # to be tested here

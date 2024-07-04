@@ -82,27 +82,6 @@ mutable struct GeneticAlgorithmState{T, A<:AbstractArray} <: AbstractState
 end
 
 """
-    initialise_genetic_state(starting_point,objective,ga,rng)
-
-Initialises populant's genes.
-
-- `starting_point`: (Vector{Float64})
-- `objective`: (Function) Fitness function to be used.
-- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
-- `rng`: Instance of a random number generator to produce reproducible results.
-
-Returns GeneticAlgorithmState.
-"""
-function initialise_genetic_state(
-    starting_point::Vector{Float64}, 
-    objective::F, 
-    ga::GeneticAlgorithm, 
-    rng::R
-) where {F<:Function, R<:AbstractRNG}
-    return GeneticAlgorithmState(init_gaussian(starting_point, ga.populationSize, rng) ,objective)
-end
-
-"""
     update_state!(ga, state, objective, rng)
 
 Updates GeneticAlgorithmState according to provided GeneticAlgorithm instance.

@@ -6,22 +6,33 @@ CurrentModule = Julia4ML_GA
 ```@index
 ```
 
+## Genetic Algorithm
+
 ```@docs
 GeneticAlgorithm
 GeneticAlgorithmState
+optimize
+update_state!
+crossover!
+mutation!
+evaluation!
+terminate!
 OptimizationResult
+```
+
+## Trace
+
+```@docs
 OptimizationTrace
-Terminator
+trace
+```
+
+
+## Helper Functions
+
+```@docs
 append!
 argmin
-crossover!
-evaluation!
 get_sub_vector
-initialise_genetic_state
 min
-mutation!
-optimize
-terminate!
-trace
-update_state!
 ```

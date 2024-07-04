@@ -1,3 +1,6 @@
+```@meta
+CurrentModule = Julia4ML_GA
+```
 # Termination Criteria
 
 For the package are three different criteria available: Number of iterations, time limit and a lower bound.
@@ -22,3 +25,9 @@ With this setting execution time is checked after each optimization step.
 With this argument the lower bound for the objective function value is set. 
 If the fittest populant reaches an objective value lower or equal than the bound the algorithm finishes.
 Note that only setting this criterium may result in infinite loops.
+
+## Terminator 
+
+```@docs
+Terminator
+```

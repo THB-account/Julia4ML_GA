@@ -67,7 +67,6 @@ function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
     random_subsequence_genes1 = get_sub_vector(genes1, r_start, r_end, true)
     random_subsequence_genes2 = get_sub_vector(genes2, r_start, r_end, true)
 
-    #println(genes1, genes2)
     if r_start < r_end
         child1[r_start:r_end-1] = random_subsequence_genes2
         child2[r_start:r_end-1] = random_subsequence_genes1
@@ -78,9 +77,6 @@ function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
         child2[r_start:length(genes1)] = get_sub_vector(random_subsequence_genes1, 1, length(genes1)-r_start+2)
         child2[1:r_end-1] = get_sub_vector(random_subsequence_genes1, length(genes1)-r_start+2, length(genes1)-r_start+1 + r_end)
     end
-
-
-    #println(child1, child2)
 
     indices = []
     if r_end >= r_start
@@ -96,13 +92,12 @@ function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
 
     d_child2 = Dict(zip(random_subsequence_genes1, random_subsequence_genes2))
     d_child1 = Dict(zip(random_subsequence_genes2, random_subsequence_genes1))
-    #println(d_child1)
+
     for i in indices
         uncopied_gene = get_uncopied_gene(d_child2, genes2[i])
-        #println("i: ", i, ", ug: ", uncopied_gene)
+  
         child2[i] = uncopied_gene
         child1[i] = get_uncopied_gene(d_child1, genes1[i])
     end
-    #println(child1, child2)
     return child1, child2
 end

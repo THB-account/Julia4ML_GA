@@ -25,7 +25,7 @@ end
 """
     append!(trace,state)
 
-Initialises populant's genes.
+Appends the current state to trace.
 
 - `trace`: (AbstractTrace) Trace struct containing values
 - `state`: (AsbtractState) A state of a genetic algorithm.

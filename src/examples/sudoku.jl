@@ -98,6 +98,39 @@ function sudoku_mutation(genes::Vector{Int8}, rng, range::Integer = 9)
     return genes
 end
 
+"""
+    solve_sudoku(sudoku;
+    iterations, 
+    time_limit, 
+    obj_bound,
+    populationSize,
+    eliteSize,
+    crossoverRate,
+    mutationRate,
+    selection, 
+    mutation, 
+    crossover,
+    rng)
+
+Solves the sudoku.
+More information: https://en.wikipedia.org/wiki/Sudoku
+
+- `sudoku`: sudoku.
+- `max_iterations`: Maximum number of iterations in optimisation process. Default is `NaN`.
+- `time_limit`: Time in seconds after which the optimization should be terminated. Default is `NaN`.
+- `obj_bound`: Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
+- `rng`: An instance of a random number generator to produce reproducible results.
+- `population_size`: Number of populants to be maintained.
+- `eliteSize`: Number of populants selected as elite.
+- `crossoverRate`: Probability of crossover for two populants.
+- `mutationRate`: Probability of mutation.
+- `selection`: Function to select populants for next iteration.
+- `muation`: Mutation function.
+- `crossover`: Crossover function.
+- `rng`: An instance of a random number generator to produce reproducible results.
+
+Returns optimization result
+"""
 function solve_sudoku(sudoku::Matrix{<:Integer};
     iterations=10000, 
     time_limit=10, 
