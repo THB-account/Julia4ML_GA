@@ -1,3 +1,13 @@
+"""
+    init_gaussian(population_size::Integer, genome_length::Integer, rng::AbstractRNG)
+
+Initializes a start population with populants which have their genome distributed around `starting_point`.
+
+- `starting_point`: The genome of each populant equals this point + gaussian noise.
+- `population_size`: Number of populants.
+
+Returns population
+"""
 function init_gaussian(starting_point::AbstractVector, population_size::Integer, rng::AbstractRNG)
     population = Vector{Vector{eltype(starting_point)}}(undef, population_size)
     d=length(starting_point)
@@ -8,6 +18,17 @@ function init_gaussian(starting_point::AbstractVector, population_size::Integer,
     return population
 end
 
+
+"""
+    init_uniform_binary_population(population_size::Integer, genome_length::Integer, rng::AbstractRNG)
+
+Initializes a start population with populants which have only Bool genes.
+
+- `population_size`: Number of populants.
+- `genome_length`: Number of genes of a single populant.
+
+Returns population
+"""
 function init_uniform_binary_population(population_size::Integer, genome_length::Integer, rng::AbstractRNG)
     population = Vector{Vector{Bool}}(undef, population_size)
 

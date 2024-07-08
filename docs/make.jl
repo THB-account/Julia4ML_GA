@@ -15,6 +15,7 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "API Reference" => "reference.md",
+        "Initialization" => "initialize.md",
         "Selection" => "selection.md",
         "Crossover" => "crossover.md",
         "Mutation" => "mutation.md",
