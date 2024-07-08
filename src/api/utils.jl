@@ -99,7 +99,7 @@ Returns a part of the vector.
 - `e`: End index (not including) [2, length + 1]
 - `allow_wrap`: If true, start can be behind end
 """
-function get_sub_vector(vec::Vector{<:Real}, s::Int, e::Int, allow_wrap::Bool = false)
+function get_sub_vector(vec::Vector{<:Real}, s::Integer, e::Integer, allow_wrap::Bool = false)
     if s == e
         return Vector{eltype(vec)}(undef, 0) # return empty vector
     end

@@ -11,7 +11,7 @@ Should not be used for numerical problem.
 
 Returns resulting genes.
 """
-function displacement(genes::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
+function displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 
     r_start = rand(rng, 1:length(genes)) # random index where subsequence starts
     r_end = rand(rng, 2:length(genes)+1) # random index where subsequence ends
@@ -49,7 +49,7 @@ Should not be used for integer value problems (tsp).
 
 Returns resulting gene.
 """
-function gaussian_displacement(genes::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
+function gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
     return genes + randn(rng,size(genes)...)
 end
 
@@ -65,7 +65,7 @@ Should not be used for integer value problems (tsp).
 
 Returns resulting gene.
 """
-function univariate_displacement(gene::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
+function univariate_displacement(gene::Vector{<:Real}, rng::AbstractRNG)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)
 end
 
@@ -80,7 +80,7 @@ Should only be used if genes is a Bool Vector.
 
 Returns resulting genes.
 """
-function bit_inversion(genes::Vector{Bool}, rng::R) where {R<:AbstractRNG}
+function bit_inversion(genes::Vector{Bool}, rng::AbstractRNG)
     p = 1/length(genes)
     for (index, element) in enumerate(genes)
         if rand(rng) <= p

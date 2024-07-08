@@ -18,7 +18,7 @@ Implements a crossover function.
 
 Returns `child1` and `child2`
 """
-function template_crossover_function(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
+function template_crossover_function(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG)
 end
 ```
 

@@ -14,7 +14,7 @@ If k == 1, this is single point crossover.
 
 Returns `child1` and `child2`
 """
-function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::R, k::Int = 2) where {R<:AbstractRNG}
+function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG, k::Integer = 2)
     crossover_points = sort([rand(rng, 1:length(genes1)+1) for i in 1:k]) # it is possible to swap 0 up to (including) all genes
     push!(crossover_points, length(genes1)+1)
     child1 = Vector{eltype(genes1)}(undef, 0)

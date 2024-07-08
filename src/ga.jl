@@ -23,19 +23,19 @@ Constructor:
     ) 
 """
 struct GeneticAlgorithm{S, M, C} <: AbstractOptimizer
-    populationSize::Int
-    eliteSize::Int
-    mutationRate::Float64
-    crossoverRate::Float64
+    populationSize::Integer
+    eliteSize::Integer
+    mutationRate::Real
+    crossoverRate::Real
     selection::S
     mutation::M
     crossover::C
     # TODO add methods here
     GeneticAlgorithm(;
-        populationSize::Int=50,
-        eliteSize::Int=5,
-        crossoverRate::Float64=0.5,
-        mutationRate::Float64=0.5,
+        populationSize::Integer=50,
+        eliteSize::Integer=5,
+        crossoverRate::Real=0.5,
+        mutationRate::Real=0.5,
         selection::S=roulette_wheel,
         mutation::M=displacement,
         crossover::C=k_point
@@ -93,12 +93,7 @@ Equivalent to one iteration of the optimizatrion process.
 - `objective`: (Function) Fitness function to be used.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
-function update_state!(
-    ga::GeneticAlgorithm, 
-    state::GeneticAlgorithmState, 
-    objective::F, 
-    rng::R
-) where {R<:AbstractRNG, F<:Function}
+function update_state!(ga::GeneticAlgorithm, state::GeneticAlgorithmState, objective::Function, rng::AbstractRNG)
     # initialisation won't be handled here
     populationSize = ga.populationSize
     eliteSize = ga.eliteSize
@@ -134,7 +129,7 @@ Control function for fitness evaluation.
 - `state`:  (GeneticAlgorithmState) GeneticAlgorithmState instance to proceed from.
 - `objective`: (Function) Fitness function by which the population is evaluated.
 """
-function evaluation!(state::GeneticAlgorithmState, objective::F) where {F<:Function}
+function evaluation!(state::GeneticAlgorithmState, objective::Function)
     state.populationFitness .= objective.(state.population)
 end
 
@@ -154,8 +149,8 @@ function crossover!(
     children::A, 
     selected_individuals::Vector{Int}, 
     ga::GeneticAlgorithm, 
-    rng::R
-) where {A<:AbstractArray, R<:AbstractRNG}
+    rng::AbstractRNG
+) where {A<:AbstractArray}
     N = length(selected_individuals)
     for i in 1:2:length(selected_individuals)
         parent1, parent2 = i!=N ? (i,i+1) : (i,i-1)
@@ -180,7 +175,7 @@ control function for mutation.
 - `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
-function mutation!(population::A, ga::GeneticAlgorithm, rng::R) where {A<:AbstractArray, R<:AbstractRNG}
+function mutation!(population::AbstractArray, ga::GeneticAlgorithm, rng::AbstractRNG)
     for i in eachindex(population)
         if rand(rng) < ga.mutationRate
             population[i] = ga.mutation(population[i],rng)

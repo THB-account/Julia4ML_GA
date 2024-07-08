@@ -21,7 +21,7 @@ Implements a selection function.
 
 Returns indices of selected populants.
 """
-function template_selection_function(fitness::Vector{<:Real}, selection_number::Int, rng::R) where {R<:AbstractRNG}
+function template_selection_function(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG)
 end
 ```
 

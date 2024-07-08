@@ -18,15 +18,15 @@ Population is initialized and build.
 Then the optimization is executed using the provided fitness function.
 """
 function optimize(
-    starting_population::A,
-    objective::F,
+    starting_population::AbstractArray,
+    objective::Function,
     ga::GeneticAlgorithm;
     iterations::Real = 100, 
     time_limit::Real = NaN, 
     obj_bound::Real = NaN,
     trace_optimization::Bool = false,
-    rng::R = default_rng()
-) where {A<:AbstractArray, R<:AbstractRNG, F<:Function}
+    rng::AbstractRNG = default_rng()
+)
     """
         1. initialize population
             1.1 build population

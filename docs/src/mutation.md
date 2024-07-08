@@ -18,7 +18,7 @@ Implements a mutation function.
 
 Returns resulting genes.
 """
-function template_mutation_function(genes::Vector{<:Real}, rng::R) where {R<:AbstractRNG}
+function template_mutation_function(genes::Vector{<:Real}, rng::AbstractRNG)
 end
 ```
 
