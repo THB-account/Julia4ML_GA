@@ -6,7 +6,6 @@ using Random: MersenneTwister, default_rng, seed!, shuffle, AbstractRNG
 # Write your package code here.
 
 include("api/types.jl")
-include("api/objective.jl")
 
 include("crossover.jl")
 include("mutation.jl")
