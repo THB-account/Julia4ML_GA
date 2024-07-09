@@ -47,7 +47,7 @@ Should not be used for integer value problems (tsp).
 - `rng`: Instance of a random number generator to produce reproducible results.
 - `genes`: (Vector{Float64}) Vector containing all genes.
 
-Returns resulting gene.
+Returns resulting genes.
 """
 function gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
     return genes + randn(rng,size(genes)...)
@@ -56,14 +56,14 @@ end
 """
     univariate_displacement(gene, rng)
 
-Adds univeriate noise to the gene with ``\\mathcal{U}(-1,1)``.
+Adds univeriate noise to the genes with ``\\mathcal{U}(-1,1)``.
 Should be used for numerical problems (rosenbrock).
 Should not be used for integer value problems (tsp).
 
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `gene`: (Vector{Float64}) Vector containing all genes.
+- `genes`: (Vector{Float64}) Vector containing all genes.
 
-Returns resulting gene.
+Returns resulting genes.
 """
 function univariate_displacement(gene::Vector{<:Real}, rng::AbstractRNG)
     return gene + (rand(rng,size(gene)...) .* 2 .- 1)

@@ -22,7 +22,7 @@ using Test
     end
 
     populationSize = 50
-    state = Julia4ML_GA.GeneticAlgorithmState(init_gaussian([0.,0.],populationSize,default_rng()),rbf)
+    state = Julia4ML_GA.GeneticAlgorithmState(init_gaussian(populationSize, [0.,0.],default_rng()),rbf)
     Julia4ML_GA.append!(trace,state)
     Julia4ML_GA.append!(trace,state)
 
@@ -49,7 +49,7 @@ end
     rng = default_rng()
 
     populationSize = 100
-    initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
+    initPop = init_gaussian(populationSize, Float64[0.,0.], rng)
     num_iter = 100
     result = Julia4ML_GA.optimize(
         initPop,

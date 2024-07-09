@@ -16,7 +16,7 @@ using Test
         rng = default_rng()
 
         populationSize = 1000
-        initPop = init_gaussian(Float64[0.,0.], populationSize, rng)
+        initPop = init_gaussian(populationSize, Float64[0.,0.], rng)
 
         result = Julia4ML_GA.optimize(
             initPop,
@@ -35,7 +35,7 @@ using Test
     end
 
     @testset "rosenbrock solution: (-4, 16) univariate_displacement" begin
-        best_solution = Julia4ML_GA.solve_rosenbrock(-4, 100, mutation=univariate_displacement)
+        best_solution = Julia4ML_GA.solve_rosenbrock(-4, 100, starting_point=Float32[1.,1.], mutation=univariate_displacement)
         @test isapprox(best_solution, [-4.,16.], atol=0.9)
     end
 end

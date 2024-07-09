@@ -1,3 +1,6 @@
+```@meta
+CurrentModule = Julia4ML_GA
+```
 # Mutation
 
 In the mutation step the new population is mutated.
@@ -29,4 +32,5 @@ displacement
 gaussian_displacement
 univariate_displacement
 bit_inversion
+sudoku_mutation
 ```

@@ -13,7 +13,17 @@ function get_traveling_cost(cost_matrix::Matrix{<:Real}, traveling_order::Vector
     return sum_costs
 end
 
-function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Real}, rng)
+"""
+    init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Real}, rng::AbstractRNG)
+
+Initializes a start population with populants which represent a possible solution to the tsp provided by the `cost_matrix`.
+
+- `population_size`: Number of populants.
+- `cost_matrix`: Each genome are the shuffled indices, where each index is a stop at that location in the `cost_matrix`.
+
+Returns population
+"""
+function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Real}, rng::AbstractRNG)
     population = Vector{Vector{Int}}(undef, population_size)
 
     tspopulationSize = size(cost_matrix)[1]

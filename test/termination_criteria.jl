@@ -9,7 +9,7 @@ using Dates
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
-    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
+    pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     
     time_limit=10.0 # to be tested here
@@ -44,7 +44,7 @@ end
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
-    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
+    pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=10.0
     bound = 0.00000005
@@ -76,7 +76,7 @@ end
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
-    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
+    pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=10.0
     bound = 0.008 # to be tested here
@@ -108,7 +108,7 @@ end
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
     ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize)
-    pop = Julia4ML_GA.init_gaussian(Float64[0.,0.], populationSize, rng)
+    pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit = NaN 
     bound = 0.008 # to be tested here

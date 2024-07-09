@@ -18,6 +18,7 @@ More information: https://en.wikipedia.org/wiki/Rosenbrock_function
 
 - `a`: First parameter of rosenbrock function.
 - `b`: Second parameter of rosenbrock function.
+- `starting_point`: Start point + gaussian noise.
 - `max_iterations`: Maximum number of iterations in optimisation process. Default is `NaN`.
 - `time_limit`: Time in seconds after which the optimization should be terminated. Default is `NaN`.
 - `obj_bound`: Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
@@ -33,7 +34,7 @@ More information: https://en.wikipedia.org/wiki/Rosenbrock_function
 
 Returns optimization result
 """
-function solve_rosenbrock(a::Real, b::Real;
+function solve_rosenbrock(a::Real, b::Real; starting_point::AbstractVector=Float64[0.,0.],
     iterations=1000, 
     time_limit=NaN, 
     obj_bound=NaN,
@@ -46,7 +47,7 @@ function solve_rosenbrock(a::Real, b::Real;
     crossover=k_point,
     rng=default_rng())
 
-    initpop = init_gaussian(Float64[0.,0.], populationSize, rng)
+    initpop = init_gaussian(populationSize, starting_point, rng)
 
     fitnessFun = x -> (a-x[1])^2 +b*(x[2]-x[1]^2)^2
 
