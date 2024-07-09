@@ -1,6 +1,3 @@
-import Random
-import Julia4ML_GA
-
 @testset "Other" begin
     @testset "Get Sub vector" begin
         @testset "Get Sub vector: test error" begin

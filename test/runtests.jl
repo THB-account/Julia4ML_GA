@@ -1,5 +1,6 @@
 # Contents of test/runtests.jl
-using Julia4ML_GA
+import Julia4ML_GA
+import Random
 using Test
 
 @testset "Julia4ML_GA.jl" begin

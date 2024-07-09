@@ -1,6 +1,3 @@
-import Random
-import Julia4ML_GA
-
 @testset "Traveling Salesman Problem" begin
     @testset "Get traveling cost" begin
         cost = [

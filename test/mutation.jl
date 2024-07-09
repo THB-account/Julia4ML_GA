@@ -1,6 +1,3 @@
-import Random
-import Julia4ML_GA
-
 @testset "mutation" begin
     @testset "Bit Inversion" begin
         rng = Random.MersenneTwister()

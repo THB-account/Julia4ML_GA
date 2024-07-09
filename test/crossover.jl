@@ -1,6 +1,3 @@
-import Random
-import Julia4ML_GA
-
 @testset "crossover" begin
     @testset "Partially mapped" begin
         rng = Random.MersenneTwister()

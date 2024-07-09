@@ -1,6 +1,3 @@
-import Random
-import Julia4ML_GA
-
 @testset "Selection" begin
     @testset "Rank" begin
         rng = Random.MersenneTwister()

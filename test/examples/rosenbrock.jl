@@ -1,7 +1,3 @@
-using Random:default_rng
-using Julia4ML_GA
-using Test
-
 @testset "rosenbrock" begin
     @testset "rosenbrock solution: (4, 16) default" begin
         best_solution = Julia4ML_GA.solve_rosenbrock(4, 100)
@@ -13,19 +9,19 @@ using Test
         # rosenbrock funktion for a = 1 and b = 100
         # global minimum (x,y) at (a,a**2)
         # solution is (1,1)
-        rng = default_rng()
+        rng = Random.default_rng()
 
         populationSize = 1000
-        initPop = init_gaussian(populationSize, Float64[0.,0.], rng)
+        initPop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
 
         result = Julia4ML_GA.optimize(
             initPop,
             x -> (1-x[1])^2 +100*(x[2]-x[1]^2)^2,
             Julia4ML_GA.GeneticAlgorithm(
                 populationSize=populationSize,
-            selection=roulette_wheel_inv,
-            mutation=gaussian_displacement,
-            crossover=k_point
+            selection=Julia4ML_GA.roulette_wheel_inv,
+            mutation=Julia4ML_GA.gaussian_displacement,
+            crossover=Julia4ML_GA.k_point
             );
             iterations=100,
             rng=rng
@@ -35,7 +31,7 @@ using Test
     end
 
     @testset "rosenbrock solution: (-4, 16) univariate_displacement" begin
-        best_solution = Julia4ML_GA.solve_rosenbrock(-4, 100, starting_point=Float32[1.,1.], mutation=univariate_displacement)
+        best_solution = Julia4ML_GA.solve_rosenbrock(-4, 100, starting_point=Float32[1.,1.], mutation=Julia4ML_GA.univariate_displacement)
         @test isapprox(best_solution, [-4.,16.], atol=0.9)
     end
 end

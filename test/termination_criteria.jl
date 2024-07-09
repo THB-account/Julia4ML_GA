@@ -1,14 +1,10 @@
-using Random
-using Julia4ML_GA
-using Test
-using Dates
+import Dates
 
 @testset "terminate_time_limit" begin
-    Random.seed!(1234)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=roulette_wheel_inv, mutation=gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     
@@ -16,27 +12,26 @@ using Dates
     bound = NaN
     max_iter = NaN
 
-    start = now()
+    start = Dates.now()
 
     res = Julia4ML_GA.optimize(pop,
         obj, 
         ga ;
         iterations=max_iter, 
-        rng=rng,
         time_limit=time_limit, 
         obj_bound = bound 
     )
 
-    fin = now()
+    fin = Dates.now()
 
-    @test isapprox(time_limit, (fin - start)/ Millisecond(1000), atol=0.5)
+    @test isapprox(time_limit, (fin - start)/ Dates.Millisecond(1000), atol=0.5)
 end
 
 @testset "terminate_max_iterations" begin
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=roulette_wheel_inv, mutation=gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=NaN
@@ -46,8 +41,7 @@ end
     res = Julia4ML_GA.optimize(pop,
         obj, 
         ga ;
-        iterations=max_iter, 
-        rng=rng,
+        iterations=max_iter,
         time_limit=time_limit, 
         obj_bound = bound,
         trace_optimization=true
@@ -58,13 +52,13 @@ end
 
 @testset "terminate_objective_lower_bound" begin
     rng = Random.default_rng()
-    obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
+    obj = x->(3-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=roulette_wheel_inv, mutation=gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=100.0
-    bound = 0.8 # to be tested here
+    bound = 0.1 # to be tested here
     max_iter = NaN
 
     res = Julia4ML_GA.optimize(pop,
@@ -81,18 +75,10 @@ end
 end
 
 @testset "termination_warnings" begin
-    #The following example runs for 3 iterations with outcomes:
-    #    # fittness fittest, id fittest
-    #    ([0.03259902851092163], [80]) 
-    #    ([0.03259902851092163], [96])
-    #    ([0.007679540200270641], [62])
-    
-
-    Random.seed!(1)
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=roulette_wheel_inv, mutation=gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit = NaN 

@@ -1,7 +1,3 @@
-import Random
-import Julia4ML_GA
-
-
 @testset "Sudoku" begin
     @testset "Error per line" begin
         array = Int8.([i for i in 1:5])

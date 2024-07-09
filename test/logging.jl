@@ -1,7 +1,3 @@
-using Julia4ML_GA
-using Random:default_rng
-using Test
-
 @testset "logging api" begin
     """
     1. check for errors when creating
@@ -22,7 +18,7 @@ using Test
     end
 
     populationSize = 50
-    state = Julia4ML_GA.GeneticAlgorithmState(init_gaussian(populationSize, [0.,0.],default_rng()),rbf)
+    state = Julia4ML_GA.GeneticAlgorithmState(Julia4ML_GA.init_gaussian(populationSize, [0.,0.],Random.default_rng()),rbf)
     Julia4ML_GA.append!(trace,state)
     Julia4ML_GA.append!(trace,state)
 
@@ -46,18 +42,18 @@ using Test
 end
 
 @testset "logging system test" begin
-    rng = default_rng()
+    rng = Random.default_rng()
 
     populationSize = 100
-    initPop = init_gaussian(populationSize, Float64[0.,0.], rng)
+    initPop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     num_iter = 100
     result = Julia4ML_GA.optimize(
         initPop,
         x -> (1-x[1])^2 +100*(x[2]-x[1]^2)^2,
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=populationSize,
-	    selection=roulette_wheel_inv,
-        mutation=gaussian_displacement
+	    selection=Julia4ML_GA.roulette_wheel_inv,
+        mutation=Julia4ML_GA.gaussian_displacement
         );
         iterations=num_iter,
         rng=rng,
