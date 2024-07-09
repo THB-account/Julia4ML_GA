@@ -6,6 +6,10 @@ CurrentModule = Julia4ML_GA
 
 [Julia4ML_GA](https://github.com/THB-account/Julia4ML_GA.jl) is a package for genetic algorithms.
 
+## Disclaimer
+
+This project was developed as part of a course at TU Berlin. More information [here](https://github.com/THB-account/Julia4ML_GA?tab=MIT-1-ov-file). 
+
 ## What is a genetic algorithm
 
 [Genetic algorithms](https://en.wikipedia.org/wiki/Genetic_algorithm) solve optimization problems by
@@ -31,7 +35,7 @@ println(best_solution) # Should print roughly the following vector: [4, 16]
 starting_population = [[0.0, 0.0] for i in 1:100]
 
 # rosenbrock function as the fitness function. Solution at (1, 1)
-fitness_function = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
+fitness_function(x) = (1-x[1])^2 +100*(x[2]-x[1]^2)^2
 
 # setting population size manually (default is 50), needs to be the same size as starting_population
 ga_instance = Julia4ML_GA.GeneticAlgorithm(populationSize=100, 
