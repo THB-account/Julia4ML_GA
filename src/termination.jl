@@ -66,7 +66,7 @@ function terminate!(t::Terminator, state::GeneticAlgorithmState)
     end
 
     # check time
-    if !isnan(t.max_iterations)
+    if !isnan(t.time_limit)
         curr = now()
         if (curr - t.starting_time)/ Millisecond(1000) >= t.time_limit
             again = false

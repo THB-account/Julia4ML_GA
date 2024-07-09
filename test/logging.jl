@@ -56,7 +56,8 @@ end
         x -> (1-x[1])^2 +100*(x[2]-x[1]^2)^2,
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=populationSize,
-	    selection=roulette_wheel_inv
+	    selection=roulette_wheel_inv,
+        mutation=gaussian_displacement
         );
         iterations=num_iter,
         rng=rng,
