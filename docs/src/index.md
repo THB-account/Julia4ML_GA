@@ -8,7 +8,7 @@ CurrentModule = Julia4ML_GA
 
 ## Disclaimer
 
-This project was developed as part of a course at TU Berlin. More information [here](https://github.com/THB-account/Julia4ML_GA?tab=MIT-1-ov-file). 
+This project was developed as part of a course at the TU Berlin. It will not be further developed after the end of the course. More information about licensing [here](https://github.com/THB-account/.Julia4ML_GA?tab=MIT-1-ov-file). 
 
 ## What is a genetic algorithm
 

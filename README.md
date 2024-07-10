@@ -9,6 +9,10 @@ Check out our docs at [https://thb-account.github.io/Julia4ML_GA/dev/](https://t
 |-------------|-------------|
 | <!-- [![Stable][docs-stable-img]][docs-stable-url] --> [![Build Status][docs-dev-img]][docs-dev-url]|[![codecov](https://codecov.io/gh/THB-account/Julia4ML_GA/branch/docu_update_240623/graph/badge.svg?token=M1YMJMO46Y)](https://codecov.io/gh/THB-account/Julia4ML_GA)|
 
+## Disclaimer
+
+This project was developed as part of a course at the TU Berlin. It will not be further developed after the end of the course.
+
 ## Demo
 
 To use a project demo, you can open Pluto and copy the following link: https://github.com/THB-account/Julia4ML_GA/blob/Pluto/demo.jl
@@ -36,17 +40,14 @@ Genetic Algorithm
     - rank_selection
 
 - Crossover:
-  - continuous:
-      - k_point
+  - k_point
   - partially_mapped
 
 - Mutation:
-    - binary:
-        - bit_inversion
-    - continuous
-        - gaussian_displacement
-        - univariate_displacement
-        - displacement
+  - bit_inversion
+  - gaussian_displacement
+  - univariate_displacement
+  - displacement
 
 
 
