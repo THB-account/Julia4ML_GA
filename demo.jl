@@ -97,7 +97,7 @@ begin
 
 	starting_point = Float64[20.,0.]
 	populationSize = 1000
-    initPop = init_gaussian(starting_point, populationSize, rng)
+    initPop = init_gaussian(populationSize, starting_point, rng)
 
 	
     result = Julia4ML_GA.optimize(
