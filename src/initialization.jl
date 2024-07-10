@@ -9,7 +9,7 @@ Initializes a start population with populants which have their genome distribute
 
 Returns population
 """
-function init_gaussian(population_size::Integer, starting_point::AbstractVector, rng::AbstractRNG)
+function init_gaussian(population_size::Integer, starting_point::AbstractVector, rng)
     population = Vector{Vector{eltype(starting_point)}}(undef, population_size)
     d=length(starting_point)
     for i in 1:population_size
