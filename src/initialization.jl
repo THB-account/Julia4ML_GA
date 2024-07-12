@@ -7,7 +7,7 @@ Initializes a start population with populants which have their genome distribute
 - `starting_point`: The genome of each populant equals this point + gaussian noise.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
-Returns population
+Returns population.
 """
 function init_gaussian(population_size::Integer, starting_point::AbstractVector, rng::AbstractRNG)
     population = Vector{Vector{eltype(starting_point)}}(undef, population_size)
@@ -29,7 +29,7 @@ Initializes a start population with populants which have only Bool genes.
 - `genome_length`: Number of genes of a single populant.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
-Returns population
+Returns population.
 """
 function init_uniform_binary_population(population_size::Integer, genome_length::Integer, rng::AbstractRNG)
     population = Vector{Vector{Bool}}(undef, population_size)

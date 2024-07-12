@@ -20,8 +20,9 @@ Initializes a start population with populants which represent a possible solutio
 
 - `population_size`: Number of populants.
 - `cost_matrix`: Each genome are the shuffled indices, where each index is a stop at that location in the `cost_matrix`.
+- `rng`: Instance of a random number generator to produce reproducible results.
 
-Returns population
+Returns population.
 """
 function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Real}, rng::AbstractRNG)
     population = Vector{Vector{Int}}(undef, population_size)
@@ -41,26 +42,28 @@ function init_tsp_population(population_size::Integer, cost_matrix::Matrix{<:Rea
 end
 
 """
-    solve_tsp(cost_matrix;
-    iterations, 
-    time_limit, 
-    obj_bound,
-    populationSize,
-    eliteSize,
-    crossoverRate,
-    mutationRate,
-    selection, 
-    mutation, 
-    crossover,
-    rng)
+    solve_tsp(
+        cost_matrix::Matrix{<:Real};
+            iterations=100, 
+            time_limit=NaN, 
+            obj_bound=NaN,
+            populationSize=50,
+            eliteSize=5,
+            crossoverRate=0.6,
+            mutationRate=0.4,
+            selection=rank_selection, 
+            mutation=displacement, 
+            crossover=partially_mapped,
+            rng=default_rng()
+    )
 
 Solves the traveling salesman problem.
 More information: https://en.wikipedia.org/wiki/Travelling_salesman_problem
 
 - `cost_matrix`: cost matrix of traveling salesman problem.
-- `max_iterations`: Maximum number of iterations in optimisation process. Default is `NaN`.
-- `time_limit`: Time in seconds after which the optimization should be terminated. Default is `NaN`.
-- `obj_bound`: Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
+- `max_iterations`: Maximum number of iterations in optimisation process.
+- `time_limit`: Time in seconds after which the optimization should be terminated.
+- `obj_bound`: Threshold on (or after) which the optimization should be terminated.
 - `rng`: An instance of a random number generator to produce reproducible results.
 - `population_size`: Number of populants to be maintained.
 - `eliteSize`: Number of populants selected as elite.
@@ -71,20 +74,22 @@ More information: https://en.wikipedia.org/wiki/Travelling_salesman_problem
 - `crossover`: Crossover function.
 - `rng`: An instance of a random number generator to produce reproducible results.
 
-Returns optimization result
+Returns optimization result.
 """
-function solve_tsp(cost_matrix::Matrix{<:Real};
-    iterations=100, 
-    time_limit=NaN, 
-    obj_bound=NaN,
-    populationSize=50,
-    eliteSize=5,
-    crossoverRate=0.6,
-    mutationRate=0.4,
-    selection=rank_selection, 
-    mutation=displacement, 
-    crossover=partially_mapped,
-    rng=default_rng())
+function solve_tsp(
+    cost_matrix::Matrix{<:Real};
+        iterations=100, 
+        time_limit=NaN, 
+        obj_bound=NaN,
+        populationSize=50,
+        eliteSize=5,
+        crossoverRate=0.6,
+        mutationRate=0.4,
+        selection=rank_selection, 
+        mutation=displacement, 
+        crossover=partially_mapped,
+        rng=default_rng()
+)
 
     initpop = init_tsp_population(populationSize, cost_matrix, rng)
 

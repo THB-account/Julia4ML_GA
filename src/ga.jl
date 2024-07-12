@@ -2,25 +2,25 @@
 """
 Contains information and functions to execute an optimization process for a genetic algorithm.
 
-- `population_size`: (Integer) Number of populants to be maintained.
-- `eliteSize`: (Integer) Number of populants selected as elite.
-- `crossoverRate`: (Float) Probability of crossover for two populants.
-- `mutationRate`: (Float) Probability of mutation.
-- `selection`: (Function) Function to select populants for next iteration.
-- `muation`: (Function) Mutation function.
-- `crossover`: (Function) Crossover function.
+- `populationSize::Integer`: Number of populants to be maintained.
+- `eliteSize::Integer`: Number of populants selected as elite.
+- `mutationRate::Real`: Probability of mutation.
+- `crossoverRate::Real`: Probability of crossover for two populants.
+- `selection::S`: Function to select populants for next iteration.
+- `mutation::M`: Mutation function.
+- `crossover::C`: Crossover function.
 
 Constructor:
 
     GeneticAlgorithm(;
-        populationSize=50,
-        eliteSize=5,
-        crossoverRate=0.8,
-        mutationRate=0.1,
-        selection=roulette_wheel,
-        mutation=displacement,
-        crossover=k_point
-    ) 
+        populationSize::Integer=50,
+        eliteSize::Integer=5,
+        crossoverRate::Real=0.5,
+        mutationRate::Real=0.5,
+        selection::S=roulette_wheel,
+        mutation::M=displacement,
+        crossover::C=k_point
+    )
 """
 struct GeneticAlgorithm{S, M, C} <: AbstractOptimizer
     populationSize::Integer
@@ -54,12 +54,16 @@ end
 """
 State of a genetic algorithm.
 
-- `population`: (Vector) Current population. Vector conatining elements of same type as starting point for optimization process.
-- `populationFitness`: (Function) Fitness function by which the population's fitness is to be evaluated.
+- `population::A`: Current population. Vector conatining elements of same type as starting point for optimization process.
+- `populationFitness::Vector{<:Real}`: Fitness function by which the population's fitness is to be evaluated.
+- `fittest::T`: Individual with best fitness value.
 
 Constructor:
 
-    GeneticAlgorithmState(population,objective)
+    GeneticAlgorithmState{T, A}(
+        population::A, 
+        objective::F
+    ) where {T, A<:AbstractArray, F<:Function}
 """
 mutable struct GeneticAlgorithmState{T, A<:AbstractArray} <: AbstractState
     population::A
@@ -82,15 +86,15 @@ mutable struct GeneticAlgorithmState{T, A<:AbstractArray} <: AbstractState
 end
 
 """
-    update_state!(ga, state, objective, rng)
+    update_state!(ga::GeneticAlgorithm, state::GeneticAlgorithmState, objective::Function, rng::AbstractRNG)
 
 Updates GeneticAlgorithmState according to provided GeneticAlgorithm instance.
 Selection, crossover, mutation and evaluation is executed.
 Equivalent to one iteration of the optimizatrion process.
 
-- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
-- `state`: (GeneticAlgorithmState) GeneticAlgorithmState to proceed from.
-- `objective`: (Function) Fitness function to be used.
+- `ga`: GeneticAlgorithm instance to work on.
+- `state`: GeneticAlgorithmState to proceed from.
+- `objective`: Fitness function to be used.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
 function update_state!(ga::GeneticAlgorithm, state::GeneticAlgorithmState, objective::Function, rng::AbstractRNG)
@@ -122,26 +126,26 @@ function update_state!(ga::GeneticAlgorithm, state::GeneticAlgorithmState, objec
 end
 
 """
-    evaluation!(ga,state,objective)
+    evaluation!(state::GeneticAlgorithmState, objective::Function)
 
 Control function for fitness evaluation.
-- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance to work on.
-- `state`:  (GeneticAlgorithmState) GeneticAlgorithmState instance to proceed from.
-- `objective`: (Function) Fitness function by which the population is evaluated.
+
+- `state`:  GeneticAlgorithmState instance to proceed from.
+- `objective`: Fitness function by which the population is evaluated.
 """
 function evaluation!(state::GeneticAlgorithmState, objective::Function)
     state.populationFitness .= objective.(state.population)
 end
 
 """
-    crossover!(parents,children,selected_individuals,ga,rng)
+    crossover!(parents::A, children::A, selected_individuals::Vector{Int}, ga::GeneticAlgorithm, rng::AbstractRNG) where {A<:AbstractArray}
 
 Control function for crossover.
 
-- `parents`: (Vector) (Sub-)Population to be used to create offspring.
-- `children` (Vector) Object to hold the newly created offspring.
-- `selected_individuals`: (Vector{Integer}) The for crossover selected populant's indices.
-- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
+- `parents`: (Sub-)Population to be used to create offspring.
+- `children` Object to hold the newly created offspring.
+- `selected_individuals`:  The for crossover selected populant's indices.
+- `ga`: GeneticAlgorithm instance the population is part of.
 - `rng`:  Instance of a random number generator to produce reproducible results.
 """
 function crossover!(
@@ -167,12 +171,12 @@ function crossover!(
 end
 
 """
-    mutation!(offspring,ga,rng)
+    mutation!(population::AbstractArray, ga::GeneticAlgorithm, rng::AbstractRNG)
 
 control function for mutation.
 
-- `population`: (Vector) (Sub-)Population to be mutated.
-- `ga`: (GeneticAlgorithm) GeneticAlgorithm instance the population is part of.
+- `population`: (Sub-)Population to be mutated.
+- `ga`: GeneticAlgorithm instance the population is part of.
 - `rng`: Instance of a random number generator to produce reproducible results.
 """
 function mutation!(population::AbstractArray, ga::GeneticAlgorithm, rng::AbstractRNG)

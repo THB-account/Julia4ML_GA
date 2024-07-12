@@ -24,7 +24,7 @@ With this setting execution time is checked after each optimization step.
 
 With this argument the lower bound for the objective function value is set. 
 If the fittest populant reaches an objective value lower or equal than the bound the algorithm finishes.
-Note that only setting this criterium may result in infinite loops.
+Note that only setting this criterion may result in infinite loops.
 
 ## Terminator 
 

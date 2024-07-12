@@ -9,11 +9,11 @@ This template can also be used to create new functions and replace the default c
 
 ```julia
 """
-    template_crossover_function(genes1, genes2, rng)
+    template_crossover_function(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG)
 
 Implements a crossover function.
 
-- `genes1`, `genes2`: Vector{<:Real} containing all genes of each parent.
+- `genes1`, `genes2`: Vector containing all genes of each parent.
 - `rng`: An instance of a random number generator to produce reproducible results.
 
 Returns `child1` and `child2`

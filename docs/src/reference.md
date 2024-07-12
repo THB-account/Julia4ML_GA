@@ -1,7 +1,7 @@
-# Julia4ML_GA API
 ```@meta
 CurrentModule = Julia4ML_GA
 ```
+# Julia4ML_GA API
 
 ```@index
 ```

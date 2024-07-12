@@ -65,7 +65,6 @@ julia> best_solution, best_solution_cost = Julia4ML_GA.solve_tsp(cost)
 solve_sudoku
 ```
 
-
 ### Sudoku Example
 ```julia-repl
 julia> import Julia4ML_GA

@@ -12,11 +12,11 @@ This template can also be used to create new functions and replace the default m
 
 ```julia
 """
-    template_mutation_function(genes, rng)
+    template_mutation_function(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Implements a mutation function.
 
-- `genes`: ::Vector{<:Real} containing all genes.
+- `genes`: ::Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
 Returns resulting genes.

@@ -1,12 +1,12 @@
 """
-    displacement(genes, rng)
+    displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Implements the displacement method. The genes are displaced inside itself. 
 The returned element has the same values as before, but with scrambled genes.
 Should only be used if the sequence of the genes solve the problem (tsp).
 Should not be used for numerical problem.
 
-- `genes`: ::Vector{<:Real} containing all genes.
+- `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
 Returns resulting genes.
@@ -38,14 +38,14 @@ function displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 end
 
 """
-    gaussian_displacement(genes, rng)
+    gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Adds gaussian noise to the genes with ``\\mathcal{N}(0,1)``. 
 Should be used for numerical problems (rosenbrock).
 Should not be used for integer value problems (tsp).
 
+- `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `genes`: (Vector{Float64}) Vector containing all genes.
 
 Returns resulting genes.
 """
@@ -54,29 +54,29 @@ function gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 end
 
 """
-    univariate_displacement(gene, rng)
+    univariate_displacement(gene::Vector{<:Real}, rng::AbstractRNG)
 
 Adds univeriate noise to the genes with ``\\mathcal{U}(-1,1)``.
 Should be used for numerical problems (rosenbrock).
 Should not be used for integer value problems (tsp).
 
+- `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `genes`: (Vector{Float64}) Vector containing all genes.
 
 Returns resulting genes.
 """
-function univariate_displacement(gene::Vector{<:Real}, rng::AbstractRNG)
-    return gene + (rand(rng,size(gene)...) .* 2 .- 1)
+function univariate_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
+    return genes + (rand(rng,size(genes)...) .* 2 .- 1)
 end
 
 """
-    bit_inversion(genes, rng)
+    bit_inversion(genes::Vector{Bool}, rng::AbstractRNG)
 
 Inverses each bit with probability 1/length(genes).
 Should only be used if genes is a Bool Vector.
 
+- `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `genes`: (Vector{Bool}) Vector containing all genes.
 
 Returns resulting genes.
 """

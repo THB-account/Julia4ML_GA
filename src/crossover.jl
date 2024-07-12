@@ -1,5 +1,5 @@
 """
-    k_point(genes1, genes2, rng)
+    k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG, k::Integer=2)
 
 Implements the k point crossover method. 
 `genes1` and `genes2` are used to create `child1` and `child2`, which are returned. 
@@ -12,9 +12,9 @@ If k == 1, this is single point crossover.
 - `rng`: An instance of a random number generator to produce reproducible results.
 - `k`: Number of cross over points
 
-Returns `child1` and `child2`
+Returns `child1` and `child2`.
 """
-function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG, k::Integer = 2)
+function k_point(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG, k::Integer=2)
     crossover_points = sort([rand(rng, 1:length(genes1)+1) for i in 1:k]) # it is possible to swap 0 up to (including) all genes
     push!(crossover_points, length(genes1)+1)
     child1 = Vector{eltype(genes1)}(undef, 0)
@@ -41,19 +41,19 @@ function get_uncopied_gene(d::Dict, gene::Real)
 end
 
 """
-    partially_mapped(genes1, genes2,rng)
+    partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG)
 
 Implements the partially mapped crossover (PMX) method. 
 `genes1` and `genes2` are used to create `child1` and `child2`, which are returned.
 This procedure only changes the order of the genes.
 `child1`, `child2`, `genes1` and `genes2` all have the same genes, but the order can be different.
 
-- `genes1`, `genes2`: Vector{<:Real} containing all genes of each parent.
+- `genes1`, `genes2`: Vector containing all genes of each parent.
 - `rng`: An instance of a random number generator to produce reproducible results.
 
-Returns `child1` and `child2`
+Returns `child1` and `child2`.
 """
-function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng)
+function partially_mapped(genes1::Vector{<:Real}, genes2::Vector{<:Real}, rng::AbstractRNG)
     child1 = similar(genes1)
     child2 = similar(genes2)
 

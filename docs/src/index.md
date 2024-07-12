@@ -51,5 +51,3 @@ result = Julia4ML_GA.optimize(starting_population,fitness_function,ga_instance;i
 
 println(Julia4ML_GA.argmin(result)) # Should print roughly the vector: [1, 1]
 ```
-    
-

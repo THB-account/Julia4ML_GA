@@ -1,18 +1,18 @@
 """
 Contains information and functions to execute an optimization process for a genetic algorithm.
 
-- `populations`: (Vector{Vector{Vector{Real}}}) Population of each iteration.
-- `fitnessValues`: (Vector{Vector{Real}}) Fitness values of each generation.
-- `fittestPopulants`: (Vector{Vector{Real}}) Fittest Individual of each population.
+- `populations::Vector{Vector{Vector{Real}}}`: Population of each iteration.
+- `fitnessValues::Vector{Vector{Real}}`: Fitness values of each generation.
+- `fittestPopulants::Vector{Vector{Real}}`: Fittest Individual of each population.
 
 Constructor:
 
     OptimizationTrace() 
 """
 mutable struct OptimizationTrace <: AbstractTrace
-    populations :: Vector{Vector{Vector{Real}}}
-    fitnessValues :: Vector{Vector{Real}}
-    fittestPopulants :: Vector{Vector{Real}}
+    populations::Vector{Vector{Vector{Real}}}
+    fitnessValues::Vector{Vector{Real}}
+    fittestPopulants::Vector{Vector{Real}}
     function OptimizationTrace()
         new(
         Vector{Vector{Vector{Real}}}[],
@@ -23,14 +23,14 @@ mutable struct OptimizationTrace <: AbstractTrace
 end
 
 """
-    append!(trace,state)
+    append!(trace::AbstractTrace, state::AbstractState) 
 
 Appends the current state to trace.
 
-- `trace`: (AbstractTrace) Trace struct containing values
-- `state`: (AsbtractState) A state of a genetic algorithm.
+- `trace`: Trace struct containing values
+- `state`: A state of a genetic algorithm.
 """
-function append!(trace::AbstractTrace,state::AbstractState)  
+function append!(trace::AbstractTrace, state::AbstractState)  
     push!(trace.populations,state.population)
     push!(trace.fitnessValues,state.populationFitness)
     push!(trace.fittestPopulants,state.fittest)
@@ -39,13 +39,13 @@ end
 """
 Contains the results of a evolutionary optimization process
 
-- `minimalPopulant`: (T1) Populant that minimizes the objective.
-- `minimalFitness`: (T2) Value of the objective for the minimal populant.
-- `trace`: (OptimizationTrace) Trace object containing individual values of generations.
+- `minimalPopulant::T1`: Populant that minimizes the objective.
+- `minmalFitness::T2`: Value of the objective for the minimal populant.
+- `trace::OptimizationTrace`: Trace object containing individual values of generations.
 
 Constructor:
 
-    OptimizationResult(minimalPopulant,minmalFitness,trace) 
+    OptimizationResult(minimalPopulant::T1, minimalFitness::T2, trace) where {T1, T2}
 """
 struct OptimizationResult{T1, T2} <: AbstractOptimizationResult
     minimalPopulant::T1
@@ -58,48 +58,49 @@ struct OptimizationResult{T1, T2} <: AbstractOptimizationResult
 end
 
 """
-    argmin(res)
+   argmin(res::OptimizationResult)
 
-- `res`: (OptimizationResult)
+- `res`: OptimizationResult
 
-Returns minimizing gene
+Returns minimizing gene.
 """
 function argmin(res::OptimizationResult)
     return res.minimalPopulant
 end
 
 """
-    min(res)
+    min(res::OptimizationResult)
 
-- `res`: (OptimizationResult)
+- `res`: OptimizationResult
 
-Returns minimal fitness value
+Returns minimal fitness value.
 """
 function min(res::OptimizationResult)
     return res.minmalFitness
 end
 
 """
-    trace(res)
+    trace(res::OptimizationResult)
 
-- `res`: (OptimizationResult)
+- `res`: OptimizationResult
 
-Returns trace of evolutionary algorithm
+Returns trace of evolutionary algorithm.
 """
 function trace(res::OptimizationResult)
     return res.trace
 end
 
 """
-    get_sub_vector(vec, s, e, allow_wrap)
+    get_sub_vector(vec::Vector{<:Real}, s::Integer, e::Integer, allow_wrap::Bool=false)
 
-Returns a part of the vector. 
-- `vec`: Vector{<:Real}
-- `s`: Start Index (including) [1, length]
-- `e`: End index (not including) [2, length + 1]
+- `vec`: Vector
+- `s`: Start Index (including) `[1, length]`
+- `e`: End index (not including) `[2, length + 1]`
 - `allow_wrap`: If true, start can be behind end
+
+Returns a part of the vector.
 """
-function get_sub_vector(vec::Vector{<:Real}, s::Integer, e::Integer, allow_wrap::Bool = false)
+function get_sub_vector(vec::Vector{<:Real}, s::Integer, e::Integer, allow_wrap::Bool=false)
     if s == e
         return Vector{eltype(vec)}(undef, 0) # return empty vector
     end

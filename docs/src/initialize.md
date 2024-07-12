@@ -11,7 +11,7 @@ During the optimization the size of the population and length of the genome of e
 
 ```julia
 """
-    function template_init_function(population_size::Integer, problem_specific_information::Any, rng::AbstractRNG)
+    template_init_function(population_size::Integer, problem_specific_information::Any, rng::AbstractRNG)
 
 Implements an initialization function.
 

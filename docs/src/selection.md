@@ -10,13 +10,13 @@ This template can also be used to create new functions and replace the default s
 
 ```julia
 """
-    template_selection_function(fitness, selection_number, rng)
+    template_selection_function(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG)
 
 Implements a selection function.
 
-- `fitness`: (Vector{<:Real}) Vector of fitness values. The higher the absolute fitness, 
+- `fitness`: Vector of fitness values. The higher the absolute fitness, 
   the more likely the corresponding gene is selected.
-- `selection_number`: (Integer) Indicates how many indices are returned.
+- `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
 Returns indices of selected populants.

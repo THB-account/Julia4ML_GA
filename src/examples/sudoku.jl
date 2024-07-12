@@ -60,8 +60,9 @@ Initializes a start population with populants which represent a possible solutio
 
 - `population_size`: Number of populants.
 - `sudoku`: Length of genes are calculated based on empty (0) places in `sudoku`.
+- `rng`: Instance of a random number generator to produce reproducible results.
 
-Returns population
+Returns population.
 """
 function init_sudoku_population(population_size::Integer, sudoku::Matrix{Int8}, rng::AbstractRNG)
     population = Vector{Vector{Int8}}(undef, population_size)
@@ -95,7 +96,7 @@ function init_sudoku_population(population_size::Integer, sudoku::Matrix{Int8}, 
 end
 
 """
-    sudoku_mutation(genes::Vector{Int8}, rng::AbstractRNG, range::Integer = 9)
+    sudoku_mutation(genes::Vector{Int8}, rng::AbstractRNG, range::Integer=9)
 
 Adds noise to the genes.
 
@@ -105,7 +106,7 @@ Adds noise to the genes.
 
 Returns resulting genes.
 """
-function sudoku_mutation(genes::Vector{Int8}, rng::AbstractRNG, range::Integer = 9)
+function sudoku_mutation(genes::Vector{Int8}, rng::AbstractRNG, range::Integer=9)
     p = 1/length(genes)
     for (index, element) in enumerate(genes)
         if rand(rng) <= p
@@ -120,26 +121,28 @@ function sudoku_mutation(genes::Vector{Int8}, rng::AbstractRNG, range::Integer =
 end
 
 """
-    solve_sudoku(sudoku;
-    iterations, 
-    time_limit, 
-    obj_bound,
-    populationSize,
-    eliteSize,
-    crossoverRate,
-    mutationRate,
-    selection, 
-    mutation, 
-    crossover,
-    rng)
+    solve_sudoku(
+        sudoku::Matrix{<:Integer};
+            iterations=10000, 
+            time_limit=10, 
+            obj_bound=0,
+            populationSize=1000,
+            eliteSize=5,
+            crossoverRate=0.5,
+            mutationRate=0.9,
+            selection=rank_selection, 
+            mutation=sudoku_mutation, 
+            crossover=k_point,
+            rng=default_rng()
+    )
 
 Solves the sudoku.
 More information: https://en.wikipedia.org/wiki/Sudoku
 
 - `sudoku`: sudoku.
-- `max_iterations`: Maximum number of iterations in optimisation process. Default is `NaN`.
-- `time_limit`: Time in seconds after which the optimization should be terminated. Default is `NaN`.
-- `obj_bound`: Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
+- `max_iterations`: Maximum number of iterations in optimisation process.
+- `time_limit`: Time in seconds after which the optimization should be terminated.
+- `obj_bound`: Threshold on (or after) which the optimization should be terminated.
 - `rng`: An instance of a random number generator to produce reproducible results.
 - `population_size`: Number of populants to be maintained.
 - `eliteSize`: Number of populants selected as elite.
@@ -150,20 +153,22 @@ More information: https://en.wikipedia.org/wiki/Sudoku
 - `crossover`: Crossover function.
 - `rng`: An instance of a random number generator to produce reproducible results.
 
-Returns optimization result
+Returns optimization result.
 """
-function solve_sudoku(sudoku::Matrix{<:Integer};
-    iterations=10000, 
-    time_limit=10, 
-    obj_bound=0,
-    populationSize=1000,
-    eliteSize=5,
-    crossoverRate=0.5,
-    mutationRate=0.9,
-    selection=rank_selection, 
-    mutation=sudoku_mutation, 
-    crossover=k_point,
-    rng=default_rng())
+function solve_sudoku(
+    sudoku::Matrix{<:Integer};
+        iterations=10000, 
+        time_limit=10, 
+        obj_bound=0,
+        populationSize=1000,
+        eliteSize=5,
+        crossoverRate=0.5,
+        mutationRate=0.9,
+        selection=rank_selection, 
+        mutation=sudoku_mutation, 
+        crossover=k_point,
+        rng=default_rng()
+)
 
     sudoku = Int8.(sudoku)
 

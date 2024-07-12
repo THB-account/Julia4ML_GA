@@ -1,21 +1,29 @@
 
 """
-    optimize(starting_point,objective,ga::GeneticAlgorithm;iterations=100,rng=default_rng())
+    optimize(
+        starting_population::AbstractArray,
+        objective::Function,
+        ga::GeneticAlgorithm;
+        iterations::Real = 100, 
+        time_limit::Real = NaN, 
+        obj_bound::Real = NaN,
+        trace_optimization::Bool = false,
+        rng::AbstractRNG = default_rng()
+    )
 
-Executes optimization process
-
-- `starting_point`: (Vector) Initial candidate.
-- `ga`: (GeneticAlgorithm)
-- `objective`: (Function) Fitness function to evaluate population. 
-- `iterations`: (Real) Maximum number of iterations. Termination condition, defaults to 100.
-- `time_limit`: (Real) Time limit in seconds. Termination condition, defaults to `NaN`.
-- `obj_bound` : (Real) Lower bound to objective value. Termination condition, defaults to `NaN`.
-- `rng`: Instance of a random number generator to produce reproducible results. Default is `Random.default_rng()`.
-
-Returns final population's fittest populant.
-
+Executes optimization process.
 Population is initialized and build. 
 Then the optimization is executed using the provided fitness function.
+
+- `starting_point`: Initial candidate.
+- `objective`: Fitness function to evaluate population. 
+- `ga`: GeneticAlgorithm
+- `iterations`: Maximum number of iterations. Termination condition.
+- `time_limit`: Time limit in seconds. Termination condition.
+- `obj_bound` : Lower bound to objective value. Termination condition.
+- `rng`: Instance of a random number generator to produce reproducible results.
+
+Returns final population's fittest populant.
 """
 function optimize(
     starting_population::AbstractArray,

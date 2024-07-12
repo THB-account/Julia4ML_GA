@@ -1,9 +1,9 @@
 """
-    Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
+Holds information about termination criteria. Starts timer upon creation, if a timelimit is provided.
 
-- `max_iterations`: (Real/NaN) Maximum number of iterations in optimisation process. Default is `NaN`.
-- `time_limit`: (Real/NaN) Time in seconds after which the optimization should be terminated. Default is `NaN`.
-- `obj_bound`: (Real/NaN) Threshold on (or after) which the optimization should be terminated. Default is `NaN`.
+- `max_iterations`: `Real` Maximum number of iterations in optimisation process.
+- `time_limit`: `Real` Time in seconds after which the optimization should be terminated.
+- `obj_bound`: `Real` Threshold on (or after) which the optimization should be terminated.
 
 Throws 
 
@@ -12,7 +12,11 @@ Throws
 
 Constructor:
 
-    Terminator(;max_iter=NaN, time_limit=NaN, obj_bound=NaN)
+    function Terminator(;
+        max_iter::Real=NaN, 
+        time_limit::Real=NaN, 
+        obj_bound::Real=NaN
+    )
 """
 mutable struct Terminator
     # terminate by iterations
@@ -26,10 +30,10 @@ mutable struct Terminator
     # terminate by bound of objective value
     obj_bound
 
-    function Terminator(
-        ;max_iter::Real = NaN, 
-        time_limit::Real = NaN, 
-        obj_bound::Real = NaN
+    function Terminator(;
+        max_iter::Real=NaN, 
+        time_limit::Real=NaN, 
+        obj_bound::Real=NaN
     )
         if isnan(max_iter) && isnan(time_limit)
             if isnan(obj_bound)
@@ -49,8 +53,8 @@ end
 
 Evaluates configured termination criteria.
 
-- `t`: (Terminator) contains termination criteria
-- `state`: (GeneticAlgorithmState)
+- `t`: contains termination criteria
+- `state`: GeneticAlgorithmState instance
 
 Returns `false` if algorithm should terminate.
 """

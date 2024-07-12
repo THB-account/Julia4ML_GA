@@ -3,16 +3,16 @@ function roulette_wheel_inv(fitness::Vector{<:Real}, selection_number::Integer, 
 end
 
 """
-    roulette_wheel(fitness, selection_number, rng)
+    roulette_wheel(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG) 
 
 Implements a simple roulette_wheel. If the sum over positive fitness scores is larger than the sum 
 over negative scores, higher fitness scores are more likely to be selected, otherwise negative values are more
 likely to be selected. Should only be used if either all fitness values are negative or all fitness values are 
 positive
 
-- `fitness`: (Vector{<:Real}) Vector of fitness values. The higher the absolute fitness, 
+- `fitness`: Vector of fitness values. The higher the absolute fitness, 
   the more likely the corresponding gene is selected.
-- `selection_number`: (Integer) Indicates how many indices are returned.
+- `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
 Returns indices of selected populants.
@@ -35,18 +35,18 @@ function roulette_wheel(fitness::Vector{<:Real}, selection_number::Integer, rng:
 end
 
 """
-    tournament_selection(fitness, selection_number, rng, tournament_size)
+    tournament_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, tournament_size::Integer=8)
 
 Implements a simple tournament selection. Selects `selection_number` candidates. Each candidate is selected by taking 
 the fittest of `tournament_size` randomly chosen candidates. 
 
-- `fitness`: (Vector{<:Real}) Vector of fitness values.
-- `selection_number`: (Integer) Indicates how many indices are returned.
+- `fitness`: Vector of fitness values.
+- `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
 Returns indices of selected populants.
 """
-function tournament_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, tournament_size::Integer = 8)
+function tournament_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, tournament_size::Integer=8)
     population_size = length(fitness)
     selected_indices = Vector{Int}(undef, selection_number)
     
@@ -65,20 +65,20 @@ function tournament_selection(fitness::Vector{<:Real}, selection_number::Integer
 end
 
 """
-    rank_selection(fitness, selection_number, rng, f)
+    rank_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, f::Function=identity)
 
 Implements rank selection based on roulette_wheel. Can deal with mixed positive and negative values.
 Selects based on order of fitness values. The amount of the difference between the fitness values is not taken into account.
 
-- `fitness`: (Vector{<:Real}) Vector of fitness values. The lower the fitness, 
+- `fitness`: Vector of fitness values. The lower the fitness, 
   the more likely the corresponding gene is selected.
-- `selection_number`: (Integer) Indicates how many indices are returned.
+- `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 - `f`: Function which can be used to change importance of rank. If x -> x^2 is used, the gene with higher fitness is returned with higher probability.
 
 Returns indices of selected populants.
 """
-function rank_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, f::Function = identity)
+function rank_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, f::Function=identity)
     selected_ranks = roulette_wheel(f.(collect(1:length(fitness))), selection_number, rng)
     fitness_with_indices = collect(zip(collect(1:length(fitness)),fitness))
     sorted_fitness = sort(fitness_with_indices, by=x->x[2], rev=true) # lowest fitness is selected with highest probability
