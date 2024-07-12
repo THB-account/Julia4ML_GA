@@ -4,11 +4,11 @@
         starting_population::AbstractArray,
         objective::Function,
         ga::GeneticAlgorithm;
-        iterations::Real = 100, 
-        time_limit::Real = NaN, 
-        obj_bound::Real = NaN,
-        trace_optimization::Bool = false,
-        rng::AbstractRNG = default_rng()
+            iterations::Real=100, 
+            time_limit::Real=NaN, 
+            obj_bound::Real=NaN,
+            trace_optimization::Bool=false,
+            rng::AbstractRNG=default_rng()
     )
 
 Executes optimization process.
@@ -29,11 +29,11 @@ function optimize(
     starting_population::AbstractArray,
     objective::Function,
     ga::GeneticAlgorithm;
-    iterations::Real = 100, 
-    time_limit::Real = NaN, 
-    obj_bound::Real = NaN,
-    trace_optimization::Bool = false,
-    rng::AbstractRNG = default_rng()
+        iterations::Real=100, 
+        time_limit::Real=NaN, 
+        obj_bound::Real=NaN,
+        trace_optimization::Bool=false,
+        rng::AbstractRNG=default_rng()
 )
     """
         1. initialize population

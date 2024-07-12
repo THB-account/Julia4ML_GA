@@ -27,7 +27,6 @@ OptimizationTrace
 trace
 ```
 
-
 ## Helper Functions
 
 ```@docs
