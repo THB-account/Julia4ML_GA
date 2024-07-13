@@ -15,10 +15,10 @@ This project was developed as part of a course at the TU Berlin. It will not be 
 
 ## Demo
 
-To use a project demo, you can open Pluto and copy the following link: https://github.com/THB-account/Julia4ML_GA/blob/Pluto/demo.jl. Downloading the notebook and opening the demo locally can faster than opening it directly.
+To use a project demo, open Pluto and copy the link: https://github.com/THB-account/Julia4ML_GA/blob/Pluto/demo.jl. Downloading the notebook and opening the demo locally can be faster than opening it directly.
 
 ## Installation
-For testing in Pluto notebook you can use the following command:
+For testing in Pluto notebook, you can use the following command:
 ```
 using Pkg;
 Pkg.add(url="https://github.com/THB-account/Julia4ML_GA")
@@ -29,8 +29,8 @@ or for temporary testing from Julia's REPL:
 ] activate --temp
 ] add https://github.com/THB-account/Julia4ML_GA.git
 ```
-Another option is to just clone the repository and opening the package locally.
-In that case you can open the cloned repository in visual studio code and type Alt+j Alt+o. 
+Another option is to clone the repository and open the package locally.
+In that case, you can open the cloned repository in Visual Studio Code and type Alt+j Alt+o. 
 This opens a Julia REPL and activates the current package.
 
 ```julia-repl
