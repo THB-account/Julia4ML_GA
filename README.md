@@ -53,8 +53,8 @@ Genetic Algorithm
 
 - Mutation:
   - bit_inversion
-  - gaussian_displacement
-  - univariate_displacement
+  - gaussian_noise
+  - uniform_noise
   - displacement
 
 

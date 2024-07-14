@@ -38,7 +38,7 @@ function displacement(genes::Vector{<:Real}, rng::AbstractRNG)
 end
 
 """
-    gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
+    gaussian_noise(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Adds gaussian noise to the genes with ``\\mathcal{N}(0,1)``. 
 Should be used for numerical problems (rosenbrock).
@@ -49,12 +49,12 @@ Should not be used for integer value problems (tsp).
 
 Returns resulting genes.
 """
-function gaussian_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
+function gaussian_noise(genes::Vector{<:Real}, rng::AbstractRNG)
     return genes + randn(rng,size(genes)...)
 end
 
 """
-    univariate_displacement(gene::Vector{<:Real}, rng::AbstractRNG)
+    uniform_noise(gene::Vector{<:Real}, rng::AbstractRNG)
 
 Adds univeriate noise to the genes with ``\\mathcal{U}(-1,1)``.
 Should be used for numerical problems (rosenbrock).
@@ -65,7 +65,7 @@ Should not be used for integer value problems (tsp).
 
 Returns resulting genes.
 """
-function univariate_displacement(genes::Vector{<:Real}, rng::AbstractRNG)
+function uniform_noise(genes::Vector{<:Real}, rng::AbstractRNG)
     return genes + (rand(rng,size(genes)...) .* 2 .- 1)
 end
 

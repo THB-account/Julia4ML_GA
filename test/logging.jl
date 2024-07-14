@@ -53,7 +53,7 @@ end
         Julia4ML_GA.GeneticAlgorithm(
             populationSize=populationSize,
 	    selection=Julia4ML_GA.roulette_wheel_inv,
-        mutation=Julia4ML_GA.gaussian_displacement
+        mutation=Julia4ML_GA.gaussian_noise
         );
         iterations=num_iter,
         rng=rng,

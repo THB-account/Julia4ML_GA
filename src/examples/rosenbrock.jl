@@ -11,7 +11,7 @@
             crossoverRate=0.4,
             mutationRate=0.6,
             selection=roulette_wheel_inv, 
-            mutation=gaussian_displacement, 
+            mutation=gaussian_noise, 
             crossover=k_point,
             rng=default_rng()
     )
@@ -50,7 +50,7 @@ function solve_rosenbrock(
         crossoverRate=0.4,
         mutationRate=0.6,
         selection=roulette_wheel_inv, 
-        mutation=gaussian_displacement, 
+        mutation=gaussian_noise, 
         crossover=k_point,
         rng=default_rng()
 )

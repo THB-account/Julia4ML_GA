@@ -4,7 +4,7 @@ import Dates
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_noise)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     
@@ -31,7 +31,7 @@ end
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_noise)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=NaN
@@ -54,7 +54,7 @@ end
     rng = Random.default_rng()
     obj = x->(3-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_noise)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit=100.0
@@ -78,7 +78,7 @@ end
     rng = Random.default_rng()
     obj = x->(1-x[1])^2 +100*(x[2]-x[1]^2)^2
     populationSize = 100
-    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_displacement)
+    ga = Julia4ML_GA.GeneticAlgorithm(populationSize=populationSize, selection=Julia4ML_GA.roulette_wheel_inv, mutation=Julia4ML_GA.gaussian_noise)
     pop = Julia4ML_GA.init_gaussian(populationSize, Float64[0.,0.], rng)
     
     time_limit = NaN 

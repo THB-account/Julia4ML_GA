@@ -106,7 +106,7 @@ begin
             Julia4ML_GA.GeneticAlgorithm(
                 populationSize=populationSize,
             selection=roulette_wheel_inv,
-            mutation=gaussian_displacement,
+            mutation=gaussian_noise,
             crossover=k_point
             );
             obj_bound=0.001, 

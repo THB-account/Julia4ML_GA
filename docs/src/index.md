@@ -51,7 +51,7 @@ fitness_function(x) = (1-x[1])^2 +100*(x[2]-x[1]^2)^2
 # setting population size manually (default is 50), needs to be the same size as starting_population
 ga_instance = Julia4ML_GA.GeneticAlgorithm(populationSize=100, 
         selection=roulette_wheel_inv,
-        mutation=gaussian_displacement,
+        mutation=gaussian_noise,
         crossover=k_point)
 
 # upper bound for iterations containing crossover, mutation, evaluation, and selection to be performed
