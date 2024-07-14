@@ -46,6 +46,7 @@ end
 Implements the partially mapped crossover (PMX) method. 
 `genes1` and `genes2` are used to create `child1` and `child2`, which are returned.
 This procedure only changes the order of the genes.
+Should only be used if both parents have the same values in the genome (but in different order).
 `child1`, `child2`, `genes1` and `genes2` all have the same genes, but the order can be different.
 
 - `genes1`, `genes2`: Vector containing all genes of each parent.

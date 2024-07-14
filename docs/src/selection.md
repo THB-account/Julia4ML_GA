@@ -28,6 +28,7 @@ end
 ## Selection Functions
 
 ```@docs
+roulette_wheel_inv
 roulette_wheel
 tournament_selection
 rank_selection

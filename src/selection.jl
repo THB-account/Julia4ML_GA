@@ -1,3 +1,14 @@
+"""
+    roulette_wheel_inv(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG) 
+
+Helper function for roulette_wheel. Should only be used if all fitness values are positive and not zero.
+
+- `fitness`: Vector of fitness values. The smaller the fitness, the more likely the corresponding genome is selected.
+- `selection_number`: Indicates how many indices are returned.
+- `rng`: Instance of a random number generator to produce reproducible results.
+
+Returns indices of selected populants.
+"""
 function roulette_wheel_inv(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG)
     roulette_wheel(1.0 ./ fitness, selection_number, rng)
 end
@@ -5,13 +16,11 @@ end
 """
     roulette_wheel(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG) 
 
-Implements a simple roulette_wheel. If the sum over positive fitness scores is larger than the sum 
-over negative scores, higher fitness scores are more likely to be selected, otherwise negative values are more
-likely to be selected. Should only be used if either all fitness values are negative or all fitness values are 
-positive
+Implements a simple roulette wheel. Should only be used if all fitness values are smaller than zero.
+This is because this package only minimizes the fitness values. Should not be used if fitness values are both negative and positive.
 
 - `fitness`: Vector of fitness values. The higher the absolute fitness, 
-  the more likely the corresponding gene is selected.
+  the more likely the corresponding genome is selected.
 - `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
@@ -38,9 +47,9 @@ end
     tournament_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, tournament_size::Integer=8)
 
 Implements a simple tournament selection. Selects `selection_number` candidates. Each candidate is selected by taking 
-the fittest of `tournament_size` randomly chosen candidates. 
+the fittest of `tournament_size` randomly chosen candidates.
 
-- `fitness`: Vector of fitness values.
+- `fitness`: Vector of fitness values. The smaller the fitness, the more likely the corresponding genome is selected.
 - `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
 
@@ -67,14 +76,13 @@ end
 """
     rank_selection(fitness::Vector{<:Real}, selection_number::Integer, rng::AbstractRNG, f::Function=identity)
 
-Implements rank selection based on roulette_wheel. Can deal with mixed positive and negative values.
+Implements rank selection based on roulette_wheel.
 Selects based on order of fitness values. The amount of the difference between the fitness values is not taken into account.
 
-- `fitness`: Vector of fitness values. The lower the fitness, 
-  the more likely the corresponding gene is selected.
+- `fitness`: Vector of fitness values. The lower the fitness, the more likely the corresponding genome is selected.
 - `selection_number`: Indicates how many indices are returned.
 - `rng`: Instance of a random number generator to produce reproducible results.
-- `f`: Function which can be used to change importance of rank. If x -> x^2 is used, the gene with higher fitness is returned with higher probability.
+- `f`: Function which can be used to change importance of rank. If x -> x^2 is used, the genome with higher fitness is returned with higher probability.
 
 Returns indices of selected populants.
 """

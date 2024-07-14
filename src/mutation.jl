@@ -4,7 +4,7 @@
 Implements the displacement method. The genes are displaced inside itself. 
 The returned element has the same values as before, but with scrambled genes.
 Should only be used if the sequence of the genes solve the problem (tsp).
-Should not be used for numerical problem.
+Should not be used for real-value optimization.
 
 - `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
@@ -41,8 +41,8 @@ end
     gaussian_noise(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Adds gaussian noise to the genes with ``\\mathcal{N}(0,1)``. 
-Should be used for numerical problems (rosenbrock).
-Should not be used for integer value problems (tsp).
+Should be used for problems with real-value genomes (rosenbrock).
+Should not be used for integer-value problems (tsp).
 
 - `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
@@ -54,11 +54,11 @@ function gaussian_noise(genes::Vector{<:Real}, rng::AbstractRNG)
 end
 
 """
-    uniform_noise(gene::Vector{<:Real}, rng::AbstractRNG)
+    uniform_noise(genes::Vector{<:Real}, rng::AbstractRNG)
 
 Adds univeriate noise to the genes with ``\\mathcal{U}(-1,1)``.
-Should be used for numerical problems (rosenbrock).
-Should not be used for integer value problems (tsp).
+Should be used for problems with real-value genomes (rosenbrock).
+Should not be used for integer-value problems (tsp).
 
 - `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
@@ -73,7 +73,7 @@ end
     bit_inversion(genes::Vector{Bool}, rng::AbstractRNG)
 
 Inverses each bit with probability 1/length(genes).
-Should only be used if genes is a Bool Vector.
+Should only be used for bool-value genomes.
 
 - `genes`: Vector containing all genes.
 - `rng`: Instance of a random number generator to produce reproducible results.
